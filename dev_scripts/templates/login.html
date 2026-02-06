@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - Major Recommender</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #6B0000;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: #6B0000;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .logo p {
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            color: #000;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #6B0000;
+        }
+        
+        .error-message {
+            background: #fee;
+            border: 2px solid #c33;
+            color: #000;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .info-message {
+            background: #f8f9fa;
+            border: 2px solid #6B0000;
+            color: #000;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #6B0000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(107, 0, 0, 0.3);
+            background: #500000;
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .demo-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #000;
+        }
+        
+        .demo-info strong {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>Major Recommender</h1>
+            <p>Discover Your Best Alternative Majors</p>
+        </div>
+        
+        {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        <div class="info-message">
+            <strong>Demo Access:</strong> Use password <strong>"1234"</strong> to login
+        </div>
+        
+        <form method="POST" action="/login">
+            <div class="form-group">
+                <label for="student_id">Student ID</label>
+                <input 
+                    type="text" 
+                    id="student_id" 
+                    name="student_id" 
+                    placeholder="Enter your student ID" 
+                    required
+                    autofocus
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter password (use 1234)" 
+                    required
+                >
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                Login & View Recommendations
+            </button>
+        </form>
+        
+        <div class="demo-info">
+            <strong>How it works:</strong><br>
+            1. Enter your Student ID<br>
+            2. Use password "1234" (demo only)<br>
+            3. View your top 5 alternative major recommendations based on courses you've already completed
+        </div>
+    </div>
+</body>
+</html>
