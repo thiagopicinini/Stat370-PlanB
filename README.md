@@ -15,7 +15,14 @@ This system analyzes student enrollment data and bachelor's degree requirements 
 
 ### Project Demo
 
-A small demo for the first version of this project can be found [here on youtube. ](https://youtu.be/2Klf99-e6xI)
+A small demo for the first version of this project can be found here:
+
+
+
+
+https://github.com/user-attachments/assets/9c73c339-51de-4c86-a435-e9e02cb55dff
+
+
 
 ### Key Features
 
