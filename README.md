@@ -8,6 +8,15 @@ A collaborative project with Dr. Catherine Putonti at Loyola University Chicago 
 
 This system analyzes student enrollment data and bachelor's degree requirements to recommend alternative majors that students may be well-positioned to pursue based on credits they've already earned.
 
+**This project is still a work in progress. Next implementations will be:**
+
+* Student will have an option to only view majors that they will be able to complete in four years of enrollment.
+* Changes made to web scraping script to remove errors from data collection process.
+
+### Project Demo
+
+A small demo for the first version of this project can be found [here on youtube. ](https://youtu.be/2Klf99-e6xI)
+
 ### Key Features
 
 - **Data Collection**: Web scraping of Loyola University course catalog for major requirements
@@ -42,6 +51,7 @@ pip install pandas flask beautifulsoup4 requests PyPDF2
 ### Running the Major Recommender
 
 1. **Prepare Data** (if needed):
+
 ```bash
 python data_gathering_scripts/dataprep.py
 python data_gathering_scripts/scrape_majors_from_web.py
@@ -49,11 +59,13 @@ python data_gathering_scripts/scrape_course_details.py
 ```
 
 2. **Run Web Application**:
+
 ```bash
 python dev_scripts/planb.py
 ```
 
 3. **Access Application**:
+
 - Open browser to `http://localhost:5001`
 - Login with student ID (password: `1234` for demo)
 
@@ -82,4 +94,4 @@ This project is developed for educational purposes at Loyola University Chicago.
 
 ## Privacy Note
 
-All student enrollment data has been de-identified to protect student privacy. No personally identifiable information is included in this repository. 
+All student enrollment data has been de-identified to protect student privacy. No personally identifiable information is included in this repository.

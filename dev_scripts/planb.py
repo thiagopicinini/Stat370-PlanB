@@ -14,7 +14,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils.paths import MAJORS_JSON, COURSES_JSON, get_filtered_enrollment_files
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-here-change-in-production'
+app.secret_key = 'your-secret-key-here-change-in-production' # Needed for session management, replace with a secure key in production, 
+#this is just for demonstration purposes and a POC. 
 
 # Initialize recommender with data files using centralized paths
 enrollment_files = [str(f) for f in get_filtered_enrollment_files()]
