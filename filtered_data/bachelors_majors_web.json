@@ -25,50 +25,70 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/accounting-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 110 or MATH 118",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 110",
+            "MATH 118"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:33]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "ENTR 313",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "ENTR 313",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "ACCT 303",
-        "ACCT 304",
-        "ACCT 311",
-        "ACCT 317",
-        "ACCT 328",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "ACCT 303",
+        "ACCT 304",
+        "ACCT 311",
+        "ACCT 317",
+        "ACCT 328",
         "[Elective: Select three of the following:9]",
         {
           "options": [
-            "ACCT 306",
-            "ACCT 307",
-            "ACCT 308",
-            "ACCT 323",
-            "ACCT 326",
-            "ACCT 341",
-            "ACCT 399"
+            "ACCT 306",
+            "ACCT 307",
+            "ACCT 308",
+            "ACCT 323",
+            "ACCT 326",
+            "ACCT 341",
+            "ACCT 399"
           ]
         }
       ],
@@ -80,49 +100,69 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/accounting-analytics-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 110 or MATH 118",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 110",
+            "MATH 118"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:33]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "ENTR 313",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "ENTR 313",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "ACCT 303",
-        "ACCT 311",
-        "ACCT 317",
-        "ACCT 328",
-        "INFS 346",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "ACCT 303",
+        "ACCT 311",
+        "ACCT 317",
+        "ACCT 328",
+        "INFS 346",
         "[Elective: Select three of the following:9]",
         {
           "options": [
-            "INFS 348",
-            "INFS 360",
-            "INFS 394",
-            "SCMG 489",
-            "INFS 494",
-            "INFS 791"
+            "INFS 348",
+            "INFS 360",
+            "INFS 394",
+            "SCMG 489",
+            "INFS 494",
+            "INFS 791"
           ]
         }
       ],
@@ -134,74 +174,74 @@
       "school_college": "School of Communication",
       "program_url": "https://catalog.luc.edu/undergraduate/communication/advertising-public-relations/public-relations-ba/",
       "required_courses": [
-        "COMM 100",
-        "COMM 175",
-        "COMM 200",
-        "COMM 215",
-        "COMM 210",
-        "COMM 211",
-        "COMM 213",
-        "MARK 201",
+        "COMM 100",
+        "COMM 175",
+        "COMM 200",
+        "COMM 215",
+        "COMM 210",
+        "COMM 211",
+        "COMM 213",
+        "MARK 201",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "COMM 363",
-            "ISSCM 241",
-            "STAT 103"
+            "COMM 363",
+            "ISSCM 241",
+            "STAT 103"
           ]
         },
         "[Elective: Select one of the following focus areas:9]",
         {
           "options": [
-            "COMM 214",
-            "COMM 317"
+            "COMM 214",
+            "COMM 317"
           ]
         },
         "[Elective: Select one of the following:]",
         {
           "options": [
-            "COMM 331",
-            "COMM 334",
-            "COMM 336",
-            "COMM 314",
-            "COMM 318"
+            "COMM 331",
+            "COMM 334",
+            "COMM 336",
+            "COMM 314",
+            "COMM 318"
           ]
         },
         "[Elective: Select one of the following:]",
         {
           "options": [
-            "COMM 313",
-            "COMM 320",
-            "COMM 375"
+            "COMM 313",
+            "COMM 320",
+            "COMM 375"
           ]
         },
         "[Elective: Select one of the following Advertising courses]",
         {
           "options": [
-            "COMM 317",
-            "COMM 331",
-            "COMM 334",
-            "COMM 336"
+            "COMM 317",
+            "COMM 331",
+            "COMM 334",
+            "COMM 336"
           ]
         },
         "[Elective: Select one of the following Public Relations courses]",
         {
           "options": [
-            "COMM 313",
-            "COMM 314",
-            "COMM 320",
-            "COMM 375"
+            "COMM 313",
+            "COMM 314",
+            "COMM 320",
+            "COMM 375"
           ]
         },
         "[Elective: Select one of the following Writing Intensive courses]",
         {
           "options": [
-            "COMM 214",
-            "COMM 318"
+            "COMM 214",
+            "COMM 318"
           ]
         },
-        "COMM 386",
-        "COMM 391"
+        "COMM 386",
+        "COMM 391"
       ],
       "total_major_courses": 24
     },
@@ -211,29 +251,34 @@
       "school_college": "School of Communication",
       "program_url": "https://catalog.luc.edu/undergraduate/communication/advertising-creative/advertising-creative-ba/",
       "required_courses": [
-        "COMM 100",
-        "COMM 175",
-        "COMM 200",
-        "COMM 215",
-        "COMM 210",
-        "COMM 211",
-        "COMM 213",
-        "MARK 201",
+        "COMM 100",
+        "COMM 175",
+        "COMM 200",
+        "COMM 215",
+        "COMM 210",
+        "COMM 211",
+        "COMM 213",
+        "MARK 201",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "COMM 363",
-            "ISSCM 241",
-            "STAT 103"
+            "COMM 363",
+            "ISSCM 241",
+            "STAT 103"
           ]
         },
-        "COMM 214",
-        "COMM 266",
-        "COMM 290",
-        "COMM 329 or COMM 330",
-        "COMM 344",
-        "COMM 389",
-        "COMM 391"
+        "COMM 214",
+        "COMM 266",
+        "COMM 290",
+        {
+          "options": [
+            "COMM 329",
+            "COMM 330"
+          ]
+        },
+        "COMM 344",
+        "COMM 389",
+        "COMM 391"
       ],
       "total_major_courses": 17
     },
@@ -243,44 +288,54 @@
       "school_college": "School of Communication",
       "program_url": "https://catalog.luc.edu/undergraduate/communication/advocacy-social-change/advocacy-social-change-ba/",
       "required_courses": [
-        "COMM 100",
-        "COMM 175",
-        "COMM 200",
-        "COMM 215 or COMM 360",
-        "COMM 220 or COMM 268",
-        "[Elective: Select two of the following:6]",
+        "COMM 100",
+        "COMM 175",
+        "COMM 200",
         {
           "options": [
-            "COMM 201",
-            "COMM 220",
-            "COMM 227",
-            "COMM 258",
-            "COMM 268",
-            "COMM 272",
-            "COMM 277",
-            "COMM 280",
-            "COMM 379"
+            "COMM 215",
+            "COMM 360"
           ]
         },
-        "COMM 230",
+        {
+          "options": [
+            "COMM 220",
+            "COMM 268"
+          ]
+        },
         "[Elective: Select two of the following:6]",
         {
           "options": [
-            "COMM 231",
-            "COMM 236",
-            "COMM 237",
-            "COMM 306",
-            "COMM 309",
-            "COMM 323"
+            "COMM 201",
+            "COMM 220",
+            "COMM 227",
+            "COMM 258",
+            "COMM 268",
+            "COMM 272",
+            "COMM 277",
+            "COMM 280",
+            "COMM 379"
+          ]
+        },
+        "COMM 230",
+        "[Elective: Select two of the following:6]",
+        {
+          "options": [
+            "COMM 231",
+            "COMM 236",
+            "COMM 237",
+            "COMM 306",
+            "COMM 309",
+            "COMM 323"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "COMM 361",
-            "COMM 365",
-            "COMM 367",
-            "COMM 368"
+            "COMM 361",
+            "COMM 365",
+            "COMM 367",
+            "COMM 368"
           ]
         }
       ],
@@ -292,8 +347,8 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/african-studies-african-diaspora/african-studies-african-diaspora-ba/",
       "required_courses": [
-        "AFR 102",
-        "AFR 397"
+        "AFR 102",
+        "AFR 397"
       ],
       "total_major_courses": 2
     },
@@ -303,8 +358,8 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/classical-studies/ancient-greek-ba/",
       "required_courses": [
-        "CLST 383",
-        "CLST 384"
+        "CLST 383",
+        "CLST 384"
       ],
       "total_major_courses": 2
     },
@@ -314,9 +369,14 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/anthropology/anthropology-ba/",
       "required_courses": [
-        "ANTH 100 or ANTH 102",
-        "ANTH 101",
-        "ANTH 231"
+        {
+          "options": [
+            "ANTH 100",
+            "ANTH 102"
+          ]
+        },
+        "ANTH 101",
+        "ANTH 231"
       ],
       "total_major_courses": 3
     },
@@ -326,26 +386,31 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/anthropology/anthropology-bs/",
       "required_courses": [
-        "ANTH 100 or ANTH 102",
-        "ANTH 101",
-        "ANTH 231",
-        "ANTH 241",
+        {
+          "options": [
+            "ANTH 100",
+            "ANTH 102"
+          ]
+        },
+        "ANTH 101",
+        "ANTH 231",
+        "ANTH 241",
         "[Elective: Select at least one of the following:]",
         {
           "options": [
-            "ANTH 324",
-            "ANTH 325",
-            "ANTH 326",
-            "ANTH 327"
+            "ANTH 324",
+            "ANTH 325",
+            "ANTH 326",
+            "ANTH 327"
           ]
         },
         "[Elective: Select no more than one of the following:]",
         {
           "options": [
-            "ANTH 280",
-            "ANTH 281",
-            "ANTH 359",
-            "ANTH 362"
+            "ANTH 280",
+            "ANTH 281",
+            "ANTH 359",
+            "ANTH 362"
           ]
         }
       ],
@@ -357,40 +422,50 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/mathematics-statistics/applied-mathematics-bs/",
       "required_courses": [
-        "MATH 161",
-        "MATH 162 or MATH 162A",
-        "MATH 201",
-        "MATH 212",
-        "MATH 263 or MATH 263A",
-        "MATH 264",
-        "PHYS 121",
+        "MATH 161",
+        {
+          "options": [
+            "MATH 162",
+            "MATH 162A"
+          ]
+        },
+        "MATH 201",
+        "MATH 212",
+        {
+          "options": [
+            "MATH 263",
+            "MATH 263A"
+          ]
+        },
+        "MATH 264",
+        "PHYS 121",
         "[Elective: Choose one of the following course sequences:6-9]",
         {
           "options": [
-            "COMP 170",
-            "MATH 215"
+            "COMP 170",
+            "MATH 215"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ANTH 101",
-            "BIOL 101",
-            "BIOL 102",
-            "CHEM 160",
-            "ENVS 101",
-            "PHYS 122"
+            "ANTH 101",
+            "BIOL 101",
+            "BIOL 102",
+            "CHEM 160",
+            "ENVS 101",
+            "PHYS 122"
           ]
         },
         "[Elective: Select one of the following:6]",
         {
           "options": [
-            "MATH 304",
-            "STAT 203"
+            "MATH 304",
+            "STAT 203"
           ]
         },
-        "MATH 309",
-        "MATH 356"
+        "MATH 309",
+        "MATH 356"
       ],
       "total_major_courses": 15
     },
@@ -400,30 +475,30 @@
       "school_college": "School of Continuing and Professional Studies",
       "program_url": "https://catalog.luc.edu/undergraduate/continuing-professional-studies/applied-psychology-ba/",
       "required_courses": [
-        "PSYC 101",
-        "PSYC 304",
-        "PSYC 306",
-        "PSYC 275",
-        "PSYC 362",
-        "CPST 322",
-        "CPST 320",
-        "PSYC 373",
+        "PSYC 101",
+        "PSYC 304",
+        "PSYC 306",
+        "PSYC 275",
+        "PSYC 362",
+        "CPST 322",
+        "CPST 320",
+        "PSYC 373",
         "[Elective: Select one of the following Tracks:12]",
         {
           "options": [
-            "CPST 250",
-            "CPST 350",
-            "CPST 380",
-            "PSYC 338",
-            "PSYC 273",
-            "CPSY 323",
-            "CPSY 324",
-            "CPSY 332"
+            "CPST 250",
+            "CPST 350",
+            "CPST 380",
+            "PSYC 338",
+            "PSYC 273",
+            "CPSY 323",
+            "CPSY 324",
+            "CPSY 332"
           ]
         },
-        "CPST 200",
-        "CPST 201",
-        "CPST 397"
+        "CPST 200",
+        "CPST 201",
+        "CPST 397"
       ],
       "total_major_courses": 13
     },
@@ -433,32 +508,37 @@
       "school_college": "School of Continuing and Professional Studies",
       "program_url": "https://catalog.luc.edu/undergraduate/continuing-professional-studies/applied-studies-ba/",
       "required_courses": [
-        "CPST 250",
-        "CPST 243 or CPST 245",
-        "COMM 175",
-        "CPST 310",
-        "CPST 247",
-        "STAT 103",
-        "CPST 315",
+        "CPST 250",
+        {
+          "options": [
+            "CPST 243",
+            "CPST 245"
+          ]
+        },
+        "COMM 175",
+        "CPST 310",
+        "CPST 247",
+        "STAT 103",
+        "CPST 315",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "COMM 101",
-            "CPST 322"
+            "COMM 101",
+            "CPST 322"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "CPST 370",
-            "CPST 360",
-            "CPST 340",
-            "CPST 320"
+            "CPST 370",
+            "CPST 360",
+            "CPST 340",
+            "CPST 320"
           ]
         },
-        "CPST 200",
-        "CPST 201",
-        "CPST 397"
+        "CPST 200",
+        "CPST 201",
+        "CPST 397"
       ],
       "total_major_courses": 14
     },
@@ -468,58 +548,58 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/art-history-ba/",
       "required_courses": [
-        "FNAR 199",
-        "FNAR 200",
-        "FNAR 201",
-        "FNAR 202",
+        "FNAR 199",
+        "FNAR 200",
+        "FNAR 201",
+        "FNAR 202",
         "[Elective: Select one of the following:]",
         {
           "options": [
-            "FNAR 113",
-            "FNAR 114",
-            "FNAR 120",
-            "FNAR 121",
-            "FNAR 124"
+            "FNAR 113",
+            "FNAR 114",
+            "FNAR 120",
+            "FNAR 121",
+            "FNAR 124"
           ]
         },
         "[Elective: Select one of the following:]",
         {
           "options": [
-            "FNAR 338",
-            "FNAR 343",
-            "FNAR 344",
-            "FNAR 349",
-            "FNAR 345",
-            "FNAR 360"
+            "FNAR 338",
+            "FNAR 343",
+            "FNAR 344",
+            "FNAR 349",
+            "FNAR 345",
+            "FNAR 360"
           ]
         },
         "[Elective: Select two of the following:]",
         {
           "options": [
-            "FNAR 351",
-            "FNAR 352",
-            "FNAR 355",
-            "FNAR 357",
-            "FNAR 358",
-            "FNAR 359"
+            "FNAR 351",
+            "FNAR 352",
+            "FNAR 355",
+            "FNAR 357",
+            "FNAR 358",
+            "FNAR 359"
           ]
         },
         "[Elective: Select one of the following:]",
         {
           "options": [
-            "FNAR 207",
-            "FNAR 304",
-            "FNAR 305",
-            "FNAR 306",
-            "FNAR 365",
-            "FNAR 207",
-            "FNAR 304",
-            "FNAR 305",
-            "FNAR 365"
+            "FNAR 207",
+            "FNAR 304",
+            "FNAR 305",
+            "FNAR 306",
+            "FNAR 365",
+            "FNAR 207",
+            "FNAR 304",
+            "FNAR 305",
+            "FNAR 365"
           ]
         },
-        "FNAR 390",
-        "FNAR 391"
+        "FNAR 390",
+        "FNAR 391"
       ],
       "total_major_courses": 14
     },
@@ -529,59 +609,69 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/chemistry-biochemistry/biochemistry-ba/",
       "required_courses": [
-        "CHEM 160",
-        "CHEM 161",
-        "CHEM 180",
-        "CHEM 181",
-        "CHEM 240",
-        "CHEM 242",
-        "CHEM 260",
-        "CHEM 272",
-        "CHEM 305",
-        "CHEM 306",
-        "CHEM 307",
-        "CHEM 370",
-        "CHEM 371",
+        "CHEM 160",
+        "CHEM 161",
+        "CHEM 180",
+        "CHEM 181",
+        "CHEM 240",
+        "CHEM 242",
+        "CHEM 260",
+        "CHEM 272",
+        "CHEM 305",
+        "CHEM 306",
+        "CHEM 307",
+        "CHEM 370",
+        "CHEM 371",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "CHEM 365",
-            "CHEM 385",
-            "CHEM 386",
-            "CHEM 387",
-            "CHEM 388"
+            "CHEM 365",
+            "CHEM 385",
+            "CHEM 386",
+            "CHEM 387",
+            "CHEM 388"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "CHEM 323",
-            "CHEM 365",
-            "CHEM 385",
-            "CHEM 386",
-            "CHEM 387",
-            "CHEM 388",
-            "CHEM 396",
-            "BIOL 335",
-            "BIOL 380",
-            "BIOL 382",
-            "BIOL 388",
-            "BIOL 389"
+            "CHEM 323",
+            "CHEM 365",
+            "CHEM 385",
+            "CHEM 386",
+            "CHEM 387",
+            "CHEM 388",
+            "CHEM 396",
+            "BIOL 335",
+            "BIOL 380",
+            "BIOL 382",
+            "BIOL 388",
+            "BIOL 389"
           ]
         },
-        "PHYS 111",
-        "PHYS 112",
-        "PHYS 111L",
-        "PHYS 112L",
-        "MATH 131 or MATH 161",
-        "MATH 132 or MATH 162",
-        "BIOL 101",
-        "BIOL 102",
-        "BIOL 111",
-        "BIOL 112",
-        "BIOL 251",
-        "BIOL 282",
-        "BIOL 283"
+        "PHYS 111",
+        "PHYS 112",
+        "PHYS 111L",
+        "PHYS 112L",
+        {
+          "options": [
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        {
+          "options": [
+            "MATH 132",
+            "MATH 162"
+          ]
+        },
+        "BIOL 101",
+        "BIOL 102",
+        "BIOL 111",
+        "BIOL 112",
+        "BIOL 251",
+        "BIOL 282",
+        "BIOL 283"
       ],
       "total_major_courses": 30
     },
@@ -591,61 +681,71 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/chemistry-biochemistry/biochemistry-bs/",
       "required_courses": [
-        "CHEM 160",
-        "CHEM 161",
-        "CHEM 180",
-        "CHEM 181",
-        "CHEM 240",
-        "CHEM 242",
-        "CHEM 260",
-        "CHEM 272",
-        "CHEM 305",
-        "CHEM 306",
-        "CHEM 307",
-        "CHEM 370",
-        "CHEM 371",
-        "CHEM 372",
-        "CHEM 373",
+        "CHEM 160",
+        "CHEM 161",
+        "CHEM 180",
+        "CHEM 181",
+        "CHEM 240",
+        "CHEM 242",
+        "CHEM 260",
+        "CHEM 272",
+        "CHEM 305",
+        "CHEM 306",
+        "CHEM 307",
+        "CHEM 370",
+        "CHEM 371",
+        "CHEM 372",
+        "CHEM 373",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "CHEM 365",
-            "CHEM 385",
-            "CHEM 386",
-            "CHEM 387",
-            "CHEM 388"
+            "CHEM 365",
+            "CHEM 385",
+            "CHEM 386",
+            "CHEM 387",
+            "CHEM 388"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "CHEM 323",
-            "CHEM 365",
-            "CHEM 385",
-            "CHEM 386",
-            "CHEM 387",
-            "CHEM 388",
-            "CHEM 396",
-            "BIOL 380",
-            "BIOL 382",
-            "BIOL 388",
-            "BIOL 389"
+            "CHEM 323",
+            "CHEM 365",
+            "CHEM 385",
+            "CHEM 386",
+            "CHEM 387",
+            "CHEM 388",
+            "CHEM 396",
+            "BIOL 380",
+            "BIOL 382",
+            "BIOL 388",
+            "BIOL 389"
           ]
         },
-        "PHYS 111",
-        "PHYS 112",
-        "PHYS 111L",
-        "PHYS 112L",
-        "MATH 131 or MATH 161",
-        "MATH 132 or MATH 162",
-        "STAT 203",
-        "BIOL 101",
-        "BIOL 102",
-        "BIOL 111",
-        "BIOL 112",
-        "BIOL 251",
-        "BIOL 282",
-        "BIOL 283"
+        "PHYS 111",
+        "PHYS 112",
+        "PHYS 111L",
+        "PHYS 112L",
+        {
+          "options": [
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        {
+          "options": [
+            "MATH 132",
+            "MATH 162"
+          ]
+        },
+        "STAT 203",
+        "BIOL 101",
+        "BIOL 102",
+        "BIOL 111",
+        "BIOL 112",
+        "BIOL 251",
+        "BIOL 282",
+        "BIOL 283"
       ],
       "total_major_courses": 33
     },
@@ -655,30 +755,40 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/bioinformatics/bioinformatics-bs/",
       "required_courses": [
-        "BIOL 101",
-        "BIOL 282",
-        "BIOL 283",
-        "CHEM 160",
-        "CHEM 180",
-        "CHEM 240",
-        "CHEM 260",
-        "CHEM 361",
-        "COMP 141",
-        "MATH 215",
-        "COMP 231",
-        "MATH 131",
-        "MATH 132",
-        "STAT 335",
-        "BIOL 387 or BIOL 392",
-        "BIOL 388",
-        "COMP 383",
-        "STAT 337 or STAT 336",
+        "BIOL 101",
+        "BIOL 282",
+        "BIOL 283",
+        "CHEM 160",
+        "CHEM 180",
+        "CHEM 240",
+        "CHEM 260",
+        "CHEM 361",
+        "COMP 141",
+        "MATH 215",
+        "COMP 231",
+        "MATH 131",
+        "MATH 132",
+        "STAT 335",
+        {
+          "options": [
+            "BIOL 387",
+            "BIOL 392"
+          ]
+        },
+        "BIOL 388",
+        "COMP 383",
+        {
+          "options": [
+            "STAT 337",
+            "STAT 336"
+          ]
+        },
         "[Elective: Select one of the following:]",
         {
           "options": [
-            "BIOI 397",
-            "BIOI 398",
-            "BIOI 399"
+            "BIOI 397",
+            "BIOI 398",
+            "BIOI 399"
           ]
         }
       ],
@@ -690,35 +800,105 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/biology/biology-bs/",
       "required_courses": [
-        "BIOL 101",
-        "BIOL 111",
-        "BIOL 102",
-        "BIOL 112",
-        "BIOL 251",
-        "BIOL 265",
-        "BIOL 282",
+        "BIOL 101",
+        "BIOL 111",
+        "BIOL 102",
+        "BIOL 112",
+        "BIOL 251",
+        "BIOL 265",
+        "BIOL 282",
         "[Elective: Select one of the following:1]",
         {
           "options": [
-            "BIOL 252",
-            "BIOL 266",
-            "BIOL 283"
+            "BIOL 252",
+            "BIOL 266",
+            "BIOL 283"
           ]
         },
-        "CHEM 160 or CHEM 101 or CHEM 105",
-        "CHEM 161 or CHEM 105 or CHEM 111",
-        "CHEM 180 or CHEM 221 or CHEM 223",
-        "CHEM 181 or CHEM 221 or CHEM 225",
-        "CHEM 240 or CHEM 222 or CHEM 224",
-        "CHEM 241 or CHEM 222 or CHEM 226",
-        "CHEM 260 or CHEM 102 or CHEM 106",
-        "CHEM 261 or CHEM 106 or CHEM 112",
-        "MATH 131 or MATH 161",
-        "MATH 132 or MATH 162",
-        "PHYS 111 or PHYS 121 or PHYS 125",
-        "PHYS 111L",
-        "PHYS 112 or PHYS 122 or PHYS 126",
-        "PHYS 112L"
+        {
+          "options": [
+            "CHEM 160",
+            "CHEM 101",
+            "CHEM 105"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 161",
+            "CHEM 105",
+            "CHEM 111"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 180",
+            "CHEM 221",
+            "CHEM 223"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 181",
+            "CHEM 221",
+            "CHEM 225"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 240",
+            "CHEM 222",
+            "CHEM 224"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 241",
+            "CHEM 222",
+            "CHEM 226"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 260",
+            "CHEM 102",
+            "CHEM 106"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 261",
+            "CHEM 106",
+            "CHEM 112"
+          ]
+        },
+        {
+          "options": [
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        {
+          "options": [
+            "MATH 132",
+            "MATH 162"
+          ]
+        },
+        {
+          "options": [
+            "PHYS 111",
+            "PHYS 121",
+            "PHYS 125"
+          ]
+        },
+        "PHYS 111L",
+        {
+          "options": [
+            "PHYS 112",
+            "PHYS 122",
+            "PHYS 126"
+          ]
+        },
+        "PHYS 112L"
       ],
       "total_major_courses": 23
     },
@@ -728,29 +908,99 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/biology/biology-ecology-emphasis-bs/",
       "required_courses": [
-        "BIOL 101",
-        "BIOL 111",
-        "BIOL 102",
-        "BIOL 112",
-        "BIOL 251",
-        "BIOL 265",
-        "BIOL 266",
-        "BIOL 282",
-        "BIOL 319",
-        "CHEM 160 or CHEM 101 or CHEM 105",
-        "CHEM 161 or CHEM 105 or CHEM 111",
-        "CHEM 180 or CHEM 221 or CHEM 223",
-        "CHEM 181 or CHEM 221 or CHEM 225",
-        "CHEM 240 or CHEM 222 or CHEM 224",
-        "CHEM 241 or CHEM 222 or CHEM 226",
-        "CHEM 260 or CHEM 102 or CHEM 106",
-        "CHEM 261 or CHEM 106 or CHEM 112",
-        "MATH 131 or MATH 161",
-        "MATH 132 or MATH 162",
-        "PHYS 111 or PHYS 121 or PHYS 125",
-        "PHYS 111L",
-        "PHYS 112 or PHYS 122 or PHYS 126",
-        "PHYS 112L"
+        "BIOL 101",
+        "BIOL 111",
+        "BIOL 102",
+        "BIOL 112",
+        "BIOL 251",
+        "BIOL 265",
+        "BIOL 266",
+        "BIOL 282",
+        "BIOL 319",
+        {
+          "options": [
+            "CHEM 160",
+            "CHEM 101",
+            "CHEM 105"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 161",
+            "CHEM 105",
+            "CHEM 111"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 180",
+            "CHEM 221",
+            "CHEM 223"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 181",
+            "CHEM 221",
+            "CHEM 225"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 240",
+            "CHEM 222",
+            "CHEM 224"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 241",
+            "CHEM 222",
+            "CHEM 226"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 260",
+            "CHEM 102",
+            "CHEM 106"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 261",
+            "CHEM 106",
+            "CHEM 112"
+          ]
+        },
+        {
+          "options": [
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        {
+          "options": [
+            "MATH 132",
+            "MATH 162"
+          ]
+        },
+        {
+          "options": [
+            "PHYS 111",
+            "PHYS 121",
+            "PHYS 125"
+          ]
+        },
+        "PHYS 111L",
+        {
+          "options": [
+            "PHYS 112",
+            "PHYS 122",
+            "PHYS 126"
+          ]
+        },
+        "PHYS 112L"
       ],
       "total_major_courses": 23
     },
@@ -760,29 +1010,99 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/biology/biology-molecular-biology-emphasis-bs/",
       "required_courses": [
-        "BIOL 101",
-        "BIOL 111",
-        "BIOL 102",
-        "BIOL 112",
-        "BIOL 251",
-        "BIOL 265",
-        "BIOL 282",
-        "BIOL 283",
-        "BIOL 366",
-        "CHEM 160 or CHEM 101 or CHEM 105",
-        "CHEM 161 or CHEM 105 or CHEM 111",
-        "CHEM 180 or CHEM 221 or CHEM 223",
-        "CHEM 181 or CHEM 221 or CHEM 225",
-        "CHEM 240 or CHEM 222 or CHEM 224",
-        "CHEM 241 or CHEM 222 or CHEM 226",
-        "CHEM 260 or CHEM 102 or CHEM 106",
-        "CHEM 261 or CHEM 106 or CHEM 112",
-        "MATH 131 or MATH 161",
-        "MATH 132 or MATH 162",
-        "PHYS 111 or PHYS 121 or PHYS 125",
-        "PHYS 111L",
-        "PHYS 112 or PHYS 122 or PHYS 126",
-        "PHYS 112L"
+        "BIOL 101",
+        "BIOL 111",
+        "BIOL 102",
+        "BIOL 112",
+        "BIOL 251",
+        "BIOL 265",
+        "BIOL 282",
+        "BIOL 283",
+        "BIOL 366",
+        {
+          "options": [
+            "CHEM 160",
+            "CHEM 101",
+            "CHEM 105"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 161",
+            "CHEM 105",
+            "CHEM 111"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 180",
+            "CHEM 221",
+            "CHEM 223"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 181",
+            "CHEM 221",
+            "CHEM 225"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 240",
+            "CHEM 222",
+            "CHEM 224"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 241",
+            "CHEM 222",
+            "CHEM 226"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 260",
+            "CHEM 102",
+            "CHEM 106"
+          ]
+        },
+        {
+          "options": [
+            "CHEM 261",
+            "CHEM 106",
+            "CHEM 112"
+          ]
+        },
+        {
+          "options": [
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        {
+          "options": [
+            "MATH 132",
+            "MATH 162"
+          ]
+        },
+        {
+          "options": [
+            "PHYS 111",
+            "PHYS 121",
+            "PHYS 125"
+          ]
+        },
+        "PHYS 111L",
+        {
+          "options": [
+            "PHYS 112",
+            "PHYS 122",
+            "PHYS 126"
+          ]
+        },
+        "PHYS 112L"
       ],
       "total_major_courses": 23
     },
@@ -792,57 +1112,57 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/physics/biophysics-bs/",
       "required_courses": [
-        "PHYS 121",
-        "PHYS 111L",
-        "PHYS 122",
-        "PHYS 126F",
-        "PHYS 112L",
-        "PHYS 235",
-        "PHYS 235L",
-        "PHYS 301",
-        "PHYS 314",
-        "PHYS 351",
+        "PHYS 121",
+        "PHYS 111L",
+        "PHYS 122",
+        "PHYS 126F",
+        "PHYS 112L",
+        "PHYS 235",
+        "PHYS 235L",
+        "PHYS 301",
+        "PHYS 314",
+        "PHYS 351",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "PHYS 310",
-            "PHYS 328",
-            "PHYS 361"
+            "PHYS 310",
+            "PHYS 328",
+            "PHYS 361"
           ]
         },
         "[Elective: Select one of the following:1-3]",
-        "CHEM 101",
-        "CHEM 102",
-        "CHEM 223",
-        "CHEM 224",
-        "MATH 161",
-        "MATH 162",
-        "MATH 263",
-        "MATH 264",
+        "CHEM 101",
+        "CHEM 102",
+        "CHEM 223",
+        "CHEM 224",
+        "MATH 161",
+        "MATH 162",
+        "MATH 263",
+        "MATH 264",
         {
           "options": [
-            "BIOL 101",
-            "BIOL 111",
-            "BIOL 251",
-            "BIOL 282",
-            "BIOL 102 or COMP 180",
-            "BIOL 112",
-            "BIOL 252",
-            "BIOL 283",
-            "BIOL 317",
-            "BIOL 335/STAT 335",
-            "BIOL 366",
-            "BIOL 366L",
-            "BIOL 387",
-            "BIOL 388",
-            "BIOL 390",
-            "BIOL 382",
-            "COMP 180",
-            "PHYS 130",
-            "PHYS 310L",
-            "PHYS 338",
-            "PHYS 371",
-            "PHYS 391"
+            "BIOL 101",
+            "BIOL 111",
+            "BIOL 251",
+            "BIOL 282",
+            "BIOL 102 or COMP 180",
+            "BIOL 112",
+            "BIOL 252",
+            "BIOL 283",
+            "BIOL 317",
+            "BIOL 335/STAT 335",
+            "BIOL 366",
+            "BIOL 366L",
+            "BIOL 387",
+            "BIOL 388",
+            "BIOL 390",
+            "BIOL 382",
+            "COMP 180",
+            "PHYS 130",
+            "PHYS 310L",
+            "PHYS 338",
+            "PHYS 371",
+            "PHYS 391"
           ]
         }
       ],
@@ -854,27 +1174,27 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/chemistry-biochemistry/chemistry-ba/",
       "required_courses": [
-        "CHEM 160",
-        "CHEM 161",
-        "CHEM 180",
-        "CHEM 181",
-        "CHEM 240",
-        "CHEM 242",
-        "CHEM 260",
-        "CHEM 272",
-        "CHEM 280",
-        "CHEM 301",
-        "CHEM 302",
-        "CHEM 303",
-        "CHEM 314",
-        "CHEM 340",
-        "PHYS 121",
-        "PHYS 122",
-        "PHYS 111L",
-        "PHYS 112L",
-        "MATH 161",
-        "MATH 162",
-        "STAT 203"
+        "CHEM 160",
+        "CHEM 161",
+        "CHEM 180",
+        "CHEM 181",
+        "CHEM 240",
+        "CHEM 242",
+        "CHEM 260",
+        "CHEM 272",
+        "CHEM 280",
+        "CHEM 301",
+        "CHEM 302",
+        "CHEM 303",
+        "CHEM 314",
+        "CHEM 340",
+        "PHYS 121",
+        "PHYS 122",
+        "PHYS 111L",
+        "PHYS 112L",
+        "MATH 161",
+        "MATH 162",
+        "STAT 203"
       ],
       "total_major_courses": 21
     },
@@ -884,29 +1204,29 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/chemistry-biochemistry/chemistry-bs/",
       "required_courses": [
-        "CHEM 160",
-        "CHEM 161",
-        "CHEM 180",
-        "CHEM 181",
-        "CHEM 240",
-        "CHEM 242",
-        "CHEM 260",
-        "CHEM 272",
-        "CHEM 280",
-        "CHEM 301",
-        "CHEM 302",
-        "CHEM 303",
-        "CHEM 370",
-        "CHEM 314",
-        "CHEM 340",
-        "CHEM 341",
-        "PHYS 121",
-        "PHYS 122",
-        "PHYS 111L",
-        "PHYS 112L",
-        "MATH 161",
-        "MATH 162",
-        "STAT 203"
+        "CHEM 160",
+        "CHEM 161",
+        "CHEM 180",
+        "CHEM 181",
+        "CHEM 240",
+        "CHEM 242",
+        "CHEM 260",
+        "CHEM 272",
+        "CHEM 280",
+        "CHEM 301",
+        "CHEM 302",
+        "CHEM 303",
+        "CHEM 370",
+        "CHEM 314",
+        "CHEM 340",
+        "CHEM 341",
+        "PHYS 121",
+        "PHYS 122",
+        "PHYS 111L",
+        "PHYS 112L",
+        "MATH 161",
+        "MATH 162",
+        "STAT 203"
       ],
       "total_major_courses": 23
     },
@@ -916,23 +1236,23 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/classical-studies/classical-civilization-ba/",
       "required_courses": [
-        "CLST 275",
-        "CLST 276",
+        "CLST 275",
+        "CLST 276",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "CLST 271",
-            "CLST 271G",
-            "CLST 272",
-            "CLST 273",
-            "CLST 273G",
-            "CLST 279",
-            "CLST 280",
-            "CLST 283"
+            "CLST 271",
+            "CLST 271G",
+            "CLST 272",
+            "CLST 273",
+            "CLST 273G",
+            "CLST 279",
+            "CLST 280",
+            "CLST 283"
           ]
         },
-        "CLST 383",
-        "CLST 384"
+        "CLST 383",
+        "CLST 384"
       ],
       "total_major_courses": 6
     },
@@ -942,95 +1262,120 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/neuroscience/cognitive-behavioral-neuroscience-bs/",
       "required_courses": [
-        "BIOL 101",
-        "BIOL 102",
-        "BIOL 251",
-        "BIOL 252 or BIOL 283",
-        "BIOL 282",
-        "BIOL 335/STAT 335 or PSYC 304",
-        "MATH 131 or MATH 161",
-        "PSYC 101",
+        "BIOL 101",
+        "BIOL 102",
+        "BIOL 251",
+        {
+          "options": [
+            "BIOL 252",
+            "BIOL 283"
+          ]
+        },
+        "BIOL 282",
+        {
+          "options": [
+            "BIOL 335",
+            "STAT 335 or PSYC 304"
+          ]
+        },
+        {
+          "options": [
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        "PSYC 101",
         "[Elective: Select one of the following three sets of classes:4]",
         {
           "options": [
-            "CHEM 101",
-            "CHEM 105",
-            "CHEM 160"
+            "CHEM 101",
+            "CHEM 105",
+            "CHEM 160"
           ]
         },
         "[Elective: Select one of the following three sets of classes:4]",
         {
           "options": [
-            "CHEM 102",
-            "CHEM 106",
-            "CHEM 180"
+            "CHEM 102",
+            "CHEM 106",
+            "CHEM 180"
           ]
         },
         "[Elective: Select one of the following three sets of classes:4]",
         {
           "options": [
-            "PHYS 111",
-            "PHYS 121",
-            "PHYS 125"
+            "PHYS 111",
+            "PHYS 121",
+            "PHYS 125"
           ]
         },
         "[Elective: Select one of the following three sets of classes:4]",
         {
           "options": [
-            "PHYS 112",
-            "PHYS 122",
-            "PHYS 126"
+            "PHYS 112",
+            "PHYS 122",
+            "PHYS 126"
           ]
         },
-        "NEUR 101",
-        "BIOL 362",
-        "PSYC 382/BIOL 284",
-        "NEUR 300/BIOL 303",
-        "PSYC 306",
+        "NEUR 101",
+        "BIOL 362",
+        {
+          "options": [
+            "PSYC 382",
+            "BIOL 284"
+          ]
+        },
+        {
+          "options": [
+            "NEUR 300",
+            "BIOL 303"
+          ]
+        },
+        "PSYC 306",
         "[Elective: Select one of the following Computer Science options:3]",
         {
           "options": [
-            "COMP 150",
-            "COMP 170",
-            "COMP 180",
-            "DSCI 101"
+            "COMP 150",
+            "COMP 170",
+            "COMP 180",
+            "DSCI 101"
           ]
         },
         "[Elective: Select three of the following:9]",
         {
           "options": [
-            "BIOL 320",
-            "BIOL 351",
-            "BIOL 352",
-            "BIOL 357"
+            "BIOL 320",
+            "BIOL 351",
+            "BIOL 352",
+            "BIOL 357"
           ]
         },
         {
           "options": [
-            "PSYC 240/BIOL 240",
-            "PSYC 251",
-            "PSYC 332",
-            "PSYC 350",
-            "PSYC 352",
-            "PSYC 355/PHIL 355",
-            "PSYC 378",
-            "PSYC 383/COMP 386"
+            "PSYC 240/BIOL 240",
+            "PSYC 251",
+            "PSYC 332",
+            "PSYC 350",
+            "PSYC 352",
+            "PSYC 355/PHIL 355",
+            "PSYC 378",
+            "PSYC 383/COMP 386"
           ]
         },
         "[Elective: Select two of the following:6-7]",
-        "PSYC 387",
+        "PSYC 387",
         {
           "options": [
-            "NEUR 301/BIOL 373/PSYC 388",
-            "PSYC 311/BIOL 313",
-            "PSYC 312",
-            "PSYC 313",
-            "PSYC 314",
-            "PSYC 316",
-            "PSYC 384/COMP 389",
-            "BIOL 396",
-            "PSYC 370",
-            "PSYC 397"
+            "NEUR 301/BIOL 373/PSYC 388",
+            "PSYC 311/BIOL 313",
+            "PSYC 312",
+            "PSYC 313",
+            "PSYC 314",
+            "PSYC 316",
+            "PSYC 384/COMP 389",
+            "BIOL 396",
+            "PSYC 370",
+            "PSYC 397"
           ]
         }
       ],
@@ -1042,59 +1387,64 @@
       "school_college": "School of Communication",
       "program_url": "https://catalog.luc.edu/undergraduate/communication/communication-studies/communication-studies-ba/",
       "required_courses": [
-        "COMM 100",
-        "COMM 175",
-        "COMM 200",
-        "COMM 215 or COMM 360",
-        "[Elective: Select two of the following:6]",
+        "COMM 100",
+        "COMM 175",
+        "COMM 200",
         {
           "options": [
-            "COMM 201",
-            "COMM 220",
-            "COMM 227",
-            "COMM 258",
-            "COMM 268",
-            "COMM 272",
-            "COMM 273",
-            "COMM 277",
-            "COMM 280",
-            "COMM 281",
-            "COMM 379"
+            "COMM 215",
+            "COMM 360"
           ]
         },
         "[Elective: Select two of the following:6]",
         {
           "options": [
-            "COMM 230",
-            "COMM 231",
-            "COMM 234",
-            "COMM 236",
-            "COMM 237",
-            "COMM 306",
-            "COMM 307",
-            "COMM 309",
-            "COMM 323"
+            "COMM 201",
+            "COMM 220",
+            "COMM 227",
+            "COMM 258",
+            "COMM 268",
+            "COMM 272",
+            "COMM 273",
+            "COMM 277",
+            "COMM 280",
+            "COMM 281",
+            "COMM 379"
+          ]
+        },
+        "[Elective: Select two of the following:6]",
+        {
+          "options": [
+            "COMM 230",
+            "COMM 231",
+            "COMM 234",
+            "COMM 236",
+            "COMM 237",
+            "COMM 306",
+            "COMM 307",
+            "COMM 309",
+            "COMM 323"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "COMM 361",
-            "COMM 365",
-            "COMM 367",
-            "COMM 368"
+            "COMM 361",
+            "COMM 365",
+            "COMM 367",
+            "COMM 368"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "COMM 204",
-            "COMM 227",
-            "COMM 237",
-            "COMM 320",
-            "COMM 339",
-            "COMM 381",
-            "COMM 393"
+            "COMM 204",
+            "COMM 227",
+            "COMM 237",
+            "COMM 320",
+            "COMM 339",
+            "COMM 381",
+            "COMM 393"
           ]
         }
       ],
@@ -1106,26 +1456,46 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/computer-science/computer-science-bs/",
       "required_courses": [
-        "MATH 131 or MATH 161",
-        "MATH 132 or MATH 162",
-        "COMP 141",
-        "COMP 163 or MATH 201",
-        "COMP 170",
-        "COMP 264",
-        "COMP 271",
-        "COMP 272",
-        "COMP 310",
-        "COMP 317",
-        "COMP 363",
-        "COMP 371",
-        "STAT 203",
-        "[Elective: Select six credits taken from one or more of the following:26]",
         {
           "options": [
-            "COMP 312",
-            "COMP 390",
-            "COMP 391",
-            "COMP 398"
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        {
+          "options": [
+            "MATH 132",
+            "MATH 162"
+          ]
+        },
+        "COMP 141",
+        {
+          "options": [
+            "COMP 163",
+            "MATH 201"
+          ]
+        },
+        "COMP 170",
+        "COMP 264",
+        "COMP 271",
+        "COMP 272",
+        "COMP 310",
+        "COMP 317",
+        "COMP 363",
+        "COMP 371",
+        "STAT 203",
+        {
+          "options": [
+            "[Elective: Select six credits taken from one",
+            "more of the following:26]"
+          ]
+        },
+        {
+          "options": [
+            "COMP 312",
+            "COMP 390",
+            "COMP 391",
+            "COMP 398"
           ]
         }
       ],
@@ -1137,19 +1507,24 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/criminal-justice-criminology/criminal-justice-criminology-bs/",
       "required_courses": [
-        "CJC 101",
-        "CJC 201",
-        "CJC 205",
+        "CJC 101",
+        "CJC 201",
+        "CJC 205",
         "[Elective: Select two of the following:6]",
         {
           "options": [
-            "CJC 202",
-            "CJC 203",
-            "CJC 204",
-            "CJC 323"
+            "CJC 202",
+            "CJC 203",
+            "CJC 204",
+            "CJC 323"
           ]
         },
-        "CJC 399 or CJC 390"
+        {
+          "options": [
+            "CJC 399",
+            "CJC 390"
+          ]
+        }
       ],
       "total_major_courses": 6
     },
@@ -1159,21 +1534,31 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/computer-science/cybersecurity-bs/",
       "required_courses": [
-        "COMP 141",
-        "COMP 163 or MATH 201",
-        "COMP 170",
-        "COMP 264",
-        "COMP 271",
-        "COMP 301",
-        "COMP 310",
-        "COMP 317",
-        "COMP 340",
-        "COMP 343",
-        "COMP 347",
-        "COMP 348",
-        "COMP 349",
-        "COMP 352",
-        "MATH 131 or MATH 161"
+        "COMP 141",
+        {
+          "options": [
+            "COMP 163",
+            "MATH 201"
+          ]
+        },
+        "COMP 170",
+        "COMP 264",
+        "COMP 271",
+        "COMP 301",
+        "COMP 310",
+        "COMP 317",
+        "COMP 340",
+        "COMP 343",
+        "COMP 347",
+        "COMP 348",
+        "COMP 349",
+        "COMP 352",
+        {
+          "options": [
+            "MATH 131",
+            "MATH 161"
+          ]
+        }
       ],
       "total_major_courses": 15
     },
@@ -1183,21 +1568,36 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/dance-ba/",
       "required_courses": [
-        "THTR 321C or THTR 321E",
-        "DANC 250",
-        "DANC 270",
-        "DANC 341",
-        "DANC 343",
-        "DANC 312 or DANC 314",
-        "DANC 232 or DANC 331",
-        "DANC 224",
-        "DANC 324",
-        "DANC 275",
-        "DANC 323",
-        "DANC 360",
-        "DANC 370",
-        "DANC 394",
-        "DANC 380"
+        {
+          "options": [
+            "THTR 321C",
+            "THTR 321E"
+          ]
+        },
+        "DANC 250",
+        "DANC 270",
+        "DANC 341",
+        "DANC 343",
+        {
+          "options": [
+            "DANC 312",
+            "DANC 314"
+          ]
+        },
+        {
+          "options": [
+            "DANC 232",
+            "DANC 331"
+          ]
+        },
+        "DANC 224",
+        "DANC 324",
+        "DANC 275",
+        "DANC 323",
+        "DANC 360",
+        "DANC 370",
+        "DANC 394",
+        "DANC 380"
       ],
       "total_major_courses": 15
     },
@@ -1207,25 +1607,35 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/data-science/data-science-bs/",
       "required_courses": [
-        "MATH 161",
-        "MATH 162",
-        "MATH 212",
-        "STAT 203",
-        "STAT 308",
-        "STAT 310",
-        "COMP 141",
-        "COMP 215/MATH 215",
-        "COMP 231",
-        "COMP 353",
-        "COMP 317",
-        "DSCI 101",
-        "STAT 338 or COMP 379",
-        "COMP 358",
+        "MATH 161",
+        "MATH 162",
+        "MATH 212",
+        "STAT 203",
+        "STAT 308",
+        "STAT 310",
+        "COMP 141",
+        {
+          "options": [
+            "COMP 215",
+            "MATH 215"
+          ]
+        },
+        "COMP 231",
+        "COMP 353",
+        "COMP 317",
+        "DSCI 101",
+        {
+          "options": [
+            "STAT 338",
+            "COMP 379"
+          ]
+        },
+        "COMP 358",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "DSCI 399",
-            "STAT 370"
+            "DSCI 399",
+            "STAT 370"
           ]
         }
       ],
@@ -1237,20 +1647,30 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/drawing-painting-printmaking-ba/",
       "required_courses": [
-        "FNAR 110",
-        "FNAR 113",
-        "FNAR 201",
-        "FNAR 202",
-        "FNAR 114",
-        "FNAR 115",
-        "FNAR 118",
-        "FNAR 213",
-        "FNAR 214",
-        "FNAR 311",
-        "FNAR 120 or FNAR 124",
-        "FNAR 190 or FNAR 233",
-        "FNAR 388",
-        "FNAR 398"
+        "FNAR 110",
+        "FNAR 113",
+        "FNAR 201",
+        "FNAR 202",
+        "FNAR 114",
+        "FNAR 115",
+        "FNAR 118",
+        "FNAR 213",
+        "FNAR 214",
+        "FNAR 311",
+        {
+          "options": [
+            "FNAR 120",
+            "FNAR 124"
+          ]
+        },
+        {
+          "options": [
+            "FNAR 190",
+            "FNAR 233"
+          ]
+        },
+        "FNAR 388",
+        "FNAR 398"
       ],
       "total_major_courses": 14
     },
@@ -1260,12 +1680,18 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/economics/economics-ba/",
       "required_courses": [
-        "MATH 130 or MATH 131 or MATH 161",
-        "STAT 103",
-        "ECON 201",
-        "ECON 202",
-        "ECON 303",
-        "ECON 304"
+        {
+          "options": [
+            "MATH 130",
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        "STAT 103",
+        "ECON 201",
+        "ECON 202",
+        "ECON 303",
+        "ECON 304"
       ],
       "total_major_courses": 6
     },
@@ -1275,54 +1701,75 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/economics-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 130 or MATH 131 or MATH 161",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 130",
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:23]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "ENTR 313",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "ENTR 313",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "ISSCM 241 or STAT 103",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "LREB 315",
-        "MGMT 201",
-        "MGMT 304",
-        "MARK 201",
-        "SCMG 232",
-        "ECON 303",
-        "ECON 304",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        "LREB 315",
+        "MGMT 201",
+        "MGMT 304",
+        "MARK 201",
+        "SCMG 232",
+        "ECON 303",
+        "ECON 304",
         "[Elective: Select four (4) of the following:12]",
         {
           "options": [
-            "ECON 320",
-            "ECON 323",
-            "ECON 324",
-            "ECON 325",
-            "ECON 327",
-            "ECON 328",
-            "ECON 329",
-            "ECON 334",
-            "ECON 336",
-            "ECON 346",
-            "ECON 360",
-            "ECON 370",
-            "ECON 399",
-            "MATH 360"
+            "ECON 320",
+            "ECON 323",
+            "ECON 324",
+            "ECON 325",
+            "ECON 327",
+            "ECON 328",
+            "ECON 329",
+            "ECON 334",
+            "ECON 336",
+            "ECON 346",
+            "ECON 360",
+            "ECON 370",
+            "ECON 399",
+            "MATH 360"
           ]
         }
       ],
@@ -1334,35 +1781,35 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/engineering/biomedical-engineering-bs/",
       "required_courses": [
-        "ENGR 101",
-        "ENGR 201",
-        "ENGR 102",
-        "ENGR 321",
-        "ENGR 322",
-        "ENGR 323",
-        "ENGR 324",
-        "ENGR 324L",
-        "ENGR 325",
-        "ENGR 311",
-        "ENGR 312",
-        "ENGR 313",
-        "ENGR 341",
-        "ENGR 341L",
-        "ENGR 342",
-        "ENGR 343",
-        "ENGR 381",
-        "ENGR 391",
-        "BIOL 101",
-        "CHEM 171",
-        "CHEM 173",
-        "COMP 170",
-        "MATH 161",
-        "MATH 162",
-        "MATH 263",
-        "MATH 266",
-        "PHYS 121",
-        "PHYS 122",
-        "STAT 203"
+        "ENGR 101",
+        "ENGR 201",
+        "ENGR 102",
+        "ENGR 321",
+        "ENGR 322",
+        "ENGR 323",
+        "ENGR 324",
+        "ENGR 324L",
+        "ENGR 325",
+        "ENGR 311",
+        "ENGR 312",
+        "ENGR 313",
+        "ENGR 341",
+        "ENGR 341L",
+        "ENGR 342",
+        "ENGR 343",
+        "ENGR 381",
+        "ENGR 391",
+        "BIOL 101",
+        "CHEM 171",
+        "CHEM 173",
+        "COMP 170",
+        "MATH 161",
+        "MATH 162",
+        "MATH 263",
+        "MATH 266",
+        "PHYS 121",
+        "PHYS 122",
+        "STAT 203"
       ],
       "total_major_courses": 29
     },
@@ -1372,35 +1819,35 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/engineering/computer-engineering-bs/",
       "required_courses": [
-        "ENGR 101",
-        "ENGR 201",
-        "ENGR 102",
-        "ENGR 321",
-        "ENGR 322",
-        "ENGR 323",
-        "ENGR 324",
-        "ENGR 324L",
-        "ENGR 325",
-        "ENGR 311",
-        "ENGR 312",
-        "ENGR 313",
-        "ENGR 351",
-        "ENGR 351L",
-        "ENGR 352",
-        "ENGR 353",
-        "ENGR 382",
-        "ENGR 392",
-        "BIOL 101",
-        "CHEM 171",
-        "CHEM 173",
-        "COMP 170",
-        "MATH 161",
-        "MATH 162",
-        "MATH 263",
-        "MATH 266",
-        "PHYS 121",
-        "PHYS 122",
-        "STAT 203"
+        "ENGR 101",
+        "ENGR 201",
+        "ENGR 102",
+        "ENGR 321",
+        "ENGR 322",
+        "ENGR 323",
+        "ENGR 324",
+        "ENGR 324L",
+        "ENGR 325",
+        "ENGR 311",
+        "ENGR 312",
+        "ENGR 313",
+        "ENGR 351",
+        "ENGR 351L",
+        "ENGR 352",
+        "ENGR 353",
+        "ENGR 382",
+        "ENGR 392",
+        "BIOL 101",
+        "CHEM 171",
+        "CHEM 173",
+        "COMP 170",
+        "MATH 161",
+        "MATH 162",
+        "MATH 263",
+        "MATH 266",
+        "PHYS 121",
+        "PHYS 122",
+        "STAT 203"
       ],
       "total_major_courses": 29
     },
@@ -1410,35 +1857,35 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/engineering/environmental-engineering-bs/",
       "required_courses": [
-        "ENGR 101",
-        "ENGR 201",
-        "ENGR 102",
-        "ENGR 321",
-        "ENGR 322",
-        "ENGR 323",
-        "ENGR 324",
-        "ENGR 324L",
-        "ENGR 325",
-        "ENGR 311",
-        "ENGR 312",
-        "ENGR 313",
-        "ENGR 361",
-        "ENGR 361L",
-        "ENGR 362",
-        "ENGR 363",
-        "ENGR 383",
-        "ENGR 393",
-        "BIOL 101",
-        "CHEM 171",
-        "CHEM 173",
-        "COMP 170",
-        "MATH 161",
-        "MATH 162",
-        "MATH 263",
-        "MATH 266",
-        "PHYS 121",
-        "PHYS 122",
-        "STAT 203"
+        "ENGR 101",
+        "ENGR 201",
+        "ENGR 102",
+        "ENGR 321",
+        "ENGR 322",
+        "ENGR 323",
+        "ENGR 324",
+        "ENGR 324L",
+        "ENGR 325",
+        "ENGR 311",
+        "ENGR 312",
+        "ENGR 313",
+        "ENGR 361",
+        "ENGR 361L",
+        "ENGR 362",
+        "ENGR 363",
+        "ENGR 383",
+        "ENGR 393",
+        "BIOL 101",
+        "CHEM 171",
+        "CHEM 173",
+        "COMP 170",
+        "MATH 161",
+        "MATH 162",
+        "MATH 263",
+        "MATH 266",
+        "PHYS 121",
+        "PHYS 122",
+        "STAT 203"
       ],
       "total_major_courses": 29
     },
@@ -1448,14 +1895,19 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/english/english-ba/",
       "required_courses": [
-        "ENGL 354 or ENGL 355",
+        {
+          "options": [
+            "ENGL 354",
+            "ENGL 355"
+          ]
+        },
         "[Elective: Select one of the following:13]",
         {
           "options": [
-            "ENGL 327"
+            "ENGL 327"
           ]
         },
-        "ENGL 390"
+        "ENGL 390"
       ],
       "total_major_courses": 4
     },
@@ -1465,16 +1917,32 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/english/creative-writing-concentration/",
       "required_courses": [
-        "ENGL 317",
-        "ENGL 318 or ENGL 318R",
-        "ENGL 319 or ENGL 357 or ENGL 327",
-        "ENGL 354 or ENGL 355",
+        "ENGL 317",
+        {
+          "options": [
+            "ENGL 318",
+            "ENGL 318R"
+          ]
+        },
+        {
+          "options": [
+            "ENGL 319",
+            "ENGL 357",
+            "ENGL 327"
+          ]
+        },
+        {
+          "options": [
+            "ENGL 354",
+            "ENGL 355"
+          ]
+        },
         "[Elective: Select two of the following:]",
         {
           "options": [
-            "ENGL 392",
-            "ENGL 397",
-            "ENGL 398"
+            "ENGL 392",
+            "ENGL 397",
+            "ENGL 398"
           ]
         }
       ],
@@ -1486,45 +1954,65 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/entrepreneurship-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 110 or MATH 118",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 110",
+            "MATH 118"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:23]",
         {
           "options": [
-            "ENTR 313",
-            "ANTH 100",
-            "ANTH 102",
-            "GLST 101",
-            "PLSC 102"
+            "ENTR 313",
+            "ANTH 100",
+            "ANTH 102",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "ENTR 201",
-        "ENTR 345",
-        "ENTR 390",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "ENTR 201",
+        "ENTR 345",
+        "ENTR 390",
         "[Elective: Select two of the following:6]",
         {
           "options": [
-            "ENTR 311",
-            "ENTR 313",
-            "ISSCM 349",
-            "ENTR 395"
+            "ENTR 311",
+            "ENTR 313",
+            "ISSCM 349",
+            "ENTR 395"
           ]
         }
       ],
@@ -1536,24 +2024,48 @@
       "school_college": "School of Environmental Sustainability",
       "program_url": "https://catalog.luc.edu/undergraduate/environmental-sustainability/environmental-economics-sustainability/environmental-economics-sustainability-governance-ba/",
       "required_courses": [
-        "ENVS 137",
-        "ENVS 200",
-        "ENVS 237",
-        "ENVS 238",
-        "ENVS 280",
-        "ENVS 286",
-        "ENVS 283",
-        "ECON 201",
-        "ECON 202",
-        "ECON 303",
-        "ENVS 335",
-        "PLSC 392",
-        "MATH 130 or MATH 131 or MATH 161",
-        "STAT 103 or ISSCM 241 or ENVS 203",
-        "ENVS 284 or PHIL 287 or THEO 204",
-        "ECON 328",
-        "ENVS 310",
-        "ENVS 390 or ENVS 391C or ENVS 395C"
+        "ENVS 137",
+        "ENVS 200",
+        "ENVS 237",
+        "ENVS 238",
+        "ENVS 280",
+        "ENVS 286",
+        "ENVS 283",
+        "ECON 201",
+        "ECON 202",
+        "ECON 303",
+        "ENVS 335",
+        "PLSC 392",
+        {
+          "options": [
+            "MATH 130",
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        {
+          "options": [
+            "STAT 103",
+            "ISSCM 241",
+            "ENVS 203"
+          ]
+        },
+        {
+          "options": [
+            "ENVS 284",
+            "PHIL 287",
+            "THEO 204"
+          ]
+        },
+        "ECON 328",
+        "ENVS 310",
+        {
+          "options": [
+            "ENVS 390",
+            "ENVS 391C",
+            "ENVS 395C"
+          ]
+        }
       ],
       "total_major_courses": 18
     },
@@ -1563,24 +2075,48 @@
       "school_college": "School of Environmental Sustainability",
       "program_url": "https://catalog.luc.edu/undergraduate/environmental-sustainability/environmental-economics-sustainability/environmental-economics-sustainability-management-ba/",
       "required_courses": [
-        "ENVS 137",
-        "ENVS 200",
-        "ENVS 237",
-        "ENVS 238",
-        "ENVS 280",
-        "ENVS 283",
-        "ENVS 286",
-        "MATH 130 or MATH 131 or MATH 161",
-        "ECON 201",
-        "ECON 202",
-        "ECON 303",
-        "ENVS 335",
-        "PLSC 392",
-        "STAT 103 or ISSCM 241 or ENVS 203",
-        "ENVS 284 or PHIL 287 or THEO 204",
-        "MGMT 201",
-        "ENVS 363",
-        "ENVS 390 or ENVS 391C or ENVS 395C"
+        "ENVS 137",
+        "ENVS 200",
+        "ENVS 237",
+        "ENVS 238",
+        "ENVS 280",
+        "ENVS 283",
+        "ENVS 286",
+        {
+          "options": [
+            "MATH 130",
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        "ECON 201",
+        "ECON 202",
+        "ECON 303",
+        "ENVS 335",
+        "PLSC 392",
+        {
+          "options": [
+            "STAT 103",
+            "ISSCM 241",
+            "ENVS 203"
+          ]
+        },
+        {
+          "options": [
+            "ENVS 284",
+            "PHIL 287",
+            "THEO 204"
+          ]
+        },
+        "MGMT 201",
+        "ENVS 363",
+        {
+          "options": [
+            "ENVS 390",
+            "ENVS 391C",
+            "ENVS 395C"
+          ]
+        }
       ],
       "total_major_courses": 18
     },
@@ -1590,50 +2126,55 @@
       "school_college": "School of Environmental Sustainability",
       "program_url": "https://catalog.luc.edu/undergraduate/environmental-sustainability/environmental-policy/environmental-policy-ba/",
       "required_courses": [
-        "ENVS 137",
-        "ENVS 237",
-        "ENVS 238",
-        "ENVS 200",
-        "ENVS 203",
-        "ENVS 280",
-        "ENVS 286",
-        "ENVS 310",
-        "PLSC 101",
-        "PLSC 392",
+        "ENVS 137",
+        "ENVS 237",
+        "ENVS 238",
+        "ENVS 200",
+        "ENVS 203",
+        "ENVS 280",
+        "ENVS 286",
+        "ENVS 310",
+        "PLSC 101",
+        "PLSC 392",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ENVS 284",
-            "PHIL 287",
-            "THEO 204"
-          ]
-        },
-        "[Elective: Select one of the following:3]",
-        "ENVS 335 or ECON 328",
-        "[Elective: Select one of the following:3]",
-        {
-          "options": [
-            "ENVS 226",
-            "ENVS 267",
-            "ENVS 369",
-            "ENVS 273",
-            "ENVS 283",
-            "ENVS 340",
-            "ENVS 345",
-            "ENVS 350A",
-            "ENVS 350B",
-            "ENVS 350C",
-            "ENVS 350F",
-            "ENVS 391",
-            "ENVS 395"
+            "ENVS 284",
+            "PHIL 287",
+            "THEO 204"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ENVS 390",
-            "ENVS 391C",
-            "ENVS 395C"
+            "ENVS 335",
+            "ECON 328"
+          ]
+        },
+        "[Elective: Select one of the following:3]",
+        {
+          "options": [
+            "ENVS 226",
+            "ENVS 267",
+            "ENVS 369",
+            "ENVS 273",
+            "ENVS 283",
+            "ENVS 340",
+            "ENVS 345",
+            "ENVS 350A",
+            "ENVS 350B",
+            "ENVS 350C",
+            "ENVS 350F",
+            "ENVS 391",
+            "ENVS 395"
+          ]
+        },
+        "[Elective: Select one of the following:3]",
+        {
+          "options": [
+            "ENVS 390",
+            "ENVS 391C",
+            "ENVS 395C"
           ]
         }
       ],
@@ -1645,51 +2186,56 @@
       "school_college": "School of Environmental Sustainability",
       "program_url": "https://catalog.luc.edu/undergraduate/environmental-sustainability/environmental-science/environmental-science-bs/",
       "required_courses": [
-        "BIOL 101",
-        "BIOL 111",
-        "CHEM 160",
-        "CHEM 161",
-        "ENVS 137",
-        "ENVS 200",
-        "ENVS 203",
-        "ENVS 274",
-        "ENVS 275",
-        "ENVS 276",
-        "ENVS 280",
-        "ENVS 286S",
-        "PLSC 392",
+        "BIOL 101",
+        "BIOL 111",
+        "CHEM 160",
+        "CHEM 161",
+        "ENVS 137",
+        "ENVS 200",
+        "ENVS 203",
+        "ENVS 274",
+        "ENVS 275",
+        "ENVS 276",
+        "ENVS 280",
+        "ENVS 286S",
+        "PLSC 392",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ENVS 284",
-            "PHIL 287",
-            "THEO 204"
+            "ENVS 284",
+            "PHIL 287",
+            "THEO 204"
           ]
         },
-        "ENVS 335 or ECON 328",
-        "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ENVS 226",
-            "ENVS 267",
-            "ENVS 273",
-            "ENVS 283",
-            "ENVS 340",
-            "ENVS 345",
-            "ENVS 350A",
-            "ENVS 350C",
-            "ENVS 350F",
-            "ENVS 369",
-            "ENVS 391",
-            "ENVS 395"
+            "ENVS 335",
+            "ECON 328"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ENVS 390",
-            "ENVS 391C",
-            "ENVS 395C"
+            "ENVS 226",
+            "ENVS 267",
+            "ENVS 273",
+            "ENVS 283",
+            "ENVS 340",
+            "ENVS 345",
+            "ENVS 350A",
+            "ENVS 350C",
+            "ENVS 350F",
+            "ENVS 369",
+            "ENVS 391",
+            "ENVS 395"
+          ]
+        },
+        "[Elective: Select one of the following:3]",
+        {
+          "options": [
+            "ENVS 390",
+            "ENVS 391C",
+            "ENVS 395C"
           ]
         }
       ],
@@ -1701,52 +2247,52 @@
       "school_college": "School of Environmental Sustainability",
       "program_url": "https://catalog.luc.edu/undergraduate/environmental-sustainability/environmental-studies/environmental-studies-ba/",
       "required_courses": [
-        "ENVS 137",
-        "ENVS 237",
-        "ENVS 238",
-        "ENVS 200",
-        "ENVS 203",
-        "ENVS 280",
-        "ENVS 286",
-        "PLSC 392",
+        "ENVS 137",
+        "ENVS 237",
+        "ENVS 238",
+        "ENVS 200",
+        "ENVS 203",
+        "ENVS 280",
+        "ENVS 286",
+        "PLSC 392",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ENVS 284",
-            "PHIL 287",
-            "THEO 204"
+            "ENVS 284",
+            "PHIL 287",
+            "THEO 204"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ENVS 335",
-            "ECON 328"
+            "ENVS 335",
+            "ECON 328"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ENVS 226",
-            "ENVS 267",
-            "ENVS 273",
-            "ENVS 283",
-            "ENVS 340",
-            "ENVS 345",
-            "ENVS 350A",
-            "ENVS 350B",
-            "ENVS 350C",
-            "ENVS 350F",
-            "ENVS 391",
-            "ENVS 395"
+            "ENVS 226",
+            "ENVS 267",
+            "ENVS 273",
+            "ENVS 283",
+            "ENVS 340",
+            "ENVS 345",
+            "ENVS 350A",
+            "ENVS 350B",
+            "ENVS 350C",
+            "ENVS 350F",
+            "ENVS 391",
+            "ENVS 395"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ENVS 390",
-            "ENVS 391C",
-            "ENVS 395C"
+            "ENVS 390",
+            "ENVS 391C",
+            "ENVS 395C"
           ]
         }
       ],
@@ -1758,18 +2304,18 @@
       "school_college": "Parkinson School of Health Sciences and Public Health",
       "program_url": "https://catalog.luc.edu/undergraduate/health-sciences-public-health/exercise-science-bs/",
       "required_courses": [
-        "EXCM 210",
-        "EXCM 301",
-        "EXCM 342",
-        "EXCM 345",
-        "EXCM 364",
-        "EXCM 368",
-        "EXCM 375",
-        "EXCM 382",
-        "EXCM 385",
-        "EXCM 387",
-        "EXCM 390",
-        "EXCM 395"
+        "EXCM 210",
+        "EXCM 301",
+        "EXCM 342",
+        "EXCM 345",
+        "EXCM 364",
+        "EXCM 368",
+        "EXCM 375",
+        "EXCM 382",
+        "EXCM 385",
+        "EXCM 387",
+        "EXCM 390",
+        "EXCM 395"
       ],
       "total_major_courses": 12
     },
@@ -1779,21 +2325,21 @@
       "school_college": "School of Communication",
       "program_url": "https://catalog.luc.edu/undergraduate/communication/film-digital-media/film-media-production-track-ba/",
       "required_courses": [
-        "COMM 100",
-        "COMM 130",
-        "COMM 135",
-        "COMM 200",
-        "COMM 201",
-        "COMM 202",
-        "COMM 274",
-        "COMM 350",
-        "COMM 394",
+        "COMM 100",
+        "COMM 130",
+        "COMM 135",
+        "COMM 200",
+        "COMM 201",
+        "COMM 202",
+        "COMM 274",
+        "COMM 350",
+        "COMM 394",
         "[Elective: Select one of the following. Courses already taken cannot also satisfy this requirement.3]",
         {
           "options": [
-            "COMM 338",
-            "COMM 339",
-            "COMM 388"
+            "COMM 338",
+            "COMM 339",
+            "COMM 388"
           ]
         }
       ],
@@ -1805,33 +2351,33 @@
       "school_college": "School of Communication",
       "program_url": "https://catalog.luc.edu/undergraduate/communication/film-digital-media/international-programming-track-ba/",
       "required_courses": [
-        "COMM 100",
-        "COMM 200",
-        "COMM 201",
-        "COMM 202",
-        "COMM 274",
-        "COMM 350",
+        "COMM 100",
+        "COMM 200",
+        "COMM 201",
+        "COMM 202",
+        "COMM 274",
+        "COMM 350",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "COMM 130",
-            "COMM 135",
-            "COMM 275"
+            "COMM 130",
+            "COMM 135",
+            "COMM 275"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "COMM 203",
-            "COMM 324"
+            "COMM 203",
+            "COMM 324"
           ]
         },
-        "COMM 394",
+        "COMM 394",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "COMM 357",
-            "COMM 388"
+            "COMM 357",
+            "COMM 388"
           ]
         }
       ],
@@ -1843,58 +2389,74 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/finance-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 130 or MATH 131 or MATH 161",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 130",
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:23]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "ENTR 313",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "ENTR 313",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "ECON 303",
-        "FINC 335",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        "FINC 334",
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "ECON 303",
+        "FINC 335",
         "[Elective: Select four of the following:12]",
         {
           "options": [
-            "FINC 336",
-            "FINC 342",
-            "FINC 345",
-            "FINC 346",
-            "FINC 356",
-            "FINC 357",
-            "FINC 358"
+            "FINC 336",
+            "FINC 342",
+            "FINC 345",
+            "FINC 346",
+            "FINC 356",
+            "FINC 357",
+            "FINC 358"
           ]
         },
         {
           "options": [
-            "FINC 337",
-            "FINC 338",
-            "FINC 347",
-            "FINC 349",
-            "FINC 355",
-            "FINC 395",
-            "FINC 399"
+            "FINC 337",
+            "FINC 338",
+            "FINC 347",
+            "FINC 349",
+            "FINC 355",
+            "FINC 395",
+            "FINC 399"
           ]
         }
       ],
@@ -1906,44 +2468,54 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/forensic-science/forensic-science-bs/",
       "required_courses": [
-        "BIOL 101",
-        "BIOL 111",
-        "BIOL 102",
-        "BIOL 112",
-        "BIOL 282",
-        "BIOL 283",
-        "BIOL 366/CHEM 361",
-        "BIOL 366L",
-        "CHEM 160",
-        "CHEM 161",
-        "CHEM 180",
-        "CHEM 181",
-        "CHEM 240",
-        "CHEM 241",
-        "CHEM 260",
-        "CHEM 272",
-        "CHEM 280",
-        "PHYS 111",
-        "PHYS 112",
-        "CJC 101",
-        "FRSC 340",
-        "FRSC 341",
-        "FRSC 342",
-        "FRSC 343",
-        "FRSC 350",
-        "FRSC 360",
-        "FRSC 370",
+        "BIOL 101",
+        "BIOL 111",
+        "BIOL 102",
+        "BIOL 112",
+        "BIOL 282",
+        "BIOL 283",
+        {
+          "options": [
+            "BIOL 366",
+            "CHEM 361"
+          ]
+        },
+        "BIOL 366L",
+        "CHEM 160",
+        "CHEM 161",
+        "CHEM 180",
+        "CHEM 181",
+        "CHEM 240",
+        "CHEM 241",
+        "CHEM 260",
+        "CHEM 272",
+        "CHEM 280",
+        "PHYS 111",
+        "PHYS 112",
+        "CJC 101",
+        "FRSC 340",
+        "FRSC 341",
+        "FRSC 342",
+        "FRSC 343",
+        "FRSC 350",
+        "FRSC 360",
+        "FRSC 370",
         "[Elective: Select one of the following:3-5]",
         {
           "options": [
-            "FRSC 361",
-            "FRSC 371",
-            "ANTH 396"
+            "FRSC 361",
+            "FRSC 371",
+            "ANTH 396"
           ]
         },
-        "MATH 131",
-        "MATH 132",
-        "BIOL 335 or STAT 335"
+        "MATH 131",
+        "MATH 132",
+        {
+          "options": [
+            "BIOL 335",
+            "STAT 335"
+          ]
+        }
       ],
       "total_major_courses": 32
     },
@@ -1953,12 +2525,17 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/modern-languages-literatures/french-ba/",
       "required_courses": [
-        "FREN 250",
-        "FREN 251",
-        "FREN 270",
-        "FREN 271",
-        "FREN 301 or FREN 302",
-        "FREN 317"
+        "FREN 250",
+        "FREN 251",
+        "FREN 270",
+        "FREN 271",
+        {
+          "options": [
+            "FREN 301",
+            "FREN 302"
+          ]
+        },
+        "FREN 317"
       ],
       "total_major_courses": 6
     },
@@ -1968,20 +2545,20 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/global-studies/global-studies-ba/",
       "required_courses": [
-        "GLST 101",
-        "ANTH 100",
-        "PLSC 102",
+        "GLST 101",
+        "ANTH 100",
+        "PLSC 102",
         "[Elective: Select two of the following:26]",
         {
           "options": [
-            "GLST 301",
-            "GLST 302",
-            "GLST 303",
-            "GLST 304",
-            "GLST 305",
-            "GLST 306",
-            "GLST 398",
-            "GLST 370"
+            "GLST 301",
+            "GLST 302",
+            "GLST 303",
+            "GLST 304",
+            "GLST 305",
+            "GLST 306",
+            "GLST 398",
+            "GLST 370"
           ]
         }
       ],
@@ -1993,38 +2570,38 @@
       "school_college": "Parkinson School of Health Sciences and Public Health",
       "program_url": "https://catalog.luc.edu/undergraduate/health-sciences-public-health/healthcare-administration-bs/",
       "required_courses": [
-        "HSM 110",
-        "HSM 120",
-        "HSM 200",
-        "HSM 220",
-        "HSM 230",
-        "HSM 240",
-        "HSM 280",
-        "HSM 310",
-        "HSM 315",
-        "HSM 325",
-        "HSM 330",
-        "HSM 338",
-        "HSM 340",
-        "HSM 345",
-        "HSM 350",
-        "HSM 358",
-        "HSM 360",
-        "HSM 368",
-        "HSM 386",
-        "PSYC 101",
-        "ACCT 201",
-        "ECON 201",
-        "FINC 301",
-        "INFS 247",
-        "ISSCM 241",
+        "HSM 110",
+        "HSM 120",
+        "HSM 200",
+        "HSM 220",
+        "HSM 230",
+        "HSM 240",
+        "HSM 280",
+        "HSM 310",
+        "HSM 315",
+        "HSM 325",
+        "HSM 330",
+        "HSM 338",
+        "HSM 340",
+        "HSM 345",
+        "HSM 350",
+        "HSM 358",
+        "HSM 360",
+        "HSM 368",
+        "HSM 386",
+        "PSYC 101",
+        "ACCT 201",
+        "ECON 201",
+        "FINC 301",
+        "INFS 247",
+        "ISSCM 241",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "HRER 301",
-            "ENTR 201",
-            "SCMG 232",
-            "ECON 329"
+            "HRER 301",
+            "ENTR 201",
+            "SCMG 232",
+            "ECON 329"
           ]
         }
       ],
@@ -2039,27 +2616,27 @@
         "[Elective: Select two courses, one from each of the following categories:]",
         {
           "options": [
-            "HIST 101",
-            "HIST 102",
-            "HIST 103",
-            "HIST 104",
-            "HONR 101",
-            "HONR 102",
-            "HIST 208",
-            "HIST 208X",
-            "HIST 208Z",
-            "HIST 209",
-            "HIST 210",
-            "HIST 211",
-            "HIST 212",
-            "HIST 213"
+            "HIST 101",
+            "HIST 102",
+            "HIST 103",
+            "HIST 104",
+            "HONR 101",
+            "HONR 102",
+            "HIST 208",
+            "HIST 208X",
+            "HIST 208Z",
+            "HIST 209",
+            "HIST 210",
+            "HIST 211",
+            "HIST 212",
+            "HIST 213"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "HIST 299",
-            "INDS 380"
+            "HIST 299",
+            "INDS 380"
           ]
         },
         "[Elective: Select four Upper-Level Courses, one from each of the following:12]"
@@ -2072,47 +2649,67 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/human-resource-management-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 110 or MATH 118",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 110",
+            "MATH 118"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:23]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "ENTR 313",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "ENTR 313",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "HRER 301",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "HRER 301",
         "[Elective: Select four of the following:12]",
         {
           "options": [
-            "HRER 311",
-            "HRER 313",
-            "HRER 317",
-            "HRER 322",
-            "HRER 329",
-            "HRER 364",
-            "HRER 395",
-            "HRER 399"
+            "HRER 311",
+            "HRER 313",
+            "HRER 317",
+            "HRER 322",
+            "HRER 329",
+            "HRER 364",
+            "HRER 395",
+            "HRER 399"
           ]
         }
       ],
@@ -2124,30 +2721,36 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/human-services/human-services-bs/",
       "required_courses": [
-        "PSYC 101",
-        "HMSV 101",
-        "HMSV 201 or PLSC 391 or SOCL 380",
-        "HMSV 390",
+        "PSYC 101",
+        "HMSV 101",
+        {
+          "options": [
+            "HMSV 201",
+            "PLSC 391",
+            "SOCL 380"
+          ]
+        },
+        "HMSV 390",
         "[Elective: Select nine credit hours from one of the following three areas:9]",
         {
           "options": [
-            "CJC 302",
-            "CJC 395",
-            "PSYC 238",
-            "PSYC 273",
-            "PSYC 348",
-            "SOCL 231",
-            "SOCL 240",
-            "SOWK 205",
-            "CJC 372",
-            "CJC 395",
-            "PSYC 235",
-            "PSYC 331",
-            "PSYC 346",
-            "PSYC 373",
-            "SOWK 361",
-            "SOCL 221",
-            "SOCL 236"
+            "CJC 302",
+            "CJC 395",
+            "PSYC 238",
+            "PSYC 273",
+            "PSYC 348",
+            "SOCL 231",
+            "SOCL 240",
+            "SOWK 205",
+            "CJC 372",
+            "CJC 395",
+            "PSYC 235",
+            "PSYC 331",
+            "PSYC 346",
+            "PSYC 373",
+            "SOWK 361",
+            "SOCL 221",
+            "SOCL 236"
           ]
         }
       ],
@@ -2159,57 +2762,77 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/information-systems-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 110 or MATH 118",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 110",
+            "MATH 118"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:23]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "ENTR 313",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "ENTR 313",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "INFS 346",
-        "INFS 347",
-        "INFS 360",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "INFS 346",
+        "INFS 347",
+        "INFS 360",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "INFS 394",
-            "INFS 397"
+            "INFS 394",
+            "INFS 397"
           ]
         },
-        "[Elective: Select two of the following. The Programming course not taken above (INFS 394or397) may be taken as an elective in this major:6]",
+        "[Elective: Select two of the following. The Programming course not taken above (INFS 394or397) may be taken as an elective in this major:6]",
         {
           "options": [
-            "INFS 336",
-            "INFS 347",
-            "INFS 348",
-            "INFS 362",
-            "INFS 394",
-            "INFS 395",
-            "INFS 397",
-            "INFS 399",
-            "ISSCM 349"
+            "INFS 336",
+            "INFS 347",
+            "INFS 348",
+            "INFS 362",
+            "INFS 394",
+            "INFS 395",
+            "INFS 397",
+            "INFS 399",
+            "ISSCM 349"
           ]
         }
       ],
@@ -2221,22 +2844,22 @@
       "school_college": "School of Continuing and Professional Studies",
       "program_url": "https://catalog.luc.edu/undergraduate/continuing-professional-studies/information-technology-ba/",
       "required_courses": [
-        "CPST 250",
-        "CPST 310",
-        "CPST 349",
-        "STAT 103",
-        "COMP 170",
-        "COMP 251",
-        "COMP 271",
-        "CPST 291",
-        "CPST 325",
-        "CPST 342",
-        "CPST 343",
-        "COMP 317",
-        "CPST 345",
-        "CPST 200",
-        "CPST 201",
-        "CPST 397"
+        "CPST 250",
+        "CPST 310",
+        "CPST 349",
+        "STAT 103",
+        "COMP 170",
+        "COMP 251",
+        "COMP 271",
+        "CPST 291",
+        "CPST 325",
+        "CPST 342",
+        "CPST 343",
+        "COMP 317",
+        "CPST 345",
+        "CPST 200",
+        "CPST 201",
+        "CPST 397"
       ],
       "total_major_courses": 16
     },
@@ -2247,37 +2870,42 @@
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/computer-science/information-technology-bs/",
       "required_courses": [
         "[Elective: Select one of the following:3]",
-        "COMP 141",
-        "COMP 163",
-        "COMP 170",
-        "COMP 251",
-        "COMP 264",
-        "COMP 301",
-        "COMP 317",
-        "COMP 377",
+        "COMP 141",
+        "COMP 163",
+        "COMP 170",
+        "COMP 251",
+        "COMP 264",
+        "COMP 301",
+        "COMP 317",
+        "COMP 377",
         {
           "options": [
-            "STAT 103",
-            "STAT 203",
-            "ISSCM 241",
-            "PSYC 304 or MATH 201 or COMP 271 or ISSCM 349"
+            "STAT 103",
+            "STAT 203",
+            "ISSCM 241",
+            "PSYC 304 or MATH 201 or COMP 271 or ISSCM 349"
           ]
         },
         {
           "options": [
-            "COMP 305",
-            "COMP 306",
-            "COMP 343",
-            "COMP 353"
+            "COMP 305",
+            "COMP 306",
+            "COMP 343",
+            "COMP 353"
           ]
         },
-        "[Elective: Select six credits taken from one or more of the following:16]",
         {
           "options": [
-            "COMP 312",
-            "COMP 390",
-            "COMP 391",
-            "COMP 398"
+            "[Elective: Select six credits taken from one",
+            "more of the following:16]"
+          ]
+        },
+        {
+          "options": [
+            "COMP 312",
+            "COMP 390",
+            "COMP 391",
+            "COMP 398"
           ]
         }
       ],
@@ -2289,55 +2917,75 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/international-business-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 110 or MATH 118",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 110",
+            "MATH 118"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:2]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "IBUS 201",
-        "IBUS 315",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "IBUS 201",
+        "IBUS 315",
         "[Elective: Select four of the following:12]",
         {
           "options": [
-            "ACCT 306",
-            "ECON 323",
-            "ECON 324",
-            "ECON 325",
-            "ENTR 313",
-            "FINC 355",
-            "HRER 329",
-            "INFS 336",
-            "MARK 363",
-            "SCMG 338",
-            "SPRT 345",
-            "ANTH 100",
-            "ANTH 102",
-            "PLSC 350",
-            "PLSC 362",
-            "PLSC 363"
+            "ACCT 306",
+            "ECON 323",
+            "ECON 324",
+            "ECON 325",
+            "ENTR 313",
+            "FINC 355",
+            "HRER 329",
+            "INFS 336",
+            "MARK 363",
+            "SCMG 338",
+            "SPRT 345",
+            "ANTH 100",
+            "ANTH 102",
+            "PLSC 350",
+            "PLSC 362",
+            "PLSC 363"
           ]
         }
       ],
@@ -2349,11 +2997,11 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/modern-languages-literatures/italian-ba/",
       "required_courses": [
-        "ITAL 250",
-        "ITAL 251",
-        "ITAL 270",
-        "ITAL 271",
-        "ITAL 312"
+        "ITAL 250",
+        "ITAL 251",
+        "ITAL 270",
+        "ITAL 271",
+        "ITAL 312"
       ],
       "total_major_courses": 5
     },
@@ -2363,8 +3011,8 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/modern-languages-literatures/italian-studies-ba/",
       "required_courses": [
-        "LITR 161",
-        "ITAL 395"
+        "LITR 161",
+        "ITAL 395"
       ],
       "total_major_courses": 2
     },
@@ -2374,8 +3022,8 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/classical-studies/latin-ba/",
       "required_courses": [
-        "CLST 383",
-        "CLST 384"
+        "CLST 383",
+        "CLST 384"
       ],
       "total_major_courses": 2
     },
@@ -2385,29 +3033,29 @@
       "school_college": "School of Continuing and Professional Studies",
       "program_url": "https://catalog.luc.edu/undergraduate/continuing-professional-studies/management-ba/",
       "required_courses": [
-        "CPST 250",
-        "CPST 310",
-        "CPST 340",
-        "CPST 350",
-        "CPST 349",
-        "CPST 243",
-        "CPST 245",
-        "STAT 103",
-        "CPST 371",
-        "CPST 335",
-        "CPST 247",
-        "COMM 175",
+        "CPST 250",
+        "CPST 310",
+        "CPST 340",
+        "CPST 350",
+        "CPST 349",
+        "CPST 243",
+        "CPST 245",
+        "STAT 103",
+        "CPST 371",
+        "CPST 335",
+        "CPST 247",
+        "COMM 175",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "CPST 322",
-            "COMM 231",
-            "COMM 277"
+            "CPST 322",
+            "COMM 231",
+            "COMM 277"
           ]
         },
-        "CPST 200",
-        "CPST 201",
-        "CPST 397"
+        "CPST 200",
+        "CPST 201",
+        "CPST 397"
       ],
       "total_major_courses": 17
     },
@@ -2417,49 +3065,69 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/management-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 110 or MATH 118",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 110",
+            "MATH 118"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:23]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "ENTR 313",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "ENTR 313",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "MGMT 360",
-        "HRER 301",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "MGMT 360",
+        "HRER 301",
         "[Elective: Select three of the following:9]",
         {
           "options": [
-            "IBUS 315",
-            "MGMT 318",
-            "MGMT 320",
-            "MGMT 331",
-            "MGMT 335",
-            "MGMT 345",
-            "MGMT 395",
-            "MGMT 399",
-            "ENVS 363"
+            "IBUS 315",
+            "MGMT 318",
+            "MGMT 320",
+            "MGMT 331",
+            "MGMT 335",
+            "MGMT 345",
+            "MGMT 395",
+            "MGMT 399",
+            "ENVS 363"
           ]
         }
       ],
@@ -2471,54 +3139,74 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/marketing-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 110 or MATH 118",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 110",
+            "MATH 118"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:23]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "ENTR 313",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "ENTR 313",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "MARK 310",
-        "MARK 311",
-        "MARK 390",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "MARK 310",
+        "MARK 311",
+        "MARK 390",
         "[Elective: Select two of the following:6]",
         {
           "options": [
-            "MARK 312",
-            "MARK 320",
-            "MARK 323",
-            "MARK 334",
-            "MARK 360",
-            "MARK 363",
-            "MARK 367",
-            "MARK 370",
-            "MARK 373",
-            "MARK 380",
-            "MARK 395",
-            "MARK 399",
-            "SPRT 365"
+            "MARK 312",
+            "MARK 320",
+            "MARK 323",
+            "MARK 334",
+            "MARK 360",
+            "MARK 363",
+            "MARK 367",
+            "MARK 370",
+            "MARK 373",
+            "MARK 380",
+            "MARK 395",
+            "MARK 399",
+            "SPRT 365"
           ]
         }
       ],
@@ -2530,34 +3218,54 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/mathematics-statistics/mathematics-bs/",
       "required_courses": [
-        "MATH 161",
-        "MATH 162",
-        "MATH 201",
-        "MATH 212",
-        "MATH 215 or COMP 170",
-        "MATH 263",
-        "MATH 264",
-        "STAT 203 or MATH 304/STAT 304",
-        "MATH 313",
-        "MATH 314 or MATH 315",
-        "MATH 351",
-        "MATH 352 or MATH 353",
+        "MATH 161",
+        "MATH 162",
+        "MATH 201",
+        "MATH 212",
+        {
+          "options": [
+            "MATH 215",
+            "COMP 170"
+          ]
+        },
+        "MATH 263",
+        "MATH 264",
+        {
+          "options": [
+            "STAT 203 or MATH 304",
+            "STAT 304"
+          ]
+        },
+        "MATH 313",
+        {
+          "options": [
+            "MATH 314",
+            "MATH 315"
+          ]
+        },
+        "MATH 351",
+        {
+          "options": [
+            "MATH 352",
+            "MATH 353"
+          ]
+        },
         "[Elective: Select two of the following:6]",
         {
           "options": [
-            "ANTH 101",
-            "ANTH 103",
-            "BIOL 101",
-            "BIOL 102",
-            "CHEM 101",
-            "CHEM 102",
-            "CHEM 160",
-            "CHEM 180",
-            "ENVS 101",
-            "ENVS 218",
-            "ENVS 224",
-            "PHYS 121",
-            "PHYS 122"
+            "ANTH 101",
+            "ANTH 103",
+            "BIOL 101",
+            "BIOL 102",
+            "CHEM 101",
+            "CHEM 102",
+            "CHEM 160",
+            "CHEM 180",
+            "ENVS 101",
+            "ENVS 218",
+            "ENVS 224",
+            "PHYS 121",
+            "PHYS 122"
           ]
         }
       ],
@@ -2569,26 +3277,36 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/mathematics-statistics/mathematics-education-track-bs/",
       "required_courses": [
-        "TLSC 110",
-        "TLSC 120",
-        "TLSC 130",
-        "TLSC 140",
-        "TLSC 150",
-        "TLSC 160",
-        "TLSC 300A",
-        "TLSC 300B",
-        "MATH 161",
-        "MATH 162",
-        "MATH 201",
-        "MATH 212",
-        "MATH 215 or COMP 170",
-        "MATH 263",
-        "MATH 301",
-        "MATH 313",
-        "MATH 318",
-        "MATH 344",
-        "MATH 360",
-        "STAT 203 or STAT 335"
+        "TLSC 110",
+        "TLSC 120",
+        "TLSC 130",
+        "TLSC 140",
+        "TLSC 150",
+        "TLSC 160",
+        "TLSC 300A",
+        "TLSC 300B",
+        "MATH 161",
+        "MATH 162",
+        "MATH 201",
+        "MATH 212",
+        {
+          "options": [
+            "MATH 215",
+            "COMP 170"
+          ]
+        },
+        "MATH 263",
+        "MATH 301",
+        "MATH 313",
+        "MATH 318",
+        "MATH 344",
+        "MATH 360",
+        {
+          "options": [
+            "STAT 203",
+            "STAT 335"
+          ]
+        }
       ],
       "total_major_courses": 20
     },
@@ -2598,21 +3316,26 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/mathematics-statistics/mathematics-computer-science-bs/",
       "required_courses": [
-        "MATH 161",
-        "MATH 162",
-        "MATH 201",
-        "MATH 212",
-        "MATH 263",
-        "MATH 264",
-        "MATH 313",
-        "MATH 351",
-        "STAT 203 or MATH 304/STAT 304",
-        "COMP 141",
-        "COMP 170",
-        "COMP 264",
-        "COMP 271",
-        "COMP 272",
-        "COMP 363"
+        "MATH 161",
+        "MATH 162",
+        "MATH 201",
+        "MATH 212",
+        "MATH 263",
+        "MATH 264",
+        "MATH 313",
+        "MATH 351",
+        {
+          "options": [
+            "STAT 203 or MATH 304",
+            "STAT 304"
+          ]
+        },
+        "COMP 141",
+        "COMP 170",
+        "COMP 264",
+        "COMP 271",
+        "COMP 272",
+        "COMP 363"
       ],
       "total_major_courses": 15
     },
@@ -2622,111 +3345,126 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/neuroscience/molecular-cellular-neuroscience-bs/",
       "required_courses": [
-        "BIOL 101",
-        "BIOL 102",
-        "BIOL 251",
-        "BIOL 252 or BIOL 283",
-        "BIOL 282",
-        "BIOL 335/STAT 335 or PSYC 304",
+        "BIOL 101",
+        "BIOL 102",
+        "BIOL 251",
+        {
+          "options": [
+            "BIOL 252",
+            "BIOL 283"
+          ]
+        },
+        "BIOL 282",
+        {
+          "options": [
+            "BIOL 335",
+            "STAT 335 or PSYC 304"
+          ]
+        },
         "[Elective: Select one of the following three sets of classes:4]",
         {
           "options": [
-            "CHEM 101",
-            "CHEM 105",
-            "CHEM 160"
+            "CHEM 101",
+            "CHEM 105",
+            "CHEM 160"
           ]
         },
         "[Elective: Select one of the following three Lecture courses:3-4]",
         {
           "options": [
-            "CHEM 180",
-            "CHEM 221",
-            "CHEM 223"
+            "CHEM 180",
+            "CHEM 221",
+            "CHEM 223"
           ]
         },
         "[Elective: Select one of the following Lab courses:1]",
-        "MATH 131",
+        "MATH 131",
         {
           "options": [
-            "CHEM 112",
-            "CHEM 181 or MATH 161"
+            "CHEM 112",
+            "CHEM 181 or MATH 161"
           ]
         },
         "[Elective: Select one of the following three sets of classes:4]",
         {
           "options": [
-            "PHYS 111",
-            "PHYS 121",
-            "PHYS 125"
+            "PHYS 111",
+            "PHYS 121",
+            "PHYS 125"
           ]
         },
         "[Elective: Select one of the following three sets of classes:4]",
-        "PSYC 101",
+        "PSYC 101",
         {
           "options": [
-            "PHYS 112",
-            "PHYS 122",
-            "PHYS 126"
+            "PHYS 112",
+            "PHYS 122",
+            "PHYS 126"
           ]
         },
-        "BIOL 362",
-        "NEUR 101",
-        "PSYC 382/BIOL 284",
-        "[Elective: Select one of the following:3-4]",
+        "BIOL 362",
+        "NEUR 101",
         {
           "options": [
-            "CHEM 222",
-            "CHEM 224",
-            "CHEM 240"
+            "PSYC 382",
+            "BIOL 284"
           ]
         },
         "[Elective: Select one of the following:3-4]",
         {
           "options": [
-            "CHEM 102",
-            "CHEM 106",
-            "CHEM 260"
+            "CHEM 222",
+            "CHEM 224",
+            "CHEM 240"
+          ]
+        },
+        "[Elective: Select one of the following:3-4]",
+        {
+          "options": [
+            "CHEM 102",
+            "CHEM 106",
+            "CHEM 260"
           ]
         },
         "[Elective: Select three of the following:7-9]",
         {
           "options": [
-            "BIOL 307",
-            "BIOL 351",
-            "BIOL 352",
-            "BIOL 357",
-            "BIOL 358",
-            "BIOL 381",
-            "BIOL 382"
+            "BIOL 307",
+            "BIOL 351",
+            "BIOL 352",
+            "BIOL 357",
+            "BIOL 358",
+            "BIOL 381",
+            "BIOL 382"
           ]
         },
         {
           "options": [
-            "CHEM 361/BIOL 366 or CHEM 370",
-            "NEUR 300",
-            "PSYC 240/BIOL 240",
-            "PSYC 378",
-            "PSYC 383/COMP 386"
+            "CHEM 361/BIOL 366 or CHEM 370",
+            "NEUR 300",
+            "PSYC 240/BIOL 240",
+            "PSYC 378",
+            "PSYC 383/COMP 386"
           ]
         },
         "[Elective: Select two of the following:3-8]",
         {
           "options": [
-            "BIOL 252 or BIOL 283",
-            "BIOL 315",
-            "BIOL 366L or CHEM 372",
-            "BIOL 367",
-            "BIOL 390"
+            "BIOL 252 or BIOL 283",
+            "BIOL 315",
+            "BIOL 366L or CHEM 372",
+            "BIOL 367",
+            "BIOL 390"
           ]
         },
-        "BIOL 376",
+        "BIOL 376",
         {
           "options": [
-            "NEUR 301/BIOL 373/PSYC 388",
-            "PSYC 311/BIOL 313 or PSYC 316",
-            "PSYC 384/COMP 389",
-            "BIOL 396",
-            "BIOL 398 or BIOL 358"
+            "NEUR 301/BIOL 373/PSYC 388",
+            "PSYC 311/BIOL 313 or PSYC 316",
+            "PSYC 384/COMP 389",
+            "BIOL 396",
+            "BIOL 398 or BIOL 358"
           ]
         }
       ],
@@ -2738,45 +3476,45 @@
       "school_college": "School of Communication",
       "program_url": "https://catalog.luc.edu/undergraduate/communication/multimedia-journalism/multimedia-journalism-ba/",
       "required_courses": [
-        "COMM 100",
-        "COMM 175",
-        "COMM 200",
-        "COMM 215",
-        "COMM 145",
-        "COMM 205",
-        "COMM 208",
-        "COMM 362",
-        "COMM 279",
-        "COMM 282",
+        "COMM 100",
+        "COMM 175",
+        "COMM 200",
+        "COMM 215",
+        "COMM 145",
+        "COMM 205",
+        "COMM 208",
+        "COMM 362",
+        "COMM 279",
+        "COMM 282",
         "[Elective: Select three of the following:9]",
         {
           "options": [
-            "COMM 207",
-            "COMM 256",
-            "COMM 259",
-            "COMM 260",
-            "COMM 262",
-            "COMM 263",
-            "COMM 265",
-            "COMM 275",
-            "COMM 311",
-            "COMM 372"
+            "COMM 207",
+            "COMM 256",
+            "COMM 259",
+            "COMM 260",
+            "COMM 262",
+            "COMM 263",
+            "COMM 265",
+            "COMM 275",
+            "COMM 311",
+            "COMM 372"
           ]
         },
         "[Elective: Select two of the following:6]",
         {
           "options": [
-            "COMM 315",
-            "COMM 327",
-            "COMM 328",
-            "COMM 332",
-            "COMM 339",
-            "COMM 358",
-            "COMM 373",
-            "COMM 398"
+            "COMM 315",
+            "COMM 327",
+            "COMM 328",
+            "COMM 332",
+            "COMM 339",
+            "COMM 358",
+            "COMM 373",
+            "COMM 398"
           ]
         },
-        "COMM 392"
+        "COMM 392"
       ],
       "total_major_courses": 15
     },
@@ -2786,25 +3524,25 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/music-ba/",
       "required_courses": [
-        "MUSC 144",
-        "MUSC 145",
-        "MUSC 244",
-        "MUSC 245",
-        "MUSC 344",
-        "MUSC 353",
+        "MUSC 144",
+        "MUSC 145",
+        "MUSC 244",
+        "MUSC 245",
+        "MUSC 344",
+        "MUSC 353",
         "[Elective: Select one of the following:43]",
         {
           "options": [
-            "MUSC 252",
-            "MUSC 256",
-            "MUSC 354"
+            "MUSC 252",
+            "MUSC 256",
+            "MUSC 354"
           ]
         },
         "[Elective: Select one of the following:61]",
         {
           "options": [
-            "MUSC 387",
-            "MUSC 388"
+            "MUSC 387",
+            "MUSC 388"
           ]
         }
       ],
@@ -2816,17 +3554,17 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/jazz-studies-concentration/",
       "required_courses": [
-        "MUSC 144",
-        "MUSC 145",
-        "MUSC 244",
-        "MUSC 245",
-        "MUSC 344",
-        "MUSC 256",
-        "MUSC 353",
-        "MUSC 387",
-        "MUSC 185",
-        "MUSC 248",
-        "MUSC 385"
+        "MUSC 144",
+        "MUSC 145",
+        "MUSC 244",
+        "MUSC 245",
+        "MUSC 344",
+        "MUSC 256",
+        "MUSC 353",
+        "MUSC 387",
+        "MUSC 185",
+        "MUSC 248",
+        "MUSC 385"
       ],
       "total_major_courses": 11
     },
@@ -2836,17 +3574,22 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/music-concentration-liturgical-music-ba/",
       "required_courses": [
-        "MUSC 144",
-        "MUSC 145",
-        "MUSC 244",
-        "MUSC 245",
-        "MUSC 344",
-        "MUSC 252",
-        "MUSC 353",
-        "MUSC 255",
-        "MUSC 333",
-        "MUSC 394",
-        "MUSC 387 or MUSC 388"
+        "MUSC 144",
+        "MUSC 145",
+        "MUSC 244",
+        "MUSC 245",
+        "MUSC 344",
+        "MUSC 252",
+        "MUSC 353",
+        "MUSC 255",
+        "MUSC 333",
+        "MUSC 394",
+        {
+          "options": [
+            "MUSC 387",
+            "MUSC 388"
+          ]
+        }
       ],
       "total_major_courses": 11
     },
@@ -2856,31 +3599,31 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/vocal-performance-concentration/",
       "required_courses": [
-        "MUSC 144",
-        "MUSC 145",
-        "MUSC 244",
-        "MUSC 245",
-        "MUSC 344",
-        "MUSC 353",
+        "MUSC 144",
+        "MUSC 145",
+        "MUSC 244",
+        "MUSC 245",
+        "MUSC 344",
+        "MUSC 353",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "MUSC 252",
-            "MUSC 256",
-            "MUSC 354"
+            "MUSC 252",
+            "MUSC 256",
+            "MUSC 354"
           ]
         },
         "[Elective: Select any combination of the following, totaling six credits:6]",
         {
           "options": [
-            "MUSC 107",
-            "MUSC 207"
+            "MUSC 107",
+            "MUSC 207"
           ]
         },
-        "MUSC 387",
-        "MUSC 363",
-        "MUSC 364",
-        "MUSC 365"
+        "MUSC 387",
+        "MUSC 363",
+        "MUSC 364",
+        "MUSC 365"
       ],
       "total_major_courses": 14
     },
@@ -2890,29 +3633,29 @@
       "school_college": "Marcella Niehoff School of Nursing",
       "program_url": "https://catalog.luc.edu/undergraduate/nursing/four-year-bsn/",
       "required_courses": [
-        "GNUR 102",
-        "GNUR 157",
-        "GNUR 157L",
-        "GNUR 158",
-        "GNUR 158L",
-        "GNUR 160",
-        "GNUR 203",
-        "GNUR 207",
-        "GNUR 238",
-        "GNUR 290",
-        "GNUR 293",
-        "GNUR 294",
-        "GNUR 297",
-        "GNUR 360",
-        "GNUR 361",
-        "GNUR 383",
-        "GNUR 384",
-        "MSN 277",
-        "MSN 377",
-        "MCN 273",
-        "MCN 374",
-        "CMAN 272",
-        "CMAN 380"
+        "GNUR 102",
+        "GNUR 157",
+        "GNUR 157L",
+        "GNUR 158",
+        "GNUR 158L",
+        "GNUR 160",
+        "GNUR 203",
+        "GNUR 207",
+        "GNUR 238",
+        "GNUR 290",
+        "GNUR 293",
+        "GNUR 294",
+        "GNUR 297",
+        "GNUR 360",
+        "GNUR 361",
+        "GNUR 383",
+        "GNUR 384",
+        "MSN 277",
+        "MSN 377",
+        "MCN 273",
+        "MCN 374",
+        "CMAN 272",
+        "CMAN 380"
       ],
       "total_major_courses": 23
     },
@@ -2922,22 +3665,22 @@
       "school_college": "School of Continuing and Professional Studies",
       "program_url": "https://catalog.luc.edu/undergraduate/continuing-professional-studies/paralegal-studies-ba/",
       "required_courses": [
-        "PLST 369",
-        "PLST 370",
-        "PLST 331",
-        "PLST 332",
-        "PLST 333",
-        "PLST 335",
-        "PLST 345",
-        "PLST 340",
-        "PLST 341",
-        "PLST 342",
-        "PLST 362",
-        "PLST 363",
-        "PLST 339",
-        "CPST 200",
-        "CPST 201",
-        "CPST 397"
+        "PLST 369",
+        "PLST 370",
+        "PLST 331",
+        "PLST 332",
+        "PLST 333",
+        "PLST 335",
+        "PLST 345",
+        "PLST 340",
+        "PLST 341",
+        "PLST 342",
+        "PLST 362",
+        "PLST 363",
+        "PLST 339",
+        "CPST 200",
+        "CPST 201",
+        "CPST 397"
       ],
       "total_major_courses": 16
     },
@@ -2947,9 +3690,14 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/philosophy/philosopy-ba/",
       "required_courses": [
-        "PHIL 274 or PHIL 301",
-        "PHIL 304",
-        "PHIL 309"
+        {
+          "options": [
+            "PHIL 274",
+            "PHIL 301"
+          ]
+        },
+        "PHIL 304",
+        "PHIL 309"
       ],
       "total_major_courses": 3
     },
@@ -2959,40 +3707,40 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/photography-video-art-ba/",
       "required_courses": [
-        "FNAR 110",
-        "FNAR 113",
-        "FNAR 365",
+        "FNAR 110",
+        "FNAR 113",
+        "FNAR 365",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "FNAR 202 or FNAR 306"
+            "FNAR 202 or FNAR 306"
           ]
         },
-        "FNAR 115",
-        "FNAR 216",
-        "FNAR 219",
-        "FNAR 315",
-        "FNAR 320",
+        "FNAR 115",
+        "FNAR 216",
+        "FNAR 219",
+        "FNAR 315",
+        "FNAR 320",
         "[Elective: Select one of the following from Visual Communication:3]",
         {
           "options": [
-            "FNAR 132 or FNAR 233"
+            "FNAR 132 or FNAR 233"
           ]
         },
         "[Elective: Select one of the following from Drawing, Painting & Printmaking:3]",
         {
           "options": [
-            "FNAR 114 or FNAR 118"
+            "FNAR 114 or FNAR 118"
           ]
         },
         "[Elective: Select one of the following from Sculpture & Ceramics:3]",
         {
           "options": [
-            "FNAR 124 or FNAR 120"
+            "FNAR 124 or FNAR 120"
           ]
         },
-        "FNAR 388",
-        "FNAR 398"
+        "FNAR 388",
+        "FNAR 398"
       ],
       "total_major_courses": 18
     },
@@ -3002,26 +3750,26 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/physics/physics-bs/",
       "required_courses": [
-        "PHYS 121",
-        "PHYS 122",
-        "PHYS 126F",
-        "PHYS 130",
-        "PHYS 235",
-        "PHYS 235L",
-        "PHYS 301",
-        "PHYS 303",
-        "PHYS 303L",
-        "PHYS 310",
-        "PHYS 310L",
-        "PHYS 314",
-        "PHYS 328",
-        "PHYS 338",
-        "PHYS 351",
-        "PHYS 361",
-        "MATH 161",
-        "MATH 162",
-        "MATH 263",
-        "MATH 264"
+        "PHYS 121",
+        "PHYS 122",
+        "PHYS 126F",
+        "PHYS 130",
+        "PHYS 235",
+        "PHYS 235L",
+        "PHYS 301",
+        "PHYS 303",
+        "PHYS 303L",
+        "PHYS 310",
+        "PHYS 310L",
+        "PHYS 314",
+        "PHYS 328",
+        "PHYS 338",
+        "PHYS 351",
+        "PHYS 361",
+        "MATH 161",
+        "MATH 162",
+        "MATH 263",
+        "MATH 264"
       ],
       "total_major_courses": 20
     },
@@ -3031,26 +3779,26 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/physics/physics-bs-engineering-bs/",
       "required_courses": [
-        "PHYS 121",
-        "PHYS 122",
-        "PHYS 126F",
-        "PHYS 130",
-        "PHYS 235",
-        "PHYS 235L",
-        "PHYS 301",
-        "PHYS 303",
-        "PHYS 303L",
-        "PHYS 310",
-        "PHYS 310L",
-        "PHYS 314",
-        "PHYS 328",
-        "PHYS 338",
-        "PHYS 351",
-        "PHYS 361",
-        "MATH 161",
-        "MATH 162",
-        "MATH 263",
-        "MATH 264"
+        "PHYS 121",
+        "PHYS 122",
+        "PHYS 126F",
+        "PHYS 130",
+        "PHYS 235",
+        "PHYS 235L",
+        "PHYS 301",
+        "PHYS 303",
+        "PHYS 303L",
+        "PHYS 310",
+        "PHYS 310L",
+        "PHYS 314",
+        "PHYS 328",
+        "PHYS 338",
+        "PHYS 351",
+        "PHYS 361",
+        "MATH 161",
+        "MATH 162",
+        "MATH 263",
+        "MATH 264"
       ],
       "total_major_courses": 20
     },
@@ -3060,43 +3808,53 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/physics/physics-computer-science-bs/",
       "required_courses": [
-        "PHYS 121",
-        "PHYS 111L",
-        "PHYS 122",
-        "PHYS 126F",
-        "PHYS 112L",
-        "PHYS 235",
-        "PHYS 235L",
-        "PHYS 301",
-        "PHYS 303",
-        "PHYS 303L",
-        "PHYS 310",
-        "PHYS 310L",
-        "PHYS 314",
-        "PHYS 351",
-        "PHYS 361",
-        "MATH 161",
-        "MATH 162",
-        "MATH 263",
-        "MATH 264",
-        "COMP 141",
-        "COMP 170",
-        "COMP 264",
-        "COMP 271",
-        "COMP 272",
-        "COMP 163 or MATH 201",
-        "COMP 313 or COMP 363",
+        "PHYS 121",
+        "PHYS 111L",
+        "PHYS 122",
+        "PHYS 126F",
+        "PHYS 112L",
+        "PHYS 235",
+        "PHYS 235L",
+        "PHYS 301",
+        "PHYS 303",
+        "PHYS 303L",
+        "PHYS 310",
+        "PHYS 310L",
+        "PHYS 314",
+        "PHYS 351",
+        "PHYS 361",
+        "MATH 161",
+        "MATH 162",
+        "MATH 263",
+        "MATH 264",
+        "COMP 141",
+        "COMP 170",
+        "COMP 264",
+        "COMP 271",
+        "COMP 272",
+        {
+          "options": [
+            "COMP 163",
+            "MATH 201"
+          ]
+        },
+        {
+          "options": [
+            "COMP 313",
+            "COMP 363"
+          ]
+        },
         "[Elective: Select two of the following:6]",
         {
           "options": [
-            "BIOL 388",
-            "BIOL 392",
-            "MATH 309",
-            "MATH 328",
-            "MATH 331",
-            "PHYS 328",
-            "PHYS 338",
-            "STAT 321"
+            "BIOL 388",
+            "BIOL 392",
+            "MATH 309",
+            "MATH 328",
+            "MATH 331",
+            "PHYS 328",
+            "PHYS 338",
+            "STAT 321"
           ]
         }
       ],
@@ -3111,10 +3869,10 @@
         "[Elective: Select three of the following:19]",
         {
           "options": [
-            "PLSC 100",
-            "PLSC 101",
-            "PLSC 102",
-            "PLSC 103"
+            "PLSC 100",
+            "PLSC 101",
+            "PLSC 102",
+            "PLSC 103"
           ]
         }
       ],
@@ -3126,19 +3884,19 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/psychology/psychology-bs/",
       "required_courses": [
-        "PSYC 101",
-        "PSYC 201",
-        "PSYC 304",
-        "PSYC 306",
+        "PSYC 101",
+        "PSYC 201",
+        "PSYC 304",
+        "PSYC 306",
         "[Elective: Choose one of the following:]",
         {
           "options": [
-            "PSYC 235",
-            "PSYC 237",
-            "PSYC 238",
-            "PSYC 239",
-            "PSYC 360",
-            "PSYC 374"
+            "PSYC 235",
+            "PSYC 237",
+            "PSYC 238",
+            "PSYC 239",
+            "PSYC 360",
+            "PSYC 374"
           ]
         }
       ],
@@ -3150,27 +3908,67 @@
       "school_college": "Parkinson School of Health Sciences and Public Health",
       "program_url": "https://catalog.luc.edu/undergraduate/health-sciences-public-health/public-health-ba/",
       "required_courses": [
-        "ANTH 280/BIOL 280 or ANTH 353 or ANTH 359 or ANTH 258",
-        "BIOL 110 or ANTH 103 or ANTH 105",
-        "HSM 110",
-        "HSM 230",
-        "PHIL 284 or PHIL 286 or PHIL 287 or HSM 280",
-        "PSYC 101",
-        "PUBH 300",
-        "PUBH 301",
-        "PUBH 303",
-        "PUBH 304",
-        "PUBH 305",
-        "PUBH 306",
-        "PUBH 307",
-        "PUBH 309",
-        "PUBH 313",
-        "PUBH 314 or HSM 210",
-        "PUBH 315",
-        "PUBH 391 or MGMT 201",
-        "PUBH 399 or PUBH 310",
-        "STAT 103 or PLSC 216 or PSYC 304 or SOCL 301",
-        "SOCL 122"
+        {
+          "options": [
+            "ANTH 280",
+            "BIOL 280 or ANTH 353 or ANTH 359 or ANTH 258"
+          ]
+        },
+        {
+          "options": [
+            "BIOL 110",
+            "ANTH 103",
+            "ANTH 105"
+          ]
+        },
+        "HSM 110",
+        "HSM 230",
+        {
+          "options": [
+            "PHIL 284",
+            "PHIL 286",
+            "PHIL 287",
+            "HSM 280"
+          ]
+        },
+        "PSYC 101",
+        "PUBH 300",
+        "PUBH 301",
+        "PUBH 303",
+        "PUBH 304",
+        "PUBH 305",
+        "PUBH 306",
+        "PUBH 307",
+        "PUBH 309",
+        "PUBH 313",
+        {
+          "options": [
+            "PUBH 314",
+            "HSM 210"
+          ]
+        },
+        "PUBH 315",
+        {
+          "options": [
+            "PUBH 391",
+            "MGMT 201"
+          ]
+        },
+        {
+          "options": [
+            "PUBH 399",
+            "PUBH 310"
+          ]
+        },
+        {
+          "options": [
+            "STAT 103",
+            "PLSC 216",
+            "PSYC 304",
+            "SOCL 301"
+          ]
+        },
+        "SOCL 122"
       ],
       "total_major_courses": 21
     },
@@ -3180,29 +3978,46 @@
       "school_college": "Parkinson School of Health Sciences and Public Health",
       "program_url": "https://catalog.luc.edu/undergraduate/health-sciences-public-health/public-health-bs/",
       "required_courses": [
-        "BIOL 101",
-        "BIOL 102",
-        "BIOL 111",
-        "BIOL 112",
-        "MATH 131",
-        "MATH 132",
-        "STAT 335",
-        "STAT 303",
-        "PSYC 101",
-        "ANTH 280 or ANTH 258 or ANTH 353 or ANTH 359",
-        "PHIL 284/PHIL 287",
-        "ENVS 380",
-        "HSM 110",
-        "HSM 230",
-        "HSM 310",
-        "PUBH 300",
-        "PUBH 301",
-        "PUBH 303",
-        "PUBH 304",
-        "PUBH 306",
-        "PUBH 307",
-        "PUBH 314/HSM 210",
-        "PUBH 399"
+        "BIOL 101",
+        "BIOL 102",
+        "BIOL 111",
+        "BIOL 112",
+        "MATH 131",
+        "MATH 132",
+        "STAT 335",
+        "STAT 303",
+        "PSYC 101",
+        {
+          "options": [
+            "ANTH 280",
+            "ANTH 258",
+            "ANTH 353",
+            "ANTH 359"
+          ]
+        },
+        {
+          "options": [
+            "PHIL 284",
+            "PHIL 287"
+          ]
+        },
+        "ENVS 380",
+        "HSM 110",
+        "HSM 230",
+        "HSM 310",
+        "PUBH 300",
+        "PUBH 301",
+        "PUBH 303",
+        "PUBH 304",
+        "PUBH 306",
+        "PUBH 307",
+        {
+          "options": [
+            "PUBH 314",
+            "HSM 210"
+          ]
+        },
+        "PUBH 399"
       ],
       "total_major_courses": 23
     },
@@ -3215,34 +4030,34 @@
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "THEO 100",
-            "THEO 185",
-            "THEO 232",
-            "THEO 265",
-            "THEO 267",
-            "THEO 279",
-            "THEO 281",
-            "THEO 317",
-            "THEO 318"
+            "THEO 100",
+            "THEO 185",
+            "THEO 232",
+            "THEO 265",
+            "THEO 267",
+            "THEO 279",
+            "THEO 281",
+            "THEO 317",
+            "THEO 318"
           ]
         },
         "[Elective: Select three of the following:9]",
         {
           "options": [
-            "THEO 272",
-            "THEO 282",
-            "THEO 295",
-            "THEO 297",
-            "THEO 299"
+            "THEO 272",
+            "THEO 282",
+            "THEO 295",
+            "THEO 297",
+            "THEO 299"
           ]
         },
         "[Elective: Select two of the following:6]",
         {
           "options": [
-            "THEO 107",
-            "THEO 186",
-            "THEO 278",
-            "THEO 393"
+            "THEO 107",
+            "THEO 186",
+            "THEO 278",
+            "THEO 393"
           ]
         }
       ],
@@ -3254,31 +4069,41 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/sculpture-ceramics-ba/",
       "required_courses": [
-        "FNAR 110",
-        "FNAR 113",
-        "FNAR 200 or FNAR 201",
-        "FNAR 202",
-        "FNAR 115",
-        "FNAR 120 or FNAR 121",
-        "FNAR 124",
-        "FNAR 222",
-        "FNAR 322",
+        "FNAR 110",
+        "FNAR 113",
+        {
+          "options": [
+            "FNAR 200",
+            "FNAR 201"
+          ]
+        },
+        "FNAR 202",
+        "FNAR 115",
+        {
+          "options": [
+            "FNAR 120",
+            "FNAR 121"
+          ]
+        },
+        "FNAR 124",
+        "FNAR 222",
+        "FNAR 322",
         "[Elective: Select one of the following from Drawing, Painting & Printmaking:3]",
         {
           "options": [
-            "FNAR 114",
-            "FNAR 118"
+            "FNAR 114",
+            "FNAR 118"
           ]
         },
         "[Elective: Select one of the following from Visual Communication:3]",
         {
           "options": [
-            "FNAR 132",
-            "FNAR 190"
+            "FNAR 132",
+            "FNAR 190"
           ]
         },
-        "FNAR 388",
-        "FNAR 398"
+        "FNAR 388",
+        "FNAR 398"
       ],
       "total_major_courses": 15
     },
@@ -3288,19 +4113,24 @@
       "school_college": "School of Social Work",
       "program_url": "https://catalog.luc.edu/undergraduate/social-work/bsw-degree-program/",
       "required_courses": [
-        "SOWK 200",
-        "SOWK 301",
-        "SOWK 303",
-        "SOWK 305",
-        "SOWK 307",
-        "SOWK 308 or SOWK 302",
-        "SOWK 330",
-        "SOWK 340",
-        "SOWK 350",
-        "SOWK 362",
-        "SOWK 370",
-        "SOWK 380",
-        "SOWK 390"
+        "SOWK 200",
+        "SOWK 301",
+        "SOWK 303",
+        "SOWK 305",
+        "SOWK 307",
+        {
+          "options": [
+            "SOWK 308",
+            "SOWK 302"
+          ]
+        },
+        "SOWK 330",
+        "SOWK 340",
+        "SOWK 350",
+        "SOWK 362",
+        "SOWK 370",
+        "SOWK 380",
+        "SOWK 390"
       ],
       "total_major_courses": 13
     },
@@ -3310,11 +4140,11 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/sociology/sociology-ba/",
       "required_courses": [
-        "SOCL 101",
-        "SOCL 205",
-        "SOCL 206",
-        "SOCL 301",
-        "SOCL 365"
+        "SOCL 101",
+        "SOCL 205",
+        "SOCL 206",
+        "SOCL 301",
+        "SOCL 365"
       ],
       "total_major_courses": 5
     },
@@ -3327,48 +4157,53 @@
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ANTH 101",
-            "ANTH 103",
-            "ANTH 104",
-            "ANTH 105",
-            "ANTH 106",
-            "ANTH 245"
+            "ANTH 101",
+            "ANTH 103",
+            "ANTH 104",
+            "ANTH 105",
+            "ANTH 106",
+            "ANTH 245"
           ]
         },
-        "ANTH 100 or ANTH 102",
-        "SOCL 101",
+        {
+          "options": [
+            "ANTH 100",
+            "ANTH 102"
+          ]
+        },
+        "SOCL 101",
         "[Elective: Select one ANTH course focusing on an ethnographic area of the following:3]",
         {
           "options": [
-            "ANTH 207",
-            "ANTH 208",
-            "ANTH 211",
-            "ANTH 212",
-            "ANTH 213",
-            "ANTH 214",
-            "ANTH 215",
-            "ANTH 216",
-            "ANTH 217",
-            "ANTH 220",
-            "ANTH 222",
-            "ANTH 224",
-            "ANTH 225"
+            "ANTH 207",
+            "ANTH 208",
+            "ANTH 211",
+            "ANTH 212",
+            "ANTH 213",
+            "ANTH 214",
+            "ANTH 215",
+            "ANTH 216",
+            "ANTH 217",
+            "ANTH 220",
+            "ANTH 222",
+            "ANTH 224",
+            "ANTH 225"
           ]
         },
-        "SOCL 206",
+        "SOCL 206",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ANTH 356",
-            "ANTH 365",
-            "SOCL 301"
+            "ANTH 356",
+            "ANTH 365",
+            "SOCL 301"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "ANTH 317",
-            "SOCL 365"
+            "ANTH 317",
+            "SOCL 365"
           ]
         }
       ],
@@ -3383,26 +4218,26 @@
         "[Elective: Select one of the following:3-4]",
         {
           "options": [
-            "MATH 131",
-            "MATH 161"
+            "MATH 131",
+            "MATH 161"
           ]
         },
         "[Elective: Select one of the following:3]",
-        "COMP 141",
-        "COMP 163",
-        "COMP 170",
-        "COMP 264",
-        "COMP 271",
-        "COMP 272",
-        "COMP 313",
-        "COMP 317",
-        "COMP 330",
+        "COMP 141",
+        "COMP 163",
+        "COMP 170",
+        "COMP 264",
+        "COMP 271",
+        "COMP 272",
+        "COMP 313",
+        "COMP 317",
+        "COMP 330",
         {
           "options": [
-            "ISSCM 241",
-            "PSYC 304",
-            "STAT 103",
-            "STAT 203 or MATH 201"
+            "ISSCM 241",
+            "PSYC 304",
+            "STAT 103",
+            "STAT 203 or MATH 201"
           ]
         }
       ],
@@ -3415,18 +4250,18 @@
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/modern-languages-literatures/spanish-ba/",
       "required_courses": [
         "[Elective: Select one of the following:6]",
-        "SPAN 270",
+        "SPAN 270",
         {
           "options": [
-            "SPAN 250",
-            "SPAN 252"
+            "SPAN 250",
+            "SPAN 252"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "SPAN 271",
-            "SPAN 272"
+            "SPAN 271",
+            "SPAN 272"
           ]
         }
       ],
@@ -3438,49 +4273,69 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/sport-management-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 110 or MATH 118",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 110",
+            "MATH 118"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:23]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "ENTR 313",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "ENTR 313",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "SPRT 130",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "SPRT 130",
         "[Elective: Select five of the following:15]",
         {
           "options": [
-            "SPRT 320",
-            "SPRT 335",
-            "SPRT 339",
-            "SPRT 345",
-            "SPRT 365",
-            "SPRT 375",
-            "SPRT 380",
-            "SPRT 385",
-            "SPRT 395",
-            "SPRT 399"
+            "SPRT 320",
+            "SPRT 335",
+            "SPRT 339",
+            "SPRT 345",
+            "SPRT 365",
+            "SPRT 375",
+            "SPRT 380",
+            "SPRT 385",
+            "SPRT 395",
+            "SPRT 399"
           ]
         }
       ],
@@ -3492,32 +4347,37 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/mathematics-statistics/statistics-bs/",
       "required_courses": [
-        "MATH 161",
-        "MATH 162",
-        "MATH 212",
-        "MATH 263",
-        "STAT 203 or STAT 335",
-        "STAT 303",
-        "STAT 304",
-        "STAT 305",
-        "STAT 307",
-        "STAT 308",
+        "MATH 161",
+        "MATH 162",
+        "MATH 212",
+        "MATH 263",
+        {
+          "options": [
+            "STAT 203",
+            "STAT 335"
+          ]
+        },
+        "STAT 303",
+        "STAT 304",
+        "STAT 305",
+        "STAT 307",
+        "STAT 308",
         "[Elective: Select two of the following:6]",
         {
           "options": [
-            "ANTH 101",
-            "ANTH 103",
-            "BIOL 101",
-            "BIOL 102",
-            "CHEM 101",
-            "CHEM 102",
-            "CHEM 160",
-            "CHEM 180",
-            "ENVS 101",
-            "ENVS 218",
-            "ENVS 224",
-            "PHYS 121",
-            "PHYS 122"
+            "ANTH 101",
+            "ANTH 103",
+            "BIOL 101",
+            "BIOL 102",
+            "CHEM 101",
+            "CHEM 102",
+            "CHEM 160",
+            "CHEM 180",
+            "ENVS 101",
+            "ENVS 218",
+            "ENVS 224",
+            "PHYS 121",
+            "PHYS 122"
           ]
         }
       ],
@@ -3529,19 +4389,19 @@
       "school_college": "School of Continuing and Professional Studies",
       "program_url": "https://catalog.luc.edu/undergraduate/continuing-professional-studies/strategic-digital-communication-ba/",
       "required_courses": [
-        "COMM 175",
-        "COMM 200",
-        "COMM 210",
-        "COMM 213",
-        "COMM 261",
-        "COMM 275",
-        "COMM 290",
-        "COMM 318",
-        "COMM 360",
-        "COMM 363",
-        "CPST 200",
-        "CPST 201",
-        "CPST 397"
+        "COMM 175",
+        "COMM 200",
+        "COMM 210",
+        "COMM 213",
+        "COMM 261",
+        "COMM 275",
+        "COMM 290",
+        "COMM 318",
+        "COMM 360",
+        "COMM 363",
+        "CPST 200",
+        "CPST 201",
+        "CPST 397"
       ],
       "total_major_courses": 13
     },
@@ -3551,56 +4411,81 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/supply-chain-management-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 110 or MATH 118",
-        "ETHC 341",
-        "QUIN 101",
-        "QUIN 102",
-        "QUIN 202",
+        "COMM 103",
+        {
+          "options": [
+            "MATH 110",
+            "MATH 118"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 101",
+        "QUIN 102",
+        "QUIN 202",
         "[Elective: Select one of the following:23]",
         {
           "options": [
-            "ANTH 100",
-            "ANTH 102",
-            "ENTR 313",
-            "GLST 101",
-            "PLSC 102"
+            "ANTH 100",
+            "ANTH 102",
+            "ENTR 313",
+            "GLST 101",
+            "PLSC 102"
           ]
         },
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 301 or FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "SCMG 338",
-        "SCMG 340",
-        "SCMG 396",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        {
+          "options": [
+            "FINC 301",
+            "FINC 334"
+          ]
+        },
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "SCMG 338",
+        "SCMG 340",
+        "SCMG 396",
         "[Elective: Select at least three of the following:9]",
         {
           "options": [
-            "SCMG 337",
-            "SCMG 341",
-            "SCMG 342",
-            "SCMG 346",
-            "SCMG 383"
+            "SCMG 337",
+            "SCMG 341",
+            "SCMG 342",
+            "SCMG 346",
+            "SCMG 383"
           ]
         },
-        "[Elective: Select no more than one of the following, or a fourth SCMG course from the above options:3]",
         {
           "options": [
-            "INFS 347",
-            "ISSCM 349",
-            "ISSCM 393",
-            "SCMG 395",
-            "SCMG 399"
+            "[Elective: Select no more than one of the following,",
+            "a fourth SCMG course from the above options:3]"
+          ]
+        },
+        {
+          "options": [
+            "INFS 347",
+            "ISSCM 349",
+            "ISSCM 393",
+            "SCMG 395",
+            "SCMG 399"
           ]
         }
       ],
@@ -3612,20 +4497,35 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/theatre-ba/",
       "required_courses": [
-        "THTR 203 or THTR 100",
-        "THTR 252",
-        "THTR 261",
-        "THTR 364",
-        "THTR 365",
-        "THTR 366",
-        "THTR 367",
-        "THTR 375",
-        "THTR 267 or THTR 352",
-        "THTR 321C",
-        "THTR 321S",
-        "THTR 321E",
-        "THTR 321R",
-        "THTR 321P or THTR 321R"
+        {
+          "options": [
+            "THTR 203",
+            "THTR 100"
+          ]
+        },
+        "THTR 252",
+        "THTR 261",
+        "THTR 364",
+        "THTR 365",
+        "THTR 366",
+        "THTR 367",
+        "THTR 375",
+        {
+          "options": [
+            "THTR 267",
+            "THTR 352"
+          ]
+        },
+        "THTR 321C",
+        "THTR 321S",
+        "THTR 321E",
+        "THTR 321R",
+        {
+          "options": [
+            "THTR 321P",
+            "THTR 321R"
+          ]
+        }
       ],
       "total_major_courses": 14
     },
@@ -3638,65 +4538,65 @@
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "THEO 100",
-            "THEO 265",
-            "THEO 266",
-            "THEO 267"
+            "THEO 100",
+            "THEO 265",
+            "THEO 266",
+            "THEO 267"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "THEO 231",
-            "THEO 302",
-            "THEO 303",
-            "THEO 304"
+            "THEO 231",
+            "THEO 302",
+            "THEO 303",
+            "THEO 304"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "THEO 232",
-            "THEO 311",
-            "THEO 313"
+            "THEO 232",
+            "THEO 311",
+            "THEO 313"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "THEO 317",
-            "THEO 318"
+            "THEO 317",
+            "THEO 318"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "THEO 107",
-            "THEO 272",
-            "THEO 282",
-            "THEO 295",
-            "THEO 297",
-            "THEO 299",
-            "THEO 350",
-            "THEO 352",
-            "THEO 353",
-            "THEO 356",
-            "THEO 365",
-            "THEO 366"
+            "THEO 107",
+            "THEO 272",
+            "THEO 282",
+            "THEO 295",
+            "THEO 297",
+            "THEO 299",
+            "THEO 350",
+            "THEO 352",
+            "THEO 353",
+            "THEO 356",
+            "THEO 365",
+            "THEO 366"
           ]
         },
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "THEO 185",
-            "THEO 186",
-            "THEO 203",
-            "THEO 204",
-            "THEO 293",
-            "THEO 340",
-            "THEO 342",
-            "THEO 343",
-            "THEO 344"
+            "THEO 185",
+            "THEO 186",
+            "THEO 203",
+            "THEO 204",
+            "THEO 293",
+            "THEO 340",
+            "THEO 342",
+            "THEO 343",
+            "THEO 344"
           ]
         }
       ],
@@ -3708,29 +4608,34 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/physics/theoretical-physics-applied-mathematics-bs/",
       "required_courses": [
-        "MATH 161",
-        "MATH 162",
-        "MATH 201",
-        "MATH 212",
-        "MATH 263",
-        "MATH 264",
-        "MATH 313",
-        "MATH 351",
-        "MATH 353",
-        "PHYS 130 or MATH 215",
-        "PHYS 121",
-        "PHYS 111L",
-        "PHYS 122",
-        "PHYS 112L",
-        "PHYS 126F",
-        "PHYS 235",
-        "PHYS 235L",
-        "PHYS 301",
-        "PHYS 314",
-        "PHYS 351",
-        "PHYS 328",
-        "PHYS 338",
-        "PHYS 361"
+        "MATH 161",
+        "MATH 162",
+        "MATH 201",
+        "MATH 212",
+        "MATH 263",
+        "MATH 264",
+        "MATH 313",
+        "MATH 351",
+        "MATH 353",
+        {
+          "options": [
+            "PHYS 130",
+            "MATH 215"
+          ]
+        },
+        "PHYS 121",
+        "PHYS 111L",
+        "PHYS 122",
+        "PHYS 112L",
+        "PHYS 126F",
+        "PHYS 235",
+        "PHYS 235L",
+        "PHYS 301",
+        "PHYS 314",
+        "PHYS 351",
+        "PHYS 328",
+        "PHYS 338",
+        "PHYS 361"
       ],
       "total_major_courses": 23
     },
@@ -3740,79 +4645,111 @@
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/us-europe-double-degree-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 130 or MATH 131 or MATH 161",
-        "ETHC 341",
-        "QUIN 202",
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "ACCT 328",
-        "ECON 303",
-        "ECON 304",
-        "ECON 346",
-        "ECON 399",
-        "ENTR 201",
-        "FINC 335",
-        "FINC 342",
-        "FINC 347",
-        "HRER 301",
-        "HRER 311",
-        "MARK 310",
-        "MARK 311",
-        "MARK 390",
-        "QUIN 351"
+        "COMM 103",
+        {
+          "options": [
+            "MATH 130",
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 202",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        "FINC 334",
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "ACCT 328",
+        "ECON 303",
+        "ECON 304",
+        "ECON 346",
+        "ECON 399",
+        "ENTR 201",
+        "FINC 335",
+        "FINC 342",
+        "FINC 347",
+        "HRER 301",
+        "HRER 311",
+        "MARK 310",
+        "MARK 311",
+        "MARK 390",
+        "QUIN 351"
       ],
       "total_major_courses": 32
     },
-    "U.S./​Europe Double Degree (BBA)": {
-      "major_name": "U.S./​Europe Double Degree",
+    "U.S./\u200bEurope Double Degree (BBA)": {
+      "major_name": "U.S./\u200bEurope Double Degree",
       "degree_type": "BBA",
       "school_college": "Quinlan School of Business",
       "program_url": "https://catalog.luc.edu/undergraduate/business/us-europe-double-degree-bba/",
       "required_courses": [
-        "COMM 103",
-        "MATH 130 or MATH 131 or MATH 161",
-        "ETHC 341",
-        "QUIN 202",
-        "ACCT 201",
-        "ACCT 202",
-        "ECON 201",
-        "ECON 202",
-        "FINC 334",
-        "INFS 247",
-        "INFS 343 or ECON 346",
-        "ISSCM 241 or STAT 103",
-        "LREB 315",
-        "MARK 201",
-        "MGMT 201",
-        "MGMT 304",
-        "SCMG 232",
-        "ACCT 328",
-        "ECON 303",
-        "ECON 304",
-        "ECON 346",
-        "ECON 399",
-        "ENTR 201",
-        "FINC 335",
-        "FINC 342",
-        "FINC 347",
-        "HRER 301",
-        "HRER 311",
-        "MARK 310",
-        "MARK 311",
-        "MARK 390",
-        "QUIN 351"
+        "COMM 103",
+        {
+          "options": [
+            "MATH 130",
+            "MATH 131",
+            "MATH 161"
+          ]
+        },
+        "ETHC 341",
+        "QUIN 202",
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        "FINC 334",
+        "INFS 247",
+        {
+          "options": [
+            "INFS 343",
+            "ECON 346"
+          ]
+        },
+        {
+          "options": [
+            "ISSCM 241",
+            "STAT 103"
+          ]
+        },
+        "LREB 315",
+        "MARK 201",
+        "MGMT 201",
+        "MGMT 304",
+        "SCMG 232",
+        "ACCT 328",
+        "ECON 303",
+        "ECON 304",
+        "ECON 346",
+        "ECON 399",
+        "ENTR 201",
+        "FINC 335",
+        "FINC 342",
+        "FINC 347",
+        "HRER 301",
+        "HRER 311",
+        "MARK 310",
+        "MARK 311",
+        "MARK 390",
+        "QUIN 351"
       ],
       "total_major_courses": 32
     },
@@ -3822,27 +4759,27 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/fine-performing-arts/visual-communication-ba/",
       "required_courses": [
-        "FNAR 113",
-        "FNAR 112",
-        "FNAR 190",
+        "FNAR 113",
+        "FNAR 112",
+        "FNAR 190",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "FNAR 202",
-            "FNAR 364"
+            "FNAR 202",
+            "FNAR 364"
           ]
         },
-        "FNAR 115",
-        "FNAR 132",
-        "FNAR 232",
-        "FNAR 233",
-        "FNAR 332",
-        "FNAR 333",
-        "FNAR 334",
-        "FNAR 382",
-        "FNAR 383",
-        "FNAR 380",
-        "FNAR 398"
+        "FNAR 115",
+        "FNAR 132",
+        "FNAR 232",
+        "FNAR 233",
+        "FNAR 332",
+        "FNAR 333",
+        "FNAR 334",
+        "FNAR 382",
+        "FNAR 383",
+        "FNAR 380",
+        "FNAR 398"
       ],
       "total_major_courses": 16
     },
@@ -3852,22 +4789,22 @@
       "school_college": "School of Continuing and Professional Studies",
       "program_url": "https://catalog.luc.edu/undergraduate/continuing-professional-studies/web-technologies-ba/",
       "required_courses": [
-        "COMP 317",
-        "COMM 275",
-        "CPST 242",
-        "CPST 342",
-        "COMP 170",
-        "COMP 251",
-        "COMP 271",
-        "CPST 291",
-        "CPST 343",
-        "CPST 325",
-        "CPST 248",
-        "CPST 249",
-        "CPST 341",
-        "CPST 200",
-        "CPST 201",
-        "CPST 397"
+        "COMP 317",
+        "COMM 275",
+        "CPST 242",
+        "CPST 342",
+        "COMP 170",
+        "COMP 251",
+        "COMP 271",
+        "CPST 291",
+        "CPST 343",
+        "CPST 325",
+        "CPST 248",
+        "CPST 249",
+        "CPST 341",
+        "CPST 200",
+        "CPST 201",
+        "CPST 397"
       ],
       "total_major_courses": 16
     },
@@ -3877,18 +4814,18 @@
       "school_college": "College of Arts and Sciences",
       "program_url": "https://catalog.luc.edu/undergraduate/arts-sciences/womens-studies-gender-studies/womens-studies-gender-studies-ba/",
       "required_courses": [
-        "WSGS 101",
-        "WSGS 201",
-        "WSGS 330",
-        "WSGS 391",
-        "WSGS 398",
-        "WSGS 399",
+        "WSGS 101",
+        "WSGS 201",
+        "WSGS 330",
+        "WSGS 391",
+        "WSGS 398",
+        "WSGS 399",
         "[Elective: Select one of the following:3]",
         {
           "options": [
-            "PLSC 312",
-            "ENGL 307",
-            "WSGS 380"
+            "PLSC 312",
+            "ENGL 307",
+            "WSGS 380"
           ]
         }
       ],
