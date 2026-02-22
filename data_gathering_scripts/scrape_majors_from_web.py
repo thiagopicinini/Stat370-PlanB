@@ -13,6 +13,23 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
+from urllib.parse import urlparse
+
+def extract_department(program_url):
+    try:
+        path = urlparse(program_url).path.lower()
+        parts = path.split("/")
+
+        if "undergraduate" in parts:
+            idx = parts.index("undergraduate")
+            if len(parts) > idx + 2:
+                department_slug = parts[idx + 2]
+                return department_slug.replace("-", " ").title()
+    except:
+        pass
+
+    return "Unknown"
+
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils.paths import MAJORS_JSON
@@ -95,13 +112,16 @@ def scrape_school_programs(school_url, school_name):
                 
                 key = f"{major_name} ({degree_type})"
                 
+                department_name = extract_department(program_url)
+
                 programs[key] = {
-                    "major_name": major_name,
-                    "degree_type": degree_type,
-                    "school_college": school_name,
-                    "program_url": program_url,
-                    "required_courses": [],
-                    "total_major_courses": 0
+                  "major_name": major_name,
+                  "degree_type": degree_type,
+                  "school_college": school_name,
+                  "department": department_name,
+                  "program_url": program_url,
+                  "required_courses": [],
+                  "total_major_courses": 0
                 }
                 
                 print(f"  Found: {key}")
