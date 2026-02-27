@@ -244,6 +244,80 @@
             margin-bottom: 10px;
         }
         
+        /* ---- Filter bar styles ---- */
+        .filter-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #6B0000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 20px;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            font-size: 12px;
+            color: #000;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        
+        .filter-group select {
+            padding: 10px 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .filter-group select:focus {
+            outline: none;
+            border-color: #6B0000;
+        }
+        
+        .refresh-btn {
+            padding: 10px 24px;
+            background: #6B0000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-left: auto;
+            height: 42px;
+        }
+        
+        .refresh-btn:hover {
+            background: #8B0000;
+        }
+
+        .four-year-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .four-year-badge.yes { background: #27ae60; color: white; }
+        .four-year-badge.no  { background: #e74c3c; color: white; }
+        
         @media (max-width: 768px) {
             .student-info {
                 grid-template-columns: 1fr;
@@ -288,8 +362,45 @@
                     <label>Total Credits Earned</label>
                     <div class="value">{{ results.total_credits_earned }}</div>
                 </div>
+
+                <div class="info-card">
+                    <label>Semesters Enrolled</label>
+                    <div class="value">{{ results.student_info.semesters_enrolled }}</div>
+                </div>
             </div>
         </div>
+
+        <!-- Filter bar -->
+        <form class="filter-bar" method="GET" action="/recommendations">
+            <div class="filter-group">
+                <label>Completable in 4 Years</label>
+                <select name="four_year">
+                    <option value="" {% if filters.four_year == '' %}selected{% endif %}>Any</option>
+                    <option value="yes" {% if filters.four_year == 'yes' %}selected{% endif %}>Yes</option>
+                    <option value="no" {% if filters.four_year == 'no' %}selected{% endif %}>No</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Outside Current Department</label>
+                <select name="outside_dept">
+                    <option value="" {% if filters.outside_dept == '' %}selected{% endif %}>Any</option>
+                    <option value="yes" {% if filters.outside_dept == 'yes' %}selected{% endif %}>Yes</option>
+                    <option value="no" {% if filters.outside_dept == 'no' %}selected{% endif %}>No</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Outside Current School/College</label>
+                <select name="outside_school">
+                    <option value="" {% if filters.outside_school == '' %}selected{% endif %}>Any</option>
+                    <option value="yes" {% if filters.outside_school == 'yes' %}selected{% endif %}>Yes</option>
+                    <option value="no" {% if filters.outside_school == 'no' %}selected{% endif %}>No</option>
+                </select>
+            </div>
+
+            <button type="submit" class="refresh-btn">Refresh Results</button>
+        </form>
         
         <div class="recommendations-section">
             <h2 class="section-title">Top 5 Alternative Major Recommendations</h2>
@@ -302,8 +413,13 @@
                         <div class="major-title">
                             <span class="major-rank">{{ loop.index }}</span>
                             <h3 style="display: inline;">{{ major.major_name }}</h3>
+                            {% if major.can_complete_in_four_years %}
+                            <span class="four-year-badge yes">4-Year ✓</span>
+                            {% else %}
+                            <span class="four-year-badge no">4-Year ✗</span>
+                            {% endif %}
                             <div class="major-meta">
-                                {{ major.degree_type }} • {{ major.school }}
+                                {{ major.degree_type }} • {{ major.school }} • {{ major.department }}
                             </div>
                         </div>
                     </div>

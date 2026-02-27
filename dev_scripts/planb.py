@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils.paths import MAJORS_JSON, COURSES_JSON, get_filtered_enrollment_files
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-here-change-in-production' # Needed for session management, replace with a secure key in production, 
+app.secret_key = 'secret-key-here-change-in-production' # Needed for session management, replace with a secure key in production, 
 #this is just for demonstration purposes and a POC. 
 
 # Initialize recommender with data files using centralized paths
@@ -62,13 +62,26 @@ def recommendations():
     if not student_id:
         return redirect(url_for('index'))
     
-    # Get recommendations
-    results = recommender.recommend_majors(student_id, top_n=5)
+    # Read filter values from request.args
+    filters = {
+        'four_year': request.args.get('four_year', ''),
+        'outside_dept': request.args.get('outside_dept', ''),
+        'outside_school': request.args.get('outside_school', '')
+    }
+    
+    # Get recommendations with filters
+    results = recommender.recommend_majors(
+        student_id,
+        top_n=5,
+        filter_four_year=filters['four_year'] if filters['four_year'] else None,
+        filter_outside_dept=filters['outside_dept'] if filters['outside_dept'] else None,
+        filter_outside_school=filters['outside_school'] if filters['outside_school'] else None
+    )
     
     if not results:
         return render_template('login.html', error='Unable to load student data')
     
-    return render_template('recommendations.html', results=results)
+    return render_template('recommendations.html', results=results, filters=filters)
 
 
 @app.route('/logout')

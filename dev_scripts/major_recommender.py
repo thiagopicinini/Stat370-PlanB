@@ -7,10 +7,11 @@ major requirements to calculate best-fit alternative majors for students.
 """
 import json
 import sys
+import math
 from pathlib import Path
 import pandas as pd
 from collections import defaultdict
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List, Tuple, Union, Optional
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -29,7 +30,29 @@ class MajorRecommender:
         """
         self.majors_data = self._load_json(majors_file)
         self.courses_data = self._load_json(courses_file)
-        self.student_data = self._load_student_data(enrollment_files)
+        self.student_data_by_semester = self._load_student_data_by_semester(enrollment_files)
+
+    def _extract_semester_from_file(self, file_path: Union[str, Path], df: pd.DataFrame) -> str:
+        """Extract semester code from file name or DataFrame content."""
+        fname = str(file_path)
+        for code in ['Fall2016', 'Fall2017', 'Fall2018', 'Fall2019', 'Fall2020',
+                     'Spring2017', 'Spring2018', 'Spring2019', 'Spring2020', 'Spring2021']:
+            if code in fname:
+                return code
+        if 'Term' in df.columns and not df.empty:
+            return str(df['Term'].iloc[0])
+        return fname
+
+    def _load_student_data_by_semester(self, enrollment_files: List[Union[str, Path]]) -> Dict[str, pd.DataFrame]:
+        data_by_semester = {}
+        for file in enrollment_files:
+            df = pd.read_csv(file, sep='\t')
+            if 'Career' in df.columns:
+                df = df[df['Career'] == 'UGRD']
+            semester_key = self._extract_semester_from_file(file, df)
+            data_by_semester[semester_key] = df
+            print(f"Loaded {semester_key}: {len(df)} undergraduate rows")
+        return data_by_semester
         
     def _load_json(self, filepath: str) -> dict:
         """Load JSON file"""
@@ -55,22 +78,20 @@ class MajorRecommender:
             return combined_df
     
     def get_student_info(self, student_id: str) -> Dict:
-        """Get student information"""
-        student_records = self.student_data[self.student_data['LID'].astype(str) == str(student_id)]
-        
-        if student_records.empty:
+        """Get student information including department and school of current major."""
+        all_records = []
+        for df in self.student_data_by_semester.values():
+            records = df[df['LID'].astype(str) == str(student_id)]
+            if not records.empty:
+                all_records.append(records)
+        if not all_records:
             return None
-        
-        # Get most recent record for student info
+        student_records = pd.concat(all_records, ignore_index=True)
         latest_record = student_records.sort_values('Term', ascending=False).iloc[0]
-        
-        # Get current major, handle NaN with fallback to Plan_List_Start_ofTerm columns
         current_major = latest_record.get('Active_Plan_List', 'Undeclared')
         if pd.isna(current_major):
-            # Try to find Plan_List_Start_ofTerm_* columns as fallback
             plan_list_cols = [col for col in latest_record.index if col.startswith('Plan_List_Start_ofTerm_')]
             if plan_list_cols:
-                # Use the first non-NaN value from Plan_List_Start_ofTerm columns
                 for col in plan_list_cols:
                     if not pd.isna(latest_record[col]):
                         current_major = latest_record[col]
@@ -79,50 +100,58 @@ class MajorRecommender:
                     current_major = 'Undeclared'
             else:
                 current_major = 'Undeclared'
-        
+        current_department = 'Unknown'
+        current_school = 'Unknown'
+        for prog_name, prog_info in self.majors_data.get('programs', {}).items():
+            plan_code = str(current_major)
+            if (prog_name == plan_code or
+                prog_info.get('major_name', '') in plan_code or
+                plan_code in prog_name):
+                current_department = prog_info.get('department', 'Unknown')
+                current_school = prog_info.get('school_college', 'Unknown')
+                break
+        semesters_enrolled = int(student_records['Term'].nunique())
         return {
             'student_id': student_id,
             'name': latest_record.get('Name', 'Unknown'),
             'current_major': current_major,
-            'class_standing': latest_record.get('Academic_Level', 'Unknown')
+            'class_standing': latest_record.get('Academic_Level', 'Unknown'),
+            'current_department': current_department,
+            'current_school': current_school,
+            'semesters_enrolled': semesters_enrolled
         }
     
     def get_student_courses(self, student_id: str) -> List[Dict]:
-        """Get all courses a student has taken and passed"""
-        student_records = self.student_data[self.student_data['LID'].astype(str) == str(student_id)]
-        
-        # Filter for passed courses (grades A, B, C, or P)
+        """Get all courses a student has taken and passed (searching all semesters)"""
+        all_records = []
+        for df in self.student_data_by_semester.values():
+            records = df[df['LID'].astype(str) == str(student_id)]
+            if not records.empty:
+                all_records.append(records)
+        if not all_records:
+            return []
+        student_records = pd.concat(all_records, ignore_index=True)
         passed_grades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'P']
         passed_courses = student_records[student_records['FinalGrade'].isin(passed_grades)]
-        
         courses = []
-        seen_courses = set()  # Track unique course-term combinations to avoid duplicates
-        
+        seen_courses = set()
         for _, row in passed_courses.iterrows():
-            # Combine Subject and CatalogNumber to get course code
             subject = str(row.get('Subject', '')).strip()
             catalog_num = str(row.get('CatalogNumber', '')).strip()
             course_code = f"{subject} {catalog_num}" if subject and catalog_num else None
-            
             if course_code and course_code != 'nan nan':
-                # Use course + term as unique identifier to avoid counting duplicates
                 course_term_key = (course_code, row['Term'])
-                
                 if course_term_key not in seen_courses:
                     seen_courses.add(course_term_key)
-                    
-                    # Get credits, handle NaN
                     credits = row.get('Units_Earned', 0)
                     if pd.isna(credits) or credits == 0:
-                        credits = 3  # Default to 3 if not specified or 0
-                    
+                        credits = 3
                     courses.append({
                         'course': course_code,
                         'credits': credits,
                         'grade': row['FinalGrade'],
                         'term': row['Term']
                     })
-        
         return courses
     
     def calculate_major_match(self, student_courses: List[Dict], major_name: str) -> Dict:
@@ -181,8 +210,80 @@ class MajorRecommender:
             'total_required': len(required_courses) if required_courses else 0
         }
     
-    def recommend_majors(self, student_id: str, top_n: int = 5) -> Dict:
-        """Recommend top N alternative majors for a student"""
+    def can_complete_in_four_years(self, student_courses: List[Dict],
+                                    major_name: str,
+                                    semesters_enrolled: int,
+                                    credits_per_semester: int = 15) -> bool:
+        """
+        Determine if a student can complete a prospective major plus university
+        core requirements within 8 total semesters (4 years).
+
+        Args:
+            student_courses: Courses the student has already passed.
+            major_name: Name of the prospective major.
+            semesters_enrolled: Number of semesters the student has already been enrolled.
+            credits_per_semester: Assumed max credits per semester (default 15).
+
+        Returns:
+            True if remaining requirements can fit in the remaining semesters.
+        """
+        total_semesters = 8  # 4 years = 8 semesters
+        remaining_semesters = max(total_semesters - semesters_enrolled, 0)
+
+        # Credits the student can still earn
+        remaining_capacity = remaining_semesters * credits_per_semester
+
+        # ---- Major remaining credits ----
+        match_info = self.calculate_major_match(student_courses, major_name)
+        major_info = self.majors_data['programs'].get(major_name, {})
+        total_required = match_info['total_required']
+        courses_matched = match_info['course_count']
+        remaining_major_courses = total_required - courses_matched
+        # Estimate 3 credits per remaining major course
+        remaining_major_credits = remaining_major_courses * 3
+
+        # ---- University core remaining credits ----
+        core_info = self.majors_data.get('university_core', {})
+        # Parse total core credit hours (approx 34-37, use 36 as midpoint)
+        total_core_str = core_info.get('total_credit_hours', '')
+        try:
+            # Try to pull numeric value from string like "Approximately 34-37 credit hours"
+            nums = [int(s) for s in total_core_str.split() if s.isdigit()]
+            total_core_credits = sum(nums) // len(nums) if nums else 36
+        except Exception:
+            total_core_credits = 36
+
+        # Estimate how many core credits the student has already satisfied.
+        # Simpler heuristic: count student credits that are NOT major-matched
+        matched_course_codes = {c['course'] for c in match_info['matched_courses']}
+        total_student_credits = sum(c['credits'] for c in student_courses)
+        major_matched_credits = match_info['total_credits']
+        non_major_credits = total_student_credits - major_matched_credits
+        core_credits_earned = min(non_major_credits, total_core_credits)
+        remaining_core_credits = max(total_core_credits - core_credits_earned, 0)
+
+        # Total remaining credits needed
+        total_remaining = remaining_major_credits + remaining_core_credits
+
+        return total_remaining <= remaining_capacity
+
+    def recommend_majors(self, student_id: str, top_n: int = 5,
+                         filter_four_year: Optional[str] = None,
+                         filter_outside_dept: Optional[str] = None,
+                         filter_outside_school: Optional[str] = None) -> Dict:
+        """
+        Recommend top N alternative majors for a student with optional filters.
+
+        Args:
+            student_id: The student LID.
+            top_n: Number of recommendations to return.
+            filter_four_year: 'yes' to keep only majors completable in 4 years,
+                              'no' to keep only those that are NOT, None to skip.
+            filter_outside_dept: 'yes' to exclude same-department majors,
+                                 'no' to keep only same-department, None to skip.
+            filter_outside_school: 'yes' to exclude same-school majors,
+                                   'no' to keep only same-school, None to skip.
+        """
         student_info = self.get_student_info(student_id)
         
         if not student_info:
@@ -197,8 +298,11 @@ class MajorRecommender:
         else:
             current_major_code = str(current_major_code)
         
-        # Calculate match for all majors (don't skip current major in matching logic,
-        # we'll just rank them differently)
+        current_department = student_info.get('current_department', 'Unknown')
+        current_school = student_info.get('current_school', 'Unknown')
+        semesters_enrolled = student_info.get('semesters_enrolled', 0)
+
+        # Calculate match for all majors
         major_matches = []
         
         for major_name in self.majors_data.get('programs', {}).keys():
@@ -215,16 +319,47 @@ class MajorRecommender:
                     current_major_code in major_name
                 )
                 
+                major_dept = major_info.get('department', 'N/A')
+                major_school = major_info.get('school_college', 'N/A')
+
+                # --- Apply filters ---
+
+                # Four-year completion filter
+                completable = self.can_complete_in_four_years(
+                    student_courses, major_name, semesters_enrolled
+                ) if student_courses else False
+
+                if filter_four_year == 'yes' and not completable:
+                    continue
+                if filter_four_year == 'no' and completable:
+                    continue
+
+                # Outside department filter
+                same_dept = (major_dept.lower() == current_department.lower())
+                if filter_outside_dept == 'yes' and same_dept:
+                    continue
+                if filter_outside_dept == 'no' and not same_dept:
+                    continue
+
+                # Outside school filter
+                same_school = (major_school.lower() == current_school.lower())
+                if filter_outside_school == 'yes' and same_school:
+                    continue
+                if filter_outside_school == 'no' and not same_school:
+                    continue
+
                 major_matches.append({
                     'major_name': major_name,
                     'degree_type': major_info.get('degree_type', 'N/A'),
-                    'school': major_info.get('school_college', 'N/A'),
+                    'school': major_school,
+                    'department': major_dept,
                     'credits_earned': match_info['total_credits'],
                     'courses_matched': match_info['course_count'],
                     'total_required_courses': match_info['total_required'],
                     'completion_percentage': round((match_info['course_count'] / match_info['total_required'] * 100) if match_info['total_required'] > 0 else 0, 1),
                     'matched_courses': match_info['matched_courses'],
-                    'is_current_major': is_current_major
+                    'is_current_major': is_current_major,
+                    'can_complete_in_four_years': completable
                 })
         
         # Sort by credits earned (descending), but filter out current major
