@@ -70,10 +70,24 @@ def analyze_student(student_data, majors_data, student_id):
         return None
     
     latest_record, passed_courses, student_course_codes = get_student_courses(student_data, student_id)
-    
+
+    # Robustly determine current major (fallback logic)
+    current_major = latest_record.get('Active_Plan_List', 'Undeclared')
+    if pd.isna(current_major):
+        plan_list_cols = [col for col in latest_record.index if col.startswith('Plan_List_Start_ofTerm_')]
+        if plan_list_cols:
+            for col in plan_list_cols:
+                if not pd.isna(latest_record[col]):
+                    current_major = latest_record[col]
+                    break
+            else:
+                current_major = 'Undeclared'
+        else:
+            current_major = 'Undeclared'
+
     # Display student info
     print(f"\nStudent Name: {latest_record['Name']}")
-    print(f"Current Major: {latest_record['Active_Plan_List']}")
+    print(f"Current Major: {current_major}")
     print(f"Total records: {len(student_records)}")
     
     # List all semesters enrolled
@@ -135,7 +149,7 @@ def analyze_student(student_data, majors_data, student_id):
     return {
         'student_id': student_id,
         'name': latest_record['Name'],
-        'current_major': latest_record['Active_Plan_List'],
+        'current_major': current_major,
         'total_courses': len(passed_courses),
         'unique_courses': len(student_course_codes),
         'matches': len(matches_found),
