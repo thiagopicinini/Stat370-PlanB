@@ -1,0 +1,123 @@
+{
+  "university_core": {
+    "category": "University Core Curriculum",
+    "description": "Required foundation courses.",
+    "areas": [],
+    "total_credit_hours": "Approximately 34-37 credit hours"
+  },
+  "programs": {
+    "Computer Science (BS)": {
+      "major_name": "Computer Science",
+      "degree_type": "BS",
+      "school_college": "College of Arts and Sciences",
+      "department": "Computer Science",
+      "program_url": "https://example.com/cs",
+      "required_courses": [
+        "MATH 161",
+        "MATH 162",
+        "COMP 141",
+        "COMP 170",
+        "COMP 264",
+        "COMP 271",
+        "COMP 272",
+        "COMP 310",
+        "COMP 317",
+        "COMP 363",
+        "COMP 371",
+        "STAT 203"
+      ]
+    },
+    "Statistics (BS)": {
+      "major_name": "Statistics",
+      "degree_type": "BS",
+      "school_college": "College of Arts and Sciences",
+      "department": "Mathematics Statistics",
+      "program_url": "https://example.com/stat",
+      "required_courses": [
+        "MATH 161",
+        "MATH 162",
+        "MATH 212",
+        "MATH 263",
+        "STAT 203 or STAT 335",
+        "STAT 303",
+        "STAT 304",
+        "STAT 305",
+        "STAT 307",
+        "STAT 308"
+      ]
+    },
+    "Mathematics (BS)": {
+      "major_name": "Mathematics",
+      "degree_type": "BS",
+      "school_college": "College of Arts and Sciences",
+      "department": "Mathematics Statistics",
+      "program_url": "https://example.com/math",
+      "required_courses": [
+        "MATH 161",
+        "MATH 162",
+        "MATH 201",
+        "MATH 212",
+        "MATH 263",
+        "MATH 264",
+        "STAT 203",
+        "MATH 313",
+        "MATH 351"
+      ]
+    },
+    "Accounting (BBA)": {
+      "major_name": "Accounting",
+      "degree_type": "BBA",
+      "school_college": "Quinlan School of Business",
+      "department": "Accounting Bba",
+      "program_url": "https://example.com/acct",
+      "required_courses": [
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        "MGMT 201",
+        "MGMT 304",
+        "MARK 201",
+        "ACCT 303",
+        "ACCT 304",
+        "ACCT 311"
+      ]
+    },
+    "Psychology (BS)": {
+      "major_name": "Psychology",
+      "degree_type": "BS",
+      "school_college": "College of Arts and Sciences",
+      "department": "Psychology",
+      "program_url": "https://example.com/psych",
+      "required_courses": [
+        "PSYC 101",
+        "PSYC 200",
+        "PSYC 201",
+        "PSYC 202",
+        "PSYC 301",
+        "PSYC 302",
+        "PSYC 304",
+        "STAT 203"
+      ]
+    },
+    "Biology (BS)": {
+      "major_name": "Biology",
+      "degree_type": "BS",
+      "school_college": "College of Arts and Sciences",
+      "department": "Biology",
+      "program_url": "https://example.com/bio",
+      "required_courses": [
+        "BIOL 101",
+        "BIOL 111",
+        "BIOL 102",
+        "BIOL 112",
+        "CHEM 101",
+        "CHEM 102",
+        "PHYS 121",
+        "PHYS 122",
+        "MATH 131 or MATH 161",
+        "STAT 203"
+      ]
+    }
+  }
+}

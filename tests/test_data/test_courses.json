@@ -1,0 +1,320 @@
+{
+  "MATH 161": {
+    "course_code": "MATH 161",
+    "course_url": "https://example.com/MATH161",
+    "course_title": "Calculus I",
+    "course_description": "Description for Calculus I."
+  },
+  "MATH 162": {
+    "course_code": "MATH 162",
+    "course_url": "https://example.com/MATH162",
+    "course_title": "Calculus II",
+    "course_description": "Description for Calculus II."
+  },
+  "MATH 131": {
+    "course_code": "MATH 131",
+    "course_url": "https://example.com/MATH131",
+    "course_title": "Applied Calculus I",
+    "course_description": "Description for Applied Calculus I."
+  },
+  "MATH 201": {
+    "course_code": "MATH 201",
+    "course_url": "https://example.com/MATH201",
+    "course_title": "Discrete Math",
+    "course_description": "Description for Discrete Math."
+  },
+  "MATH 212": {
+    "course_code": "MATH 212",
+    "course_url": "https://example.com/MATH212",
+    "course_title": "Linear Algebra",
+    "course_description": "Description for Linear Algebra."
+  },
+  "MATH 263": {
+    "course_code": "MATH 263",
+    "course_url": "https://example.com/MATH263",
+    "course_title": "Multivariable Calc",
+    "course_description": "Description for Multivariable Calc."
+  },
+  "MATH 264": {
+    "course_code": "MATH 264",
+    "course_url": "https://example.com/MATH264",
+    "course_title": "ODE",
+    "course_description": "Description for ODE."
+  },
+  "MATH 313": {
+    "course_code": "MATH 313",
+    "course_url": "https://example.com/MATH313",
+    "course_title": "Abstract Algebra",
+    "course_description": "Description for Abstract Algebra."
+  },
+  "MATH 351": {
+    "course_code": "MATH 351",
+    "course_url": "https://example.com/MATH351",
+    "course_title": "Real Analysis",
+    "course_description": "Description for Real Analysis."
+  },
+  "COMP 141": {
+    "course_code": "COMP 141",
+    "course_url": "https://example.com/COMP141",
+    "course_title": "Intro Computing",
+    "course_description": "Description for Intro Computing."
+  },
+  "COMP 170": {
+    "course_code": "COMP 170",
+    "course_url": "https://example.com/COMP170",
+    "course_title": "Intro CS",
+    "course_description": "Description for Intro CS."
+  },
+  "COMP 264": {
+    "course_code": "COMP 264",
+    "course_url": "https://example.com/COMP264",
+    "course_title": "Systems",
+    "course_description": "Description for Systems."
+  },
+  "COMP 271": {
+    "course_code": "COMP 271",
+    "course_url": "https://example.com/COMP271",
+    "course_title": "Data Structures",
+    "course_description": "Description for Data Structures."
+  },
+  "COMP 272": {
+    "course_code": "COMP 272",
+    "course_url": "https://example.com/COMP272",
+    "course_title": "Software Eng",
+    "course_description": "Description for Software Eng."
+  },
+  "COMP 310": {
+    "course_code": "COMP 310",
+    "course_url": "https://example.com/COMP310",
+    "course_title": "Algorithms",
+    "course_description": "Description for Algorithms."
+  },
+  "COMP 317": {
+    "course_code": "COMP 317",
+    "course_url": "https://example.com/COMP317",
+    "course_title": "Social Computing",
+    "course_description": "Description for Social Computing."
+  },
+  "COMP 363": {
+    "course_code": "COMP 363",
+    "course_url": "https://example.com/COMP363",
+    "course_title": "Theory",
+    "course_description": "Description for Theory."
+  },
+  "COMP 371": {
+    "course_code": "COMP 371",
+    "course_url": "https://example.com/COMP371",
+    "course_title": "Programming Languages",
+    "course_description": "Description for Programming Languages."
+  },
+  "STAT 203": {
+    "course_code": "STAT 203",
+    "course_url": "https://example.com/STAT203",
+    "course_title": "Intro Stats",
+    "course_description": "Description for Intro Stats."
+  },
+  "STAT 303": {
+    "course_code": "STAT 303",
+    "course_url": "https://example.com/STAT303",
+    "course_title": "Probability",
+    "course_description": "Description for Probability."
+  },
+  "STAT 304": {
+    "course_code": "STAT 304",
+    "course_url": "https://example.com/STAT304",
+    "course_title": "Math Stats",
+    "course_description": "Description for Math Stats."
+  },
+  "STAT 305": {
+    "course_code": "STAT 305",
+    "course_url": "https://example.com/STAT305",
+    "course_title": "Regression",
+    "course_description": "Description for Regression."
+  },
+  "STAT 307": {
+    "course_code": "STAT 307",
+    "course_url": "https://example.com/STAT307",
+    "course_title": "Statistical Design",
+    "course_description": "Description for Statistical Design."
+  },
+  "STAT 308": {
+    "course_code": "STAT 308",
+    "course_url": "https://example.com/STAT308",
+    "course_title": "Applied Stats",
+    "course_description": "Description for Applied Stats."
+  },
+  "STAT 335": {
+    "course_code": "STAT 335",
+    "course_url": "https://example.com/STAT335",
+    "course_title": "Intro Biostat",
+    "course_description": "Description for Intro Biostat."
+  },
+  "ACCT 201": {
+    "course_code": "ACCT 201",
+    "course_url": "https://example.com/ACCT201",
+    "course_title": "Intro Acct I",
+    "course_description": "Description for Intro Acct I."
+  },
+  "ACCT 202": {
+    "course_code": "ACCT 202",
+    "course_url": "https://example.com/ACCT202",
+    "course_title": "Intro Acct II",
+    "course_description": "Description for Intro Acct II."
+  },
+  "ACCT 303": {
+    "course_code": "ACCT 303",
+    "course_url": "https://example.com/ACCT303",
+    "course_title": "Intermed Acct I",
+    "course_description": "Description for Intermed Acct I."
+  },
+  "ACCT 304": {
+    "course_code": "ACCT 304",
+    "course_url": "https://example.com/ACCT304",
+    "course_title": "Intermed Acct II",
+    "course_description": "Description for Intermed Acct II."
+  },
+  "ACCT 311": {
+    "course_code": "ACCT 311",
+    "course_url": "https://example.com/ACCT311",
+    "course_title": "Cost Accounting",
+    "course_description": "Description for Cost Accounting."
+  },
+  "ECON 201": {
+    "course_code": "ECON 201",
+    "course_url": "https://example.com/ECON201",
+    "course_title": "Microecon",
+    "course_description": "Description for Microecon."
+  },
+  "ECON 202": {
+    "course_code": "ECON 202",
+    "course_url": "https://example.com/ECON202",
+    "course_title": "Macroecon",
+    "course_description": "Description for Macroecon."
+  },
+  "MGMT 201": {
+    "course_code": "MGMT 201",
+    "course_url": "https://example.com/MGMT201",
+    "course_title": "Principles of Mgmt",
+    "course_description": "Description for Principles of Mgmt."
+  },
+  "MGMT 304": {
+    "course_code": "MGMT 304",
+    "course_url": "https://example.com/MGMT304",
+    "course_title": "Strategic Mgmt",
+    "course_description": "Description for Strategic Mgmt."
+  },
+  "MARK 201": {
+    "course_code": "MARK 201",
+    "course_url": "https://example.com/MARK201",
+    "course_title": "Marketing",
+    "course_description": "Description for Marketing."
+  },
+  "PSYC 101": {
+    "course_code": "PSYC 101",
+    "course_url": "https://example.com/PSYC101",
+    "course_title": "Intro Psych",
+    "course_description": "Description for Intro Psych."
+  },
+  "PSYC 200": {
+    "course_code": "PSYC 200",
+    "course_url": "https://example.com/PSYC200",
+    "course_title": "Research Methods",
+    "course_description": "Description for Research Methods."
+  },
+  "PSYC 201": {
+    "course_code": "PSYC 201",
+    "course_url": "https://example.com/PSYC201",
+    "course_title": "Brain & Behavior",
+    "course_description": "Description for Brain & Behavior."
+  },
+  "PSYC 202": {
+    "course_code": "PSYC 202",
+    "course_url": "https://example.com/PSYC202",
+    "course_title": "Developmental",
+    "course_description": "Description for Developmental."
+  },
+  "PSYC 301": {
+    "course_code": "PSYC 301",
+    "course_url": "https://example.com/PSYC301",
+    "course_title": "Personality",
+    "course_description": "Description for Personality."
+  },
+  "PSYC 302": {
+    "course_code": "PSYC 302",
+    "course_url": "https://example.com/PSYC302",
+    "course_title": "Social Psych",
+    "course_description": "Description for Social Psych."
+  },
+  "PSYC 304": {
+    "course_code": "PSYC 304",
+    "course_url": "https://example.com/PSYC304",
+    "course_title": "Abnormal Psych",
+    "course_description": "Description for Abnormal Psych."
+  },
+  "BIOL 101": {
+    "course_code": "BIOL 101",
+    "course_url": "https://example.com/BIOL101",
+    "course_title": "Intro Bio I",
+    "course_description": "Description for Intro Bio I."
+  },
+  "BIOL 102": {
+    "course_code": "BIOL 102",
+    "course_url": "https://example.com/BIOL102",
+    "course_title": "Intro Bio II",
+    "course_description": "Description for Intro Bio II."
+  },
+  "BIOL 111": {
+    "course_code": "BIOL 111",
+    "course_url": "https://example.com/BIOL111",
+    "course_title": "Bio Lab I",
+    "course_description": "Description for Bio Lab I."
+  },
+  "BIOL 112": {
+    "course_code": "BIOL 112",
+    "course_url": "https://example.com/BIOL112",
+    "course_title": "Bio Lab II",
+    "course_description": "Description for Bio Lab II."
+  },
+  "CHEM 101": {
+    "course_code": "CHEM 101",
+    "course_url": "https://example.com/CHEM101",
+    "course_title": "Gen Chem I",
+    "course_description": "Description for Gen Chem I."
+  },
+  "CHEM 102": {
+    "course_code": "CHEM 102",
+    "course_url": "https://example.com/CHEM102",
+    "course_title": "Gen Chem II",
+    "course_description": "Description for Gen Chem II."
+  },
+  "PHYS 121": {
+    "course_code": "PHYS 121",
+    "course_url": "https://example.com/PHYS121",
+    "course_title": "Intro Physics I",
+    "course_description": "Description for Intro Physics I."
+  },
+  "PHYS 122": {
+    "course_code": "PHYS 122",
+    "course_url": "https://example.com/PHYS122",
+    "course_title": "Intro Physics II",
+    "course_description": "Description for Intro Physics II."
+  },
+  "ENGL 100": {
+    "course_code": "ENGL 100",
+    "course_url": "https://example.com/ENGL100",
+    "course_title": "Freshman Writing",
+    "course_description": "Description for Freshman Writing."
+  },
+  "HIST 101": {
+    "course_code": "HIST 101",
+    "course_url": "https://example.com/HIST101",
+    "course_title": "Western Civ",
+    "course_description": "Description for Western Civ."
+  },
+  "PHIL 101": {
+    "course_code": "PHIL 101",
+    "course_url": "https://example.com/PHIL101",
+    "course_title": "Intro Philosophy",
+    "course_description": "Description for Intro Philosophy."
+  }
+}
