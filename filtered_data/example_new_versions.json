@@ -1,0 +1,303 @@
+{
+  "program": {
+    "name": "Cognitive and Behavioral Neuroscience (BS)",
+    "institution": "Loyola University Chicago",
+    "catalogYear": "2025-2026",
+    "totalHours": "74-76",
+    "requirements": [
+      {
+        "id": "req_basic_science_math",
+        "name": "Basic Science and Math Foundations",
+        "selectionRule": "all",
+        "credits": "35-37",
+        "courses": [
+          { "code": "BIOL 101 & BIOL 111", "credits": 4 },
+          { "code": "BIOL 102 & BIOL 112", "credits": 4 },
+          { "code": "BIOL 251", "credits": 3 },
+          { "code": "BIOL 252 or BIOL 283", "credits": 1 },
+          { "code": "BIOL 282", "credits": 3 },
+          { "code": "BIOL 335 or STAT 335 or PSYC 304", "credits": 3 },
+          { "code": "MATH 131 or MATH 161", "credits": "3-4" },
+          { "code": "PSYC 101", "credits": 3 }
+        ],
+        "alternatives": [
+          {
+            "description": "Select one of three chemistry sequences",
+            "requiredCount": 2,
+            "credits": 8,
+            "options": [
+              ["CHEM 101 & CHEM 111", "CHEM 102 & CHEM 112"],
+              ["CHEM 100", "CHEM 105"],
+              ["CHEM 121 & CHEM 121L", "CHEM 122 & CHEM 122L"]
+            ]
+          },
+          {
+            "description": "Select one of three physics sequences",
+            "requiredCount": 2,
+            "credits": 8,
+            "options": [
+              ["PHYS 111 & PHYS 112", "PHYS 121 & PHYS 122"],
+              ["PHYS 101 & PHYS 102", "PHYS 103 & PHYS 104"],
+              ["PHYS 125 & PHYS 126", "PHYS 135 & PHYS 136"]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "req_neuro_foundations",
+        "name": "Neuroscience Foundations Courses",
+        "selectionRule": "all",
+        "credits": 9,
+        "courses": [
+          { "code": "NEUR 101", "credits": 3 },
+          { "code": "BIOL 362", "credits": 3 },
+          { "code": "PSYC 382 / BIOL 284", "credits": 3 }
+        ]
+      },
+      {
+        "id": "req_cognitive_behavioral_track",
+        "name": "Cognitive/Behavioral Neuroscience Track",
+        "selectionRule": "all",
+        "credits": "22-24",
+        "subrequirements": [
+          {
+            "name": "Specialty Areas Courses",
+            "selectionRule": "all",
+            "credits": 4,
+            "courses": [
+              { "code": "NEUR 300 / BIOL 303", "credits": 1 },
+              { "code": "PSYC 306", "credits": 3 }
+            ]
+          },
+          {
+            "name": "Computer Science Option",
+            "selectionRule": "exactly_one",
+            "credits": 3,
+            "courses": [
+              { "code": "COMP 150", "credits": 3 },
+              { "code": "COMP 163", "credits": 3 },
+              { "code": "COMP 170", "credits": 3 },
+              { "code": "COMP 193", "credits": 3 }
+            ]
+          },
+          {
+            "name": "Cognitive/Behavioral Neuroscience Lecture Electives",
+            "selectionRule": "choose_n",
+            "requiredCount": 3,
+            "credits": 9,
+            "courses": [
+              { "code": "BIOL 310", "credits": 3 },
+              { "code": "BIOL 364", "credits": 3 },
+              { "code": "BIOL 365", "credits": 3 },
+              { "code": "BIOL 366", "credits": 3 },
+              { "code": "BIOL 393", "credits": 3 },
+              { "code": "PSYC 240", "credits": 3 },
+              { "code": "PSYC 343", "credits": 3 },
+              { "code": "PSYC 344", "credits": 3 },
+              { "code": "PSYC 345", "credits": 3 },
+              { "code": "PSYC 346", "credits": 3 },
+              { "code": "PSYC 347", "credits": 3 },
+              { "code": "PSYC 349", "credits": 3 },
+              { "code": "PSYC 380", "credits": 3 }
+            ]
+          },
+          {
+            "name": "Cognitive/Behavioral Neuroscience Lab Electives",
+            "selectionRule": "choose_n",
+            "requiredCount": 2,
+            "credits": "6-7",
+            "courses": [
+              { "code": "BIOL 391", "credits": "3-4" },
+              { "code": "NEUR 350", "credits": 3 },
+              { "code": "PSYC 245", "credits": 3 },
+              { "code": "PSYC 246", "credits": 3 },
+              { "code": "PSYC 247", "credits": 3 },
+              { "code": "PSYC 248", "credits": 3 },
+              { "code": "PSYC 249", "credits": 3 },
+              { "code": "PSYC 386", "credits": 3 }
+            ],
+            "allowAlternatives": [
+              {
+                "description": "May include one independent research option with Cognitive/Behavioral focus",
+                "courses": [
+                  { "code": "BIOL 395", "credits": 3 },
+                  { "code": "PSYC 370", "credits": 3 },
+                  { "code": "NEUR 399", "credits": 3 }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "req_capstone",
+        "name": "Cognitive/Behavioral Neuroscience Capstone",
+        "selectionRule": "exactly_one",
+        "credits": 3,
+        "courses": [
+          { "code": "PSYC 387", "credits": 3 }
+        ]
+      }
+    ],
+    "programNotes": {
+      "collegeRequirements": "All CAS students must take two Writing Intensive courses (6 credits) and complete a foreign language requirement at 102-level or higher (3 credits) or a language competency test."
+    }
+  }
+}
+
+
+{
+  "program": {
+    "name": "Anthropology (BS)",
+    "institution": "Loyola University Chicago",
+    "catalogYear": "2025-2026",
+    "totalHours": 36,
+    "requirements": [
+      {
+        "id": "req_foundations",
+        "name": "Required Foundations",
+        "selectionRule": "alternatives",
+        "credits": 3,
+        "alternatives": [
+          {
+            "requiredCount": 1,
+            "options": [
+              { "code": "ANTH 100", "credits": 3 },
+              { "code": "ANTH 102", "credits": 3 }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "req_ethnographic",
+        "name": "Ethnographic Requirement",
+        "selectionRule": "exactly_one",
+        "credits": 3,
+        "courses": [
+          { "code": "ANTH 207", "credits": 3 },
+          { "code": "ANTH 208", "credits": 3 },
+          { "code": "ANTH 211", "credits": 3 },
+          { "code": "ANTH 212", "credits": 3 },
+          { "code": "ANTH 213", "credits": 3 },
+          { "code": "ANTH 214", "credits": 3 },
+          { "code": "ANTH 215", "credits": 3 },
+          { "code": "ANTH 216", "credits": 3 },
+          { "code": "ANTH 217", "credits": 3 },
+          { "code": "ANTH 220", "credits": 3 },
+          { "code": "ANTH 222", "credits": 3 },
+          { "code": "ANTH 224", "credits": 3 },
+          { "code": "ANTH 225", "credits": 3 }
+        ]
+      },
+      {
+        "id": "req_archaeology",
+        "name": "Archaeology Requirement",
+        "selectionRule": "exactly_one",
+        "credits": 3,
+        "courses": [
+          { "code": "ANTH 242", "credits": 3 },
+          { "code": "ANTH 243", "credits": 3 },
+          { "code": "ANTH 244", "credits": 3 },
+          { "code": "ANTH 245", "credits": 3 },
+          { "code": "ANTH 246", "credits": 3 },
+          { "code": "ANTH 247", "credits": 3 },
+          { "code": "ANTH 342", "credits": 3 },
+          { "code": "ANTH 360", "credits": 3 },
+          { "code": "ANTH 365", "credits": 3 },
+          { "code": "ANTH 366", "credits": 3 }
+        ]
+      },
+      {
+        "id": "req_theoretical",
+        "name": "Theoretical Requirement",
+        "selectionRule": "exactly_one",
+        "credits": 3,
+        "courses": [
+          { "code": "ANTH 303", "credits": 3 },
+          { "code": "ANTH 304", "credits": 3 },
+          { "code": "ANTH 305", "credits": 3 },
+          { "code": "ANTH 306", "credits": 3 },
+          { "code": "ANTH 307", "credits": 3 },
+          { "code": "ANTH 309", "credits": 3 },
+          { "code": "ANTH 314", "credits": 3 },
+          { "code": "ANTH 316", "credits": 3 },
+          { "code": "ANTH 317", "credits": 3 },
+          { "code": "ANTH 319", "credits": 3 },
+          { "code": "ANTH 321", "credits": 3 },
+          { "code": "ANTH 330", "credits": 3 },
+          { "code": "ANTH 332", "credits": 3 },
+          { "code": "ANTH 348", "credits": 3 },
+          { "code": "ANTH 361", "credits": 3 },
+          { "code": "ANTH 363", "credits": 3 }
+        ]
+      },
+      {
+        "id": "req_bio_anthropology",
+        "name": "Bio-Anthropology Requirement",
+        "credits": 6,
+        "selectionRule": "nested_group",
+        "subgroups": [
+          {
+            "name": "Core Bio-Anthropology",
+            "selectionRule": "at_least_one",
+            "courses": [
+              { "code": "ANTH 324", "credits": 3 },
+              { "code": "ANTH 325", "credits": 3 },
+              { "code": "ANTH 326", "credits": 3 },
+              { "code": "ANTH 327", "credits": 3 }
+            ]
+          },
+          {
+            "name": "Specialized Bio-Anthropology",
+            "selectionRule": "at_most_one",
+            "courses": [
+              { "code": "ANTH 280", "credits": 3 },
+              { "code": "ANTH 281", "credits": 3 },
+              { "code": "ANTH 359", "credits": 3 },
+              { "code": "ANTH 362", "credits": 3 }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "req_elective_lower",
+        "name": "ANTH Elective (100/200/300 level)",
+        "selectionRule": "exactly_one",
+        "credits": 3,
+        "eligibility": {
+          "type": "course_filter",
+          "rules": [
+            { "field": "department", "operator": "equals", "value": "ANTH" },
+            { "field": "level", "operator": "in", "value": [100, 200, 300] }
+          ]
+        }
+      },
+      {
+        "id": "req_elective_upper_1",
+        "name": "ANTH Elective (200/300 level)",
+        "selectionRule": "exactly_one",
+        "credits": 3,
+        "eligibility": {
+          "type": "course_filter",
+          "rules": [
+            { "field": "department", "operator": "equals", "value": "ANTH" },
+            { "field": "level", "operator": "in", "value": [200, 300] }
+          ]
+        }
+      },
+      {
+        "id": "req_elective_upper_2",
+        "name": "ANTH Elective (200/300 level)",
+        "selectionRule": "exactly_one",
+        "credits": 3,
+        "eligibility": {
+          "type": "course_filter",
+          "rules": [
+            { "field": "department", "operator": "equals", "value": "ANTH" },
+            { "field": "level", "operator": "in", "value": [200, 300] }
+          ]
+        }
+      }
+    ]
+  }
+}

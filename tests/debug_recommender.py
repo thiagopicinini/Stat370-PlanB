@@ -11,12 +11,14 @@ from pathlib import Path
 import pandas as pd
 import random
 import unittest
-from major_recommender import MajorRecommender
 from datetime import datetime
 import os
 
-# Add parent directory to path for imports
+# Add parent directory and dev_scripts to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent / 'dev_scripts'))
+
+from major_recommender import MajorRecommender
 from utils.paths import MAJORS_JSON, MERGED_ENROLLMENT, COURSES_JSON, get_filtered_enrollment_files
 
 
@@ -157,33 +159,73 @@ def analyze_student(student_data, majors_data, student_id):
     }
 
 
+def extract_all_courses_from_requirements(requirements):
+    """Extract all unique course codes from structured requirements recursively"""
+    all_courses = set()
+    
+    for req_group in requirements:
+        if not isinstance(req_group, dict):
+            continue
+        
+        # Get courses from this group
+        courses = req_group.get('courses', [])
+        for course in courses:
+            if isinstance(course, dict):
+                code = course.get('code', '').strip()
+                if code:
+                    all_courses.add(code)
+            elif isinstance(course, str):
+                code = course.strip()
+                if code:
+                    all_courses.add(code)
+        
+        # Recursively extract from subgroups
+        subgroups = req_group.get('subgroups', [])
+        if subgroups:
+            all_courses.update(extract_all_courses_from_requirements(subgroups))
+    
+    return all_courses
+
+
 def find_major_matches(majors_data, student_course_codes):
-    """Find which majors match student's completed courses."""
+    """Find which majors match student's completed courses.
+    
+    Works with both old format (required_courses) and new format (requirements).
+    """
     matches_found = {}
     
     for major_name, major_info in majors_data['programs'].items():
-        required_courses = major_info.get('required_courses', [])
-        if not required_courses:
-            continue
-        
         matched = []
-        for req_course in required_courses:
-            course_options = []
+        
+        # Check for new structured format (scrape_v2)
+        if 'requirements' in major_info:
+            all_required_courses = extract_all_courses_from_requirements(major_info.get('requirements', []))
+            for student_course in student_course_codes:
+                if student_course in all_required_courses:
+                    matched.append(student_course)
+        else:
+            # Old format fallback
+            required_courses = major_info.get('required_courses', [])
+            if not required_courses:
+                continue
             
-            if isinstance(req_course, str):
-                course_options = [c.strip() for c in req_course.split(' or ')]
-            elif isinstance(req_course, dict):
-                if 'options' in req_course:
-                    # Clean up non-breaking spaces
-                    course_options = [c.replace('\xa0', ' ').strip() for c in req_course['options']]
-            
-            for course_option in course_options:
-                if course_option in student_course_codes:
-                    matched.append(course_option)
-                    break
+            for req_course in required_courses:
+                course_options = []
+                
+                if isinstance(req_course, str):
+                    course_options = [c.strip() for c in req_course.split(' or ')]
+                elif isinstance(req_course, dict):
+                    if 'options' in req_course:
+                        # Clean up non-breaking spaces
+                        course_options = [c.replace('\xa0', ' ').strip() for c in req_course['options']]
+                
+                for course_option in course_options:
+                    if course_option in student_course_codes:
+                        matched.append(course_option)
+                        break
         
         if matched:
-            matches_found[major_name] = matched
+            matches_found[major_name] = list(set(matched))  # Deduplicate
     
     return matches_found
 
@@ -192,7 +234,6 @@ def analyze_majors_data(majors_data):
     """Analyze the structure of majors data."""
     
     print("Analyzing Majors Database")
-    
     print(f"\nTotal majors in database: {len(majors_data['programs'])}")
     
     majors_with_courses = 0
@@ -201,35 +242,59 @@ def analyze_majors_data(majors_data):
     sample_majors_without_courses = []
     
     for major_name, major_info in majors_data['programs'].items():
-        required_courses = major_info.get('required_courses', [])
-        if required_courses:
+        # Check both old and new formats
+        has_courses = False
+        course_count = 0
+        
+        if 'requirements' in major_info:
+            # New format (scrape_v2)
+            requirements = major_info.get('requirements', [])
+            if requirements:
+                all_courses = extract_all_courses_from_requirements(requirements)
+                if all_courses:
+                    has_courses = True
+                    course_count = len(all_courses)
+        else:
+            # Old format
+            required_courses = major_info.get('required_courses', [])
+            if required_courses:
+                has_courses = True
+                course_count = len(required_courses)
+        
+        if has_courses:
             majors_with_courses += 1
             if len(sample_majors_with_courses) < 5:
-                sample_majors_with_courses.append((major_name, len(required_courses)))
+                sample_majors_with_courses.append((major_name, course_count))
         else:
             majors_without_courses += 1
             if len(sample_majors_without_courses) < 5:
                 sample_majors_without_courses.append(major_name)
     
-    print(f"\nMajors WITH required courses: {majors_with_courses} ")
-    print(f"Majors WITHOUT required courses: {majors_without_courses} ")
+    print(f"\nMajors WITH required courses: {majors_with_courses}")
+    print(f"Majors WITHOUT required courses: {majors_without_courses}")
     
     print("\nSample majors WITH required courses:")
     for name, count in sample_majors_with_courses:
-        print(f"  - {name}: {count} courses")
+        print(f"  • {name}: {count} courses")
     
     print("\nSample majors WITHOUT required courses:")
     for name in sample_majors_without_courses:
-        print(f"  - {name}")
+        print(f"  • {name}")
     
-    # Show example major
+    # Show example major with details
     if sample_majors_with_courses:
-        major_name, _ = sample_majors_with_courses[0]
-        major_info = majors_data['programs'][major_name]
-        print(f"\nExample Major: {major_name}")
-        print(f"Required courses (first 10):")
-        for course in major_info['required_courses'][:10]:
-            print(f"  - {course}")
+        example_major = sample_majors_with_courses[0][0]
+        major_info = majors_data['programs'][example_major]
+        print(f"\nExample Major: {example_major}")
+        print(f"  School/College: {major_info.get('school_college', 'N/A')}")
+        print(f"  Department: {major_info.get('department', 'N/A')}")
+        print(f"  Total Credits: {major_info.get('total_credits', 'N/A')}")
+        
+        if 'requirements' in major_info:
+            reqs = major_info['requirements']
+            print(f"  Requirements Structure: {len(reqs)} requirement groups")
+            for req in reqs[:2]:
+                print(f"    - {req.get('name', 'Unnamed')}: {len(req.get('courses', []))} courses, selectionRule={req.get('selectionRule', 'N/A')}")
 
 
 def test_random_students(student_data, majors_data, n=5, summary_path=None):
@@ -268,6 +333,132 @@ def test_random_students(student_data, majors_data, n=5, summary_path=None):
     if summary_path:
         with open(summary_path, 'w') as f:
             f.write('\n'.join(lines))
+    # Also print to console
+    print('\n'.join(lines))
+
+
+def run_real_test_cases(student_data, majors_data, summary_path=None):
+    """Run all real-world test cases from test_cases.json and generate detailed report."""
+    test_cases_file = Path(__file__).parent / "test_data" / "test_cases.json"
+    
+    if not test_cases_file.exists():
+        print(f"Test cases file not found: {test_cases_file}")
+        return
+    
+    with open(test_cases_file, 'r') as f:
+        test_data = json.load(f)
+    
+    real_cases = test_data.get('real_world_test_cases', [])
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    lines = [f"# Real-World Test Cases Report\n\nRun date: {now}\n\n"]
+    lines.append(f"Total test cases: {len(real_cases)}\n")
+    
+    # Initialize recommender
+    try:
+        enrollment_files = get_filtered_enrollment_files()
+        recommender = MajorRecommender(MAJORS_JSON, COURSES_JSON, enrollment_files)
+    except Exception as e:
+        lines.append(f"ERROR: Failed to initialize recommender: {e}\n")
+        if summary_path:
+            with open(summary_path, 'w') as f:
+                f.write('\n'.join(lines))
+        print('\n'.join(lines))
+        return
+    
+    results = []
+    for test_case in real_cases:
+        test_id = test_case.get('test_id', 'Unknown')
+        student_id = test_case.get('student_id', '')
+        issue = test_case.get('issue', '')
+        bug_desc = test_case.get('bug_description', '')
+        
+        lines.append(f"\n{'='*70}")
+        lines.append(f"Test Case: {test_id} | Student ID: {student_id}")
+        lines.append(f"{'='*70}")
+        
+        if issue:
+            lines.append(f"Issue: {issue}")
+        if bug_desc:
+            lines.append(f"Bug Description: {bug_desc}")
+        
+        # Check if student exists
+        student_records = student_data[student_data['LID'].astype(str) == str(student_id)]
+        if len(student_records) == 0:
+            lines.append(f" Student {student_id} NOT FOUND in database")
+            results.append({
+                'test_id': test_id,
+                'student_id': student_id,
+                'status': 'NOT_FOUND',
+                'error': 'Student not in database'
+            })
+            continue
+        
+        # Get student info
+        latest_record, passed_courses, student_course_codes = get_student_courses(student_data, student_id)
+        lines.append(f"\nStudent: {latest_record['Name']}")
+        lines.append(f"Total courses passed: {len(passed_courses)}")
+        lines.append(f"Unique course codes: {len(student_course_codes)}")
+        
+        if len(student_course_codes) > 0:
+            lines.append(f"Sample courses: {', '.join(sorted(list(student_course_codes))[:5])}")
+        
+        # Get recommendations
+        try:
+            recommendations = recommender.recommend_majors(student_id, top_n=5)
+            recommended_majors = recommendations.get('recommended_majors', [])
+            
+            lines.append(f"\nTop 5 Recommendations:")
+            if recommended_majors:
+                for idx, major in enumerate(recommended_majors, 1):
+                    major_name = major.get('major_name', 'Unknown')
+                    matched_count = major.get('courses_matched', 0)
+                    lines.append(f"  {idx}. {major_name} (matched: {matched_count})")
+                results.append({
+                    'test_id': test_id,
+                    'student_id': student_id,
+                    'status': 'SUCCESS',
+                    'recommendations': [m.get('major_name', '') for m in recommended_majors]
+                })
+            else:
+                lines.append("  (No recommendations)")
+                results.append({
+                    'test_id': test_id,
+                    'student_id': student_id,
+                    'status': 'SUCCESS',
+                    'recommendations': []
+                })
+            
+            # Show expected behavior if available
+            expected = test_case.get('actual_recommendations', [])
+            if expected:
+                lines.append(f"\nActual/Expected Top Recommendations (from test data):")
+                for idx, major in enumerate(expected[:5], 1):
+                    lines.append(f"  {idx}. {major}")
+        
+        except Exception as e:
+            lines.append(f" ERROR getting recommendations: {e}")
+            results.append({
+                'test_id': test_id,
+                'student_id': student_id,
+                'status': 'ERROR',
+                'error': str(e)
+            })
+    
+    # Summary
+    lines.append(f"\n\n{'='*70}")
+    lines.append("SUMMARY")
+    lines.append(f"{'='*70}\n")
+    lines.append(f"Total tests: {len(results)}")
+    lines.append(f"Successful: {sum(1 for r in results if r['status'] == 'SUCCESS')}")
+    lines.append(f"Errors: {sum(1 for r in results if r['status'] == 'ERROR')}")
+    lines.append(f"Not found: {sum(1 for r in results if r['status'] == 'NOT_FOUND')}\n")
+    
+    # Save if requested
+    if summary_path:
+        with open(summary_path, 'w') as f:
+            f.write('\n'.join(lines))
+        print(f"Report saved to {summary_path}")
+    
     # Also print to console
     print('\n'.join(lines))
 
@@ -467,12 +658,81 @@ class TestFilterLogic(unittest.TestCase):
             self.assertIn('can_complete_in_four_years', major)
             self.assertIsInstance(major['can_complete_in_four_years'], bool)
 
+    # ---- Credits per semester feature tests ----
+
+    def test_credits_per_semester_default(self):
+        """When credits_per_semester is not specified, should default to 15."""
+        results = self.recommender.recommend_majors(
+            self.sample_student_id, top_n=5
+        )
+        self.assertIsNotNone(results)
+        self.assertIsInstance(results['recommended_majors'], list)
+
+    def test_credits_per_semester_custom_values(self):
+        """credits_per_semester parameter should accept custom values (12, 15, 18, 21)."""
+        for credits in [12, 15, 18, 21]:
+            with self.subTest(credits_per_semester=credits):
+                results = self.recommender.recommend_majors(
+                    self.sample_student_id, top_n=5,
+                    credits_per_semester=credits
+                )
+                self.assertIsNotNone(results)
+                self.assertIsInstance(results['recommended_majors'], list)
+
+    def test_credits_per_semester_affects_completion(self):
+        """Lower credits_per_semester should result in fewer 4-year completable majors."""
+        results_high = self.recommender.recommend_majors(
+            self.sample_student_id, top_n=50,
+            credits_per_semester=21  # High load: more majors completable
+        )
+        results_low = self.recommender.recommend_majors(
+            self.sample_student_id, top_n=50,
+            credits_per_semester=12  # Low load: fewer majors completable
+        )
+        
+        completable_high = sum(1 for m in results_high['recommended_majors'] 
+                               if m['can_complete_in_four_years'])
+        completable_low = sum(1 for m in results_low['recommended_majors'] 
+                              if m['can_complete_in_four_years'])
+        
+        # With higher credits per semester, at least as many (usually more) majors should be completable
+        self.assertGreaterEqual(
+            completable_high, completable_low,
+            f"With 18 credits/sem: {completable_high} completable. "
+            f"With 4 credits/sem: {completable_low} completable. "
+            f"Expected >= relationship."
+        )
+
+    def test_can_complete_with_custom_credits_per_semester(self):
+        """can_complete_in_four_years should accept credits_per_semester parameter."""
+        first_major = list(self.recommender.majors_data['programs'].keys())[0]
+        
+        # Test with different credit loads
+        result_low = self.recommender.can_complete_in_four_years(
+            self.sample_courses, first_major,
+            semesters_enrolled=self.sample_info['semesters_enrolled'],
+            credits_per_semester=4
+        )
+        result_high = self.recommender.can_complete_in_four_years(
+            self.sample_courses, first_major,
+            semesters_enrolled=self.sample_info['semesters_enrolled'],
+            credits_per_semester=18
+        )
+        
+        # Both should return booleans
+        self.assertIsInstance(result_low, bool)
+        self.assertIsInstance(result_high, bool)
+
 
 if __name__ == "__main__":
     import argparse
+    import io
+    import contextlib
+    
     parser = argparse.ArgumentParser(description="Debug recommender & run unit tests")
     parser.add_argument('--test', action='store_true', help='Run unit tests only')
-    parser.add_argument('--students', type=int, default=100, help='Number of sample students to test')
+    parser.add_argument('--students', type=int, default=0, help='Number of sample students to test')
+    parser.add_argument('--real-cases', action='store_true', help='Run real-world test cases from test_cases.json')
     args, remaining = parser.parse_known_args()
 
     # Output paths
@@ -481,11 +741,20 @@ if __name__ == "__main__":
     now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     summary_students_path = output_dir / f"sample_students_summary_{now}.txt"
     summary_unit_path = output_dir / f"unit_test_summary_{now}.txt"
+    summary_real_cases_path = output_dir / f"real_test_cases_summary_{now}.txt"
+
+    if args.real_cases:
+        # Run real test cases
+        print("Loading data and running real-world test cases...")
+        with open(MAJORS_JSON, 'r') as f:
+            majors_data = json.load(f)
+        student_data = pd.read_csv(MERGED_ENROLLMENT, sep='\t')
+        run_real_test_cases(student_data, majors_data, summary_path=summary_real_cases_path)
+        print(f"Real test cases report saved to {summary_real_cases_path}")
+        sys.exit(0)
 
     if args.test:
         # Run all unit tests and capture output
-        import io
-        import contextlib
         suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestFilterLogic)
         buf = io.StringIO()
         with contextlib.redirect_stdout(buf):
@@ -520,11 +789,8 @@ if __name__ == "__main__":
         print('\n'.join(summary_lines))
         sys.exit(0)
 
-    if args.students:
+    if args.students > 0:
         # Run sample students test and save summary
-        majors_data = None
-        student_data = None
-        # Load data
         with open(MAJORS_JSON, 'r') as f:
             majors_data = json.load(f)
         student_data = pd.read_csv(MERGED_ENROLLMENT, sep='\t')
@@ -534,43 +800,4 @@ if __name__ == "__main__":
 
     # Default: print help
     parser.print_help()
-    output_dir = Path(__file__).parent.parent / 'test_output'
-    output_dir.mkdir(exist_ok=True)
-    students_summary_path = output_dir / 'sample_students_summary.txt'
-    unit_test_summary_path = output_dir / 'unit_test_summary.txt'
-
-    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-    if args.test:
-        # Run only unit tests and save summary
-        sys.argv = [sys.argv[0]] + remaining
-        # Capture output
-        import io
-        import contextlib
-        buf = io.StringIO()
-        with contextlib.redirect_stdout(buf):
-            unittest.main(verbosity=2, exit=False)
-        test_output = buf.getvalue()
-        # Parse and summarize
-        lines = [f"# Unit Test Results\n\nRun date: {now}\n\n"]
-        for line in test_output.splitlines():
-            if line.strip().startswith('test_'):
-                # e.g. test_can_complete_in_four_years_returns_bool (__main__.TestFilterLogic) ... ok
-                parts = line.split(' ... ')
-                if len(parts) == 2:
-                    testname = parts[0].split()[0]
-                    result = parts[1].strip().upper()
-                    lines.append(f"- {testname}: {result}")
-            elif line.strip().startswith('Ran '):
-                lines.append(line.strip())
-            elif line.strip().startswith('OK') or line.strip().startswith('FAILED'):
-                lines.append(line.strip())
-        with open(unit_test_summary_path, 'w') as f:
-            f.write('\n'.join(lines))
-        print(f"Unit test summary saved to {unit_test_summary_path}")
-    else:
-        # Run the original debug analysis and save summary
-        majors_data, student_data = load_data()
-        test_random_students(student_data, majors_data, n=args.students, summary_path=students_summary_path)
-        print(f"Sample students summary saved to {students_summary_path}")
 

@@ -1,0 +1,282 @@
+{
+  "synthetic_test_cases": [
+    {
+      "test_id": "T001",
+      "student_id": "synthetic_001",
+      "year_level": "Junior",
+      "current_major": "Computer Science (BS)",
+      "courses": [
+        "MATH 161",
+        "MATH 162",
+        "MATH 212",
+        "STAT 203",
+        "STAT 303",
+        "STAT 304",
+        "STAT 305"
+      ],
+      "expected_top_5": [
+        "Statistics (BS)",
+        "Mathematics (BS)",
+        "Data Science (BS)",
+        "Computer Science (BS)",
+        "Economics (BA)"
+      ],
+      "manual_reasoning": [
+        "Student matches multiple core Statistics requirements directly.",
+        "Strong calculus and statistics overlap makes Mathematics a strong secondary fit.",
+        "Quantitative majors should dominate the recommendation list."
+      ],
+      "expected_behavior": "Strong quantitative recommendations",
+      "priority": "High"
+    },
+    {
+      "test_id": "T002",
+      "student_id": "synthetic_002",
+      "year_level": "Sophomore",
+      "current_major": "Undeclared",
+      "courses": [
+        "MATH 161",
+        "MATH 162",
+        "MATH 212",
+        "MATH 263",
+        "STAT 203"
+      ],
+      "expected_top_5": [
+        "Mathematics (BS)",
+        "Statistics (BS)",
+        "Data Science (BS)",
+        "Computer Science (BS)",
+        "Economics (BA)"
+      ],
+      "manual_reasoning": [
+        "Student is more math-heavy than statistics-heavy.",
+        "Mathematics should rank above Statistics because of broader direct math sequence completion.",
+        "Statistics still belongs near the top because of STAT 203 overlap."
+      ],
+      "expected_behavior": "Math-first quantitative recommendations",
+      "priority": "High"
+    },
+    {
+      "test_id": "T003",
+      "student_id": "synthetic_003",
+      "year_level": "Junior",
+      "current_major": "Accounting (BBA)",
+      "courses": [
+        "ACCT 201",
+        "ACCT 202",
+        "ECON 201",
+        "ECON 202",
+        "FINC 301",
+        "INFS 247",
+        "MGMT 201",
+        "MARK 201"
+      ],
+      "expected_top_5": [
+        "Accounting (BBA)",
+        "Finance (BBA)",
+        "Economics (BBA)",
+        "Accounting and Analytics (BBA)",
+        "Entrepreneurship (BBA)"
+      ],
+      "manual_reasoning": [
+        "Student has strong overlap with core Accounting and broader Quinlan business requirements.",
+        "Finance and Economics should rank highly due to ECON and FINC overlap.",
+        "Accounting should clearly rank first."
+      ],
+      "expected_behavior": "Strong business recommendations centered on Accounting",
+      "priority": "High"
+    },
+    {
+      "test_id": "T004",
+      "student_id": "synthetic_004",
+      "year_level": "Sophomore",
+      "current_major": "Undeclared",
+      "courses": [
+        "ACCT 201",
+        "ECON 201",
+        "ECON 202",
+        "STAT 103",
+        "INFS 247",
+        "MATH 118"
+      ],
+      "expected_top_5": [
+        "Accounting (BBA)",
+        "Economics (BBA)",
+        "Finance (BBA)",
+        "Entrepreneurship (BBA)",
+        "Accounting and Analytics (BBA)"
+      ],
+      "manual_reasoning": [
+        "Student has mixed business and quantitative coursework.",
+        "Business majors should rank above pure quantitative majors because of ACCT, ECON, and INFS overlap.",
+        "This is a useful hybrid case for testing cross-domain ranking."
+      ],
+      "expected_behavior": "Mixed business-quantitative recommendations",
+      "priority": "High"
+    },
+    {
+      "test_id": "T005",
+      "student_id": "synthetic_005",
+      "year_level": "Freshman",
+      "current_major": "Undeclared",
+      "courses": [
+        "UNIV 101",
+        "UCWR 110"
+      ],
+      "expected_top_5": [],
+      "manual_reasoning": [
+        "Only introductory core courses are present.",
+        "There is not enough major-specific evidence for meaningful recommendations.",
+        "If the system excludes core intro classes correctly, it should return no useful majors."
+      ],
+      "expected_behavior": "No meaningful recommendations",
+      "priority": "High"
+    },
+    {
+      "test_id": "T006",
+      "student_id": "synthetic_006",
+      "year_level": "Sophomore",
+      "current_major": "Biology (BS)",
+      "courses": [
+        "BIOL 101",
+        "BIOL 102",
+        "CHEM 160",
+        "CHEM 161",
+        "MATH 161"
+      ],
+      "expected_top_5": [
+        "Biology (BS)",
+        "Biochemistry (BS)",
+        "Bioinformatics (BS)",
+        "Environmental Science (BS)",
+        "Biophysics (BS)"
+      ],
+      "manual_reasoning": [
+        "Student has clear life science foundation through BIOL and CHEM.",
+        "Biology should rank first, with Biochemistry and Bioinformatics close behind.",
+        "Recommendations should stay in the life science cluster."
+      ],
+      "expected_behavior": "Strong life science recommendations",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "T007",
+      "student_id": "synthetic_007",
+      "year_level": "Freshman",
+      "current_major": "Computer Science (BS)",
+      "courses": [
+        "COMP 141",
+        "COMP 170",
+        "MATH 161"
+      ],
+      "expected_top_5": [
+        "Computer Science (BS)",
+        "Data Science (BS)",
+        "Cybersecurity (BS)",
+        "Mathematics (BS)",
+        "Statistics (BS)"
+      ],
+      "manual_reasoning": [
+        "Student has an early computing foundation but still limited coursework overall.",
+        "Computer Science should rank first, but recommendations should remain somewhat tentative.",
+        "This is a good case for checking whether the system overcommits on too little data."
+      ],
+      "expected_behavior": "Early-stage computing recommendations",
+      "priority": "High"
+    },
+    {
+      "test_id": "T008",
+      "student_id": "synthetic_008",
+      "year_level": "Senior",
+      "current_major": "Undeclared",
+      "courses": [],
+      "expected_top_5": [],
+      "manual_reasoning": [
+        "No passed courses are available.",
+        "System should return no meaningful recommendations.",
+        "Useful sanity check for empty or invalid transcript behavior."
+      ],
+      "expected_behavior": "No recommendations",
+      "priority": "High"
+    }
+  ],
+  "real_world_test_cases": [
+    {
+      "test_id": "REAL_001",
+      "student_id": "7988793",
+      "issue": "Criminal Justice (current major) showing as #2, should not appear in top 5",
+      "actual_recommendations": [
+        "Sociology",
+        "Classical Civilization",
+        "Environmental Economics & Sustainability: Governance",
+        "Environmental Economics & Sustainability: Management",
+        "Environmental Policy"
+      ],
+      "bug_description": "The recommender shows Criminal Justice as #2 in recommendations when it should not appear. This indicates a logic error in course matching or filtering.",
+      "note": "Likely issue: courses from Criminal Justice major are matching incorrectly; may be due to elective groups being double-counted"
+    },
+    {
+      "test_id": "REAL_002",
+      "student_id": "7954102",
+      "issue": "ANTH 100 matching multiple times for International Business",
+      "actual_recommendations": [
+        "International Business",
+        "Accounting",
+        "Accounting and Analytics",
+        "Entrepreneurship",
+        "Human Resource Management"
+      ],
+      "bug_description": "ANTH 100 appears to be counted twice when matching International Business requirements. This suggests elective/option groups are not being properly deduplicated.",
+      "expected_behavior": "Each course should only count once per major, even if it appears in multiple requirement groups"
+    },
+    {
+      "test_id": "REAL_003",
+      "student_id": "7277747",
+      "actual_recommendations": [
+        "Film and Digital Media: Film and Media Production Track",
+        "Film and Digital Media: International Programming Track",
+        "Advocacy and Social Change",
+        "Communication Studies",
+        "Advertising and Public Relations"
+      ],
+      "bug_description": "Test case for film/media/communications domain. Check if recommendations are reasonable given the student's coursework."
+    },
+    {
+      "test_id": "REAL_004",
+      "student_id": "7984083",
+      "issue": "Only 1 matched course shown for Accounting and Analytics despite student taking 17/28 ACCT courses",
+      "actual_recommendations": [
+        "Accounting and Analytics",
+        "U.S./Europe Double Degree",
+        "Economics",
+        "Finance",
+        "International Business"
+      ],
+      "bug_description": "Major matching is severely undercounting course matches. Student took 17 out of 28 accounting courses but only 1 match is recorded. This indicates the new structured requirements format is not properly extracting course codes from elective groups.",
+      "additional_issue": "Duplicate programs detected: Two 'U.S./Europe Double Degree' entries in majors_structured.json"
+    },
+    {
+      "test_id": "REAL_005",
+      "student_id": "7925323",
+      "actual_recommendations": [
+        "Advocacy and Social Change",
+        "Communication Studies",
+        "Drawing, Painting and Printmaking",
+        "Environmental Policy",
+        "Human Services"
+      ],
+      "bug_description": "Test case for humanities/social sciences domain recommendations."
+    }
+  ],
+  "test_metadata": {
+    "description": "Test cases for the Major Recommender system. Includes both synthetic cases for unit testing and real-world cases documenting known issues.",
+    "created_date": "2026-04-12",
+    "version": "2.0",
+    "notes": [
+      "Synthetic cases T001-T008 are designed to test specific matching scenarios",
+      "Real-world cases document actual students and known issues with the recommender",
+      "Key issue area: Courses in elective/option groups are being double-counted or under-counted",
+      "Need to ensure each course only counts once per major when calculating matches"
+    ]
+  }
+}

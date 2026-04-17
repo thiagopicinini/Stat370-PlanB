@@ -371,10 +371,20 @@
         </div>
 
         <!-- Filter bar -->
-        <form class="filter-bar" method="GET" action="/recommendations">
+        <form class="filter-bar" method="GET" action="/recommendations" id="filter-form">
+            <div class="filter-group">
+                <label>Credits Per Semester</label>
+                <select name="credits_per_semester" class="filter-select">
+                    <option value="18" {% if not filters.credits_per_semester or filters.credits_per_semester == '18' %}selected{% endif %}>Default: 18 Credits</option>
+                    <option value="12" {% if filters.credits_per_semester == '12' %}selected{% endif %}>12 Credits</option>
+                    <option value="15" {% if filters.credits_per_semester == '15' %}selected{% endif %}>15 Credits</option>
+                    <option value="21" {% if filters.credits_per_semester == '21' %}selected{% endif %}>21 Credits</option>
+                </select>
+            </div>
+
             <div class="filter-group">
                 <label>Completable in 4 Years</label>
-                <select name="four_year">
+                <select name="four_year" class="filter-select">
                     <option value="" {% if filters.four_year == '' %}selected{% endif %}>Any</option>
                     <option value="yes" {% if filters.four_year == 'yes' %}selected{% endif %}>Yes</option>
                     <option value="no" {% if filters.four_year == 'no' %}selected{% endif %}>No</option>
@@ -383,7 +393,7 @@
 
             <div class="filter-group">
                 <label>Outside Current Department</label>
-                <select name="outside_dept">
+                <select name="outside_dept" class="filter-select">
                     <option value="" {% if filters.outside_dept == '' %}selected{% endif %}>Any</option>
                     <option value="yes" {% if filters.outside_dept == 'yes' %}selected{% endif %}>Yes</option>
                     <option value="no" {% if filters.outside_dept == 'no' %}selected{% endif %}>No</option>
@@ -392,7 +402,7 @@
 
             <div class="filter-group">
                 <label>Outside Current School/College</label>
-                <select name="outside_school">
+                <select name="outside_school" class="filter-select">
                     <option value="" {% if filters.outside_school == '' %}selected{% endif %}>Any</option>
                     <option value="yes" {% if filters.outside_school == 'yes' %}selected{% endif %}>Yes</option>
                     <option value="no" {% if filters.outside_school == 'no' %}selected{% endif %}>No</option>
@@ -401,6 +411,15 @@
 
             <button type="submit" class="refresh-btn">Refresh Results</button>
         </form>
+        
+        <script>
+            // Auto-submit form when any filter changes
+            document.querySelectorAll('.filter-select').forEach(select => {
+                select.addEventListener('change', function() {
+                    document.getElementById('filter-form').submit();
+                });
+            });
+        </script>
         
         <div class="recommendations-section">
             <h2 class="section-title">Top 5 Alternative Major Recommendations</h2>
@@ -412,7 +431,7 @@
                     <div class="major-header">
                         <div class="major-title">
                             <span class="major-rank">{{ loop.index }}</span>
-                            <h3 style="display: inline;">{{ major.major_name }}</h3>
+                            <h3 style="display: inline;">{{ major.major_name.split('(')[0].strip() }}</h3>
                             {% if major.can_complete_in_four_years %}
                             <span class="four-year-badge yes">4-Year ✓</span>
                             {% else %}

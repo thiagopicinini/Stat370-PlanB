@@ -6,11 +6,12 @@ major recommendations based on their completed coursework.
 """
 import sys
 from pathlib import Path
-from flask import Flask, render_template, request, redirect, url_for, session
-from major_recommender import MajorRecommender, authenticate_student
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from flask import Flask, render_template, request, redirect, url_for, session, make_response
+from dev_scripts.major_recommender import MajorRecommender, authenticate_student
 from utils.paths import MAJORS_JSON, COURSES_JSON, get_filtered_enrollment_files
 
 app = Flask(__name__)
@@ -62,26 +63,45 @@ def recommendations():
     if not student_id:
         return redirect(url_for('index'))
     
-    # Read filter values from request.args
+    # Read filter values from request.args - explicitly handle empty strings
     filters = {
-        'four_year': request.args.get('four_year', ''),
-        'outside_dept': request.args.get('outside_dept', ''),
-        'outside_school': request.args.get('outside_school', '')
+        'credits_per_semester': request.args.get('credits_per_semester', '').strip(),
+        'four_year': request.args.get('four_year', '').strip(),
+        'outside_dept': request.args.get('outside_dept', '').strip(),
+        'outside_school': request.args.get('outside_school', '').strip()
     }
+    
+    # Convert credits_per_semester to int, default to 18
+    try:
+        credits_per_semester = int(filters['credits_per_semester']) if filters['credits_per_semester'] else 18
+    except (ValueError, TypeError):
+        credits_per_semester = 18
+    
+    # Convert empty strings to None for optional filters
+    four_year_filter = filters['four_year'] if filters['four_year'] else None
+    outside_dept_filter = filters['outside_dept'] if filters['outside_dept'] else None
+    outside_school_filter = filters['outside_school'] if filters['outside_school'] else None
     
     # Get recommendations with filters
     results = recommender.recommend_majors(
         student_id,
         top_n=5,
-        filter_four_year=filters['four_year'] if filters['four_year'] else None,
-        filter_outside_dept=filters['outside_dept'] if filters['outside_dept'] else None,
-        filter_outside_school=filters['outside_school'] if filters['outside_school'] else None
+        credits_per_semester=credits_per_semester,
+        filter_four_year=four_year_filter,
+        filter_outside_dept=outside_dept_filter,
+        filter_outside_school=outside_school_filter
     )
     
     if not results:
         return render_template('login.html', error='Unable to load student data')
     
-    return render_template('recommendations.html', results=results, filters=filters)
+    # Create response with cache-busting headers to ensure fresh data
+    response = make_response(render_template('recommendations.html', results=results, filters=filters))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    
+    return response
 
 
 @app.route('/logout')

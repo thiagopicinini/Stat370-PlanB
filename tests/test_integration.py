@@ -20,6 +20,15 @@ HOW DO THE 30 CONTROL STUDENTS WORK?
     should be. If the recommender gives a different answer, the test fails
     and we know something is broken.
 
+FLASK APP INTEGRATION:
+    This test suite also includes integration tests for the Flask web application,
+    using real production enrollment data. Tests verify that:
+        - Authentication works correctly
+        - Current major is properly extracted (handles major,minor format)
+        - Recommendations are generated correctly
+        - All filter options work as expected
+        - Flask app can be initialized with recommender
+
 WHAT IS THE "recommender" PARAMETER?
     It's a fixture defined in conftest.py -- a MajorRecommender instance
     loaded with our fake test data. pytest automatically injects it
@@ -27,6 +36,12 @@ WHAT IS THE "recommender" PARAMETER?
 """
 
 import pytest
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from utils.paths import MAJORS_JSON, COURSES_JSON, get_filtered_enrollment_files
+from dev_scripts.major_recommender import MajorRecommender, authenticate_student
 
 
 # =====================================================================
@@ -468,3 +483,240 @@ class TestErrorHandling:
         r = recommender.recommend_majors("S001", top_n=1000)
         assert r is not None
         assert len(r["recommended_majors"]) <= 1000
+
+
+# =====================================================================
+# 8. Flask App Integration Tests (Real Production Data)
+# =====================================================================
+# These tests verify compatibility with the Flask web application
+# using actual student enrollment data from production.
+
+class TestFlaskAppIntegration:
+    """Test Flask app compatibility with recommender using production data.
+    
+    Note: These tests use a separate fixture (flask_recommender) that loads
+    production enrollment data, not the test fixture which uses synthetic S001-S030 data.
+    """
+    
+    @pytest.fixture(scope="class")
+    def flask_recommender(self):
+        """Initialize a recommender with production enrollment data."""
+        enrollment_files = [str(f) for f in get_filtered_enrollment_files()]
+        return MajorRecommender(MAJORS_JSON, COURSES_JSON, enrollment_files)
+    
+    # ---- Authentication Tests ----
+    
+    def test_authentication_correct_password(self):
+        """Test that correct password authenticates successfully."""
+        result = authenticate_student('7988793', '1234')
+        assert result == True
+
+    def test_authentication_wrong_password(self):
+        """Test that wrong password fails authentication."""
+        result = authenticate_student('7988793', 'wrong')
+        assert result == False
+
+    def test_authentication_empty_password(self):
+        """Test that empty password fails."""
+        result = authenticate_student('7988793', '')
+        assert result == False
+
+    # ---- Student Info Tests ----
+    
+    def test_student_info_retrieval(self, flask_recommender):
+        """Test that student info is correctly retrieved."""
+        student_info = flask_recommender.get_student_info('7988793')
+        assert student_info is not None
+        assert 'name' in student_info
+        assert 'current_major' in student_info
+        assert 'class_standing' in student_info
+
+    def test_current_major_extraction(self, flask_recommender):
+        """Test that major is extracted without minor (MAJOR-DEGREE,MINOR-MINR -> MAJOR-DEGREE)."""
+        student_info = flask_recommender.get_student_info('7988793')
+        # Should extract only CJCR-BS from CJCR-BS,SOCL-MINR
+        assert student_info['current_major'] == 'CJCR-BS'
+        assert 'MINR' not in student_info['current_major']
+
+    def test_current_major_resolution(self, flask_recommender):
+        """Test that shorthand major is resolved to full name and department."""
+        student_info = flask_recommender.get_student_info('7988793')
+        assert student_info['current_department'] != 'Unknown'
+        assert student_info['current_school'] != 'Unknown'
+
+    def test_student_info_invalid_id(self, flask_recommender):
+        """Test that invalid student ID returns None."""
+        student_info = flask_recommender.get_student_info('DOESNOTEXIST')
+        assert student_info is None
+
+    # ---- Recommendation Tests ----
+    
+    def test_recommendations_without_filters(self, flask_recommender):
+        """Test that recommendations are generated without filters."""
+        results = flask_recommender.recommend_majors('7988793', top_n=5)
+        assert results is not None
+        assert 'recommended_majors' in results
+        assert 'student_info' in results
+        assert len(results['recommended_majors']) <= 5
+
+    def test_current_major_filtered_from_results(self, flask_recommender):
+        """Test that current major is filtered from recommendations (REAL_001 fix)."""
+        results = flask_recommender.recommend_majors('7988793', top_n=5)
+        
+        # Criminal Justice should NOT appear in recommendations
+        current_major_in_results = any(
+            major['major_name'].lower() == 'criminal justice and criminology (bs)'
+            for major in results['recommended_majors']
+        )
+        assert not current_major_in_results, \
+            "Current major (Criminal Justice) should be filtered from recommendations"
+
+    def test_recommendations_structure(self, flask_recommender):
+        """Test that each recommendation has required fields."""
+        results = flask_recommender.recommend_majors('7988793', top_n=5)
+        
+        for major in results['recommended_majors']:
+            assert 'major_name' in major
+            assert 'degree_type' in major
+            assert 'school' in major
+            assert 'department' in major
+            assert 'credits_earned' in major
+            assert 'courses_matched' in major
+            assert 'total_required_courses' in major
+            assert 'completion_percentage' in major
+
+    def test_recommendations_sorted_by_match_quality(self, flask_recommender):
+        """Test that recommendations are sorted by match quality."""
+        results = flask_recommender.recommend_majors('7988793', top_n=5)
+        
+        if len(results['recommended_majors']) > 1:
+            # Each major should have courses_matched >= next major's courses_matched
+            for i in range(len(results['recommended_majors']) - 1):
+                current = results['recommended_majors'][i]['courses_matched']
+                next_major = results['recommended_majors'][i + 1]['courses_matched']
+                assert current >= next_major, \
+                    f"Results should be sorted by courses_matched (descending)"
+
+    # ---- Filter Tests ----
+    
+    def test_filter_credits_per_semester(self, flask_recommender):
+        """Test credits_per_semester filter parameter."""
+        results = flask_recommender.recommend_majors(
+            '7988793',
+            top_n=5,
+            credits_per_semester=12
+        )
+        assert results is not None
+        assert len(results['recommended_majors']) <= 5
+
+    def test_filter_outside_dept(self, flask_recommender):
+        """Test filter_outside_dept parameter."""
+        student_info = flask_recommender.get_student_info('7988793')
+        current_dept = student_info['current_department']
+        
+        results = flask_recommender.recommend_majors(
+            '7988793',
+            top_n=5,
+            filter_outside_dept=True
+        )
+        
+        # All results should be from different department
+        for major in results['recommended_majors']:
+            assert major['department'].lower() != current_dept.lower()
+
+    def test_filter_outside_school(self, flask_recommender):
+        """Test filter_outside_school parameter works without error."""
+        results = flask_recommender.recommend_majors(
+            '7954102',
+            top_n=50,
+            filter_outside_school=True
+        )
+        
+        # Test passes if filter runs without error and returns valid results
+        assert results is not None
+        assert 'recommended_majors' in results
+        # Filter may result in fewer recommendations or same if all are in same school
+        assert isinstance(results['recommended_majors'], list)
+
+    def test_combined_filters(self, flask_recommender):
+        """Test that multiple filters work together."""
+        results_all = flask_recommender.recommend_majors('7988793', top_n=50)
+        results_filtered = flask_recommender.recommend_majors(
+            '7988793',
+            top_n=50,
+            filter_outside_dept=True,
+            filter_outside_school=True
+        )
+        
+        # More restrictive filters should yield fewer or equal results
+        assert len(results_filtered['recommended_majors']) <= len(results_all['recommended_majors'])
+
+    # ---- Real-World Test Cases ----
+    
+    def test_real_001_student_7988793_cjc(self, flask_recommender):
+        """REAL_001: Criminal Justice major - verify current major filtering works."""
+        student_info = flask_recommender.get_student_info('7988793')
+        assert student_info['current_major'] == 'CJCR-BS'
+        
+        results = flask_recommender.recommend_majors('7988793', top_n=5)
+        names = [m['major_name'] for m in results['recommended_majors']]
+        
+        # Criminal Justice should NOT appear
+        assert 'Criminal Justice and Criminology (BS)' not in names
+        
+        # But other majors should appear
+        assert len(names) > 0
+
+    def test_real_002_student_7954102_business(self, flask_recommender):
+        """REAL_002: Business major - verify good recommendations."""
+        results = flask_recommender.recommend_majors('7954102', top_n=5)
+        names = [m['major_name'] for m in results['recommended_majors']]
+        
+        # International Business should be in top recommendations
+        assert 'International Business (BBA)' in names
+
+    def test_real_003_student_7277747_communications(self, flask_recommender):
+        """REAL_003: Communications major - verify recommendations are reasonable."""
+        results = flask_recommender.recommend_majors('7277747', top_n=5)
+        assert results is not None
+        assert len(results['recommended_majors']) > 0
+
+    def test_real_004_student_7984083_accounting(self, flask_recommender):
+        """REAL_004: Accounting major - verify strong match."""
+        results = flask_recommender.recommend_majors('7984083', top_n=5)
+        names = [m['major_name'] for m in results['recommended_majors']]
+        
+        # Accounting and Analytics should be top recommendation
+        assert 'Accounting and Analytics (BBA)' in names
+
+    def test_real_005_student_7925323_humanities(self, flask_recommender):
+        """REAL_005: Humanities major - verify reasonable recommendations."""
+        results = flask_recommender.recommend_majors('7925323', top_n=5)
+        assert results is not None
+        assert len(results['recommended_majors']) > 0
+
+    # ---- Flask App Import Tests ----
+    
+    def test_flask_app_imports(self):
+        """Test that Flask app can be imported successfully."""
+        try:
+            from dev_scripts.planb import app, recommender
+            assert app is not None
+            assert recommender is not None
+        except ImportError as e:
+            pytest.fail(f"Flask app import failed: {e}")
+
+    def test_flask_app_routes_exist(self):
+        """Test that Flask app has all required routes."""
+        from dev_scripts.planb import app
+        routes = [rule.rule for rule in app.url_map.iter_rules()]
+        
+        required_routes = ['/', '/login', '/logout', '/recommendations']
+        for route in required_routes:
+            assert route in routes, f"Missing route: {route}"
+
+    def test_flask_app_secret_key_set(self):
+        """Test that Flask app has secret key configured."""
+        from dev_scripts.planb import app
+        assert len(app.secret_key) > 0
+
