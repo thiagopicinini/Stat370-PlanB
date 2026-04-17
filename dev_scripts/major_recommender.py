@@ -479,8 +479,12 @@ class MajorRecommender:
         
         # Calculate match for all majors
         major_matches = []
+        seen_majors = set()  # Track majors we've already added to avoid duplicates
         
         for major_name in self.majors_data.get('programs', {}).keys():
+            # Skip if we've already added this major
+            if major_name.lower() in seen_majors:
+                continue
             match_info = self.calculate_major_match(student_courses, major_name)
             
             # Only include majors where student has matched at least one course
@@ -563,6 +567,7 @@ class MajorRecommender:
                     'is_current_major': is_current_major,
                     'can_complete_in_four_years': completable
                 })
+                seen_majors.add(major_name.lower())  # Mark this major as seen
         
         # Sort by courses matched (descending), then credits earned, but filter out current major
         major_matches = [m for m in major_matches if not m['is_current_major']]
