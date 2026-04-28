@@ -1,6 +1,6 @@
 ---
 title: "Consulting Final Report"
-author: "Oscar Sanchez Huezca, Thiago Picinini, Krish Ghandi"
+author: "Oscar Sanchez Huezca, Thiago Picinini, Krish Gandhi"
 date: "2026-04-28"
 output: pdf_document
 ---
