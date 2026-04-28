@@ -1,39 +1,131 @@
 """
-Scrape bachelor's degree program requirements from Loyola catalog into structured JSON format.
-
-This script extracts all bachelor's degree programs from the Loyola University
-catalog and formats them with proper selection rules (exactly_one, at_least_one,
-at_most_one, nested_group, etc.) and dynamic course filtering.
+Edited scraper for Loyola University Chicago undergraduate catalog, requires manual fixes to handle some edge cases in the curriculum tables.
+Current information is not from the scraper but from a manually fixed version of the output JSON. This script is kept for reference and potential future use if the catalog structure changes again.
 """
+
 import json
 import re
-import sys
 import time
-from pathlib import Path
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urljoin
 
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup, NavigableString, Tag
 
 
-def extract_department(program_url):
-    """Extract department name from URL"""
-    try:
-        path = urlparse(program_url).path.lower()
-        parts = path.split("/")
+# ── helpers ────────────────────────────────────────────────────────────────────
 
-        if "undergraduate" in parts:
-            idx = parts.index("undergraduate")
-            if len(parts) > idx + 2:
-                department_slug = parts[idx + 2]
-                return department_slug.replace("-", " ").title()
-    except:
-        pass
-    return "Unknown"
+def get_row_description_text(row):
+    """
+    Return the text of a description/header row WITHOUT leaking the hourscol value.
+    Original bug: row.get_text() included the credit number cell.
+    """
+    parts = []
+    for td in row.find_all('td'):
+        if 'hourscol' in (td.get('class') or []):
+            continue
+        t = td.get_text(strip=True)
+        if t:
+            parts.append(t)
+    return ' '.join(parts).strip()
+
+
+def parse_credits_from_cell(credits_cell):
+    if not credits_cell:
+        return None
+    text = credits_cell.get_text(strip=True)
+    m = re.search(r'(\d+(?:-\d+)?)', text)
+    return m.group(1) if m else None
+
+
+def extract_required_credits_from_selection(text):
+    """Pull credit value from a selection header, e.g. 'Select two (6 credits)'."""
+    m = re.search(r'\((\d+(?:-\d+)?)\s*(?:credits?|hours?)?\)', text, re.I)
+    return m.group(1) if m else None
+
+
+def is_selection_description(text):
+    if not text:
+        return False
+    tl = text.lower()
+    return any(p in tl for p in [
+        'select', 'choose', 'of the following', 'complete', 'take', 'from the following'
+    ])
+
+
+def parse_selection_rule(text):
+    """Return (rule_string, n_choices) from a description line."""
+    if not text:
+        return 'exactly_one', 1
+    tl = text.lower()
+    if 'at least one' in tl:
+        return 'at_least_one', 1
+    if 'at most one' in tl or 'no more than one' in tl:
+        return 'at_most_one', 1
+    m = re.search(r'(?:choose|select|take)\s+(\w+)\s+(?:courses?|of the following)', tl)
+    if m:
+        num_word = m.group(1)
+        w2n = {'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5,
+               'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10}
+        if num_word in w2n:
+            n = w2n[num_word]
+            return f'choose_{num_word}', n
+    digit_m = re.search(r'(?:choose|select|take)\s+(\d+)', tl)
+    if digit_m:
+        n = int(digit_m.group(1))
+        words = ['zero','one','two','three','four','five','six','seven','eight','nine','ten']
+        label = words[n] if n < len(words) else str(n)
+        return f'choose_{label}', n
+    if 'one of the following' in tl:
+        return 'exactly_one', 1
+    if 'two of the following' in tl:
+        return 'choose_two', 2
+    if 'three of the following' in tl:
+        return 'choose_three', 3
+    if 'four of the following' in tl:
+        return 'choose_four', 4
+    return 'exactly_one', 1
+
+
+def compute_group_credits(group):
+    total = 0
+    for course in group.get('courses', []):
+        cred = course.get('credits', '3')
+        try:
+            total += int(str(cred).split('-')[0])
+        except (ValueError, TypeError):
+            pass
+    for sub in group.get('subgroups', []):
+        rc = sub.get('required_credits')
+        if rc:
+            try:
+                total += int(str(rc).split('-')[0])
+                continue
+            except (ValueError, TypeError):
+                pass
+        rule = sub.get('selectionRule', 'exactly_one')
+        courses = sub.get('courses', [])
+        # recurse into sub-subgroups
+        if not courses and sub.get('subgroups'):
+            total += compute_group_credits(sub)
+            continue
+        if not courses:
+            continue
+        sample = courses[0].get('credits', '3')
+        try:
+            unit = int(str(sample).split('-')[0])
+        except (ValueError, TypeError):
+            unit = 3
+        multiplier = {
+            'exactly_one': 1, 'at_least_one': 1, 'at_most_one': 1,
+            'choose_two': 2, 'choose_three': 3, 'choose_four': 4,
+            'choose_five': 5, 'choose_six': 6, 'choose_seven': 7,
+            'choose_eight': 8, 'choose_nine': 9, 'choose_ten': 10,
+        }.get(rule, 1)
+        total += multiplier * unit
+    return total
 
 
 def get_university_core_requirements():
-    """Get University Core requirements"""
     return {
         "category": "University Core",
         "description": "All undergraduate students must complete the University Core curriculum",
@@ -49,619 +141,503 @@ def get_university_core_requirements():
             "Societal and Cultural Knowledge and Inquiry Tier 1 - 3 credit hours",
             "Quantitative Knowledge and Inquiry - 3 credit hours",
             "Ethical Knowledge and Inquiry - 3 credit hours",
-            "Engaged Learning - 3 credit hours minimum"
+            "Engaged Learning - 3 credit hours minimum",
         ],
-        "total_credit_hours": "Approximately 34-37 credit hours"
+        "total_credit_hours": "Approximately 34-37 credit hours",
     }
 
 
-def extract_credits_from_text(text):
+# ── main curriculum table parser ───────────────────────────────────────────────
+
+def parse_curriculum_tables(container):
     """
-    Extract credit hours from text.
-    Returns string like "3", "3-4", or None if not found.
+    Parse all sc_courselist tables inside container.
+    Returns a list of requirement group dicts.
     """
-    if not text:
-        return None
-    
-    # Look for patterns like "3 hours", "3 credit hours", or just "3"
+    groups = []
+    tables = container.find_all('table', class_='sc_courselist')
+    if not tables:
+        return groups
+
+    for table in tables:
+        # --- Derive table name from immediately-preceding heading/paragraph ---
+        prev = table.find_previous_sibling(['h2', 'h3', 'h4', 'p', 'strong'])
+        if prev is None:
+            prev = table.find_previous(['h2', 'h3', 'h4'])
+        table_name = prev.get_text(strip=True) if prev else 'Requirements'
+
+        current_group = None
+
+        # Selection state (simple: one list of options)
+        in_selection = False
+        selection_text = None
+        selection_rule = 'exactly_one'
+        selection_req_credits = None
+        selection_courses = []
+
+        # Multi-part selection state (one-from-each-area style)
+        parent_selection = None
+        current_sub_name = None
+        current_sub_courses = []
+
+        # Track last required course so orclass rows can merge with it (BUG 1 FIX)
+        last_required_course = None  # dict {"code": ..., "credits": ...}
+
+        def flush_selection():
+            """Commit the in-progress simple selection as a subgroup."""
+            nonlocal in_selection, selection_text, selection_rule
+            nonlocal selection_req_credits, selection_courses
+            if in_selection and selection_courses:
+                sub = {
+                    'name': selection_text or 'Select from the following',
+                    'selectionRule': selection_rule,
+                    'courses': selection_courses[:],
+                }
+                if selection_req_credits:
+                    sub['required_credits'] = selection_req_credits
+                current_group.setdefault('subgroups', []).append(sub)
+            in_selection = False
+            selection_text = None
+            selection_rule = 'exactly_one'
+            selection_req_credits = None
+            selection_courses = []
+
+        def flush_sub():
+            """Commit current subsection of a parent multi-part selection."""
+            nonlocal current_sub_name, current_sub_courses
+            if current_sub_name and current_sub_courses:
+                parent_selection['subgroups'].append({
+                    'name': current_sub_name,
+                    'selectionRule': 'exactly_one',
+                    'courses': current_sub_courses[:],
+                })
+            current_sub_name = None
+            current_sub_courses = []
+
+        for row in table.find_all('tr'):
+            row_classes = row.get('class', [])
+
+            # ── Area header: start a new requirement group ──────────────────
+            if 'areaheader' in row_classes:
+                flush_selection()
+                if parent_selection:
+                    flush_sub()
+                    parent_selection = None
+
+                if current_group and (current_group.get('courses') or current_group.get('subgroups')):
+                    if current_group.get('credits') is None:
+                        current_group['credits'] = compute_group_credits(current_group) or None
+                    groups.append(current_group)
+
+                header_text = row.get_text(strip=True)
+                credit_m = re.search(r'\((\d+(?:-\d+)?)\s*(?:credits?|hours?)?\)', header_text)
+                header_credits = credit_m.group(1) if credit_m else None
+
+                current_group = {
+                    'id': re.sub(r'[^a-z0-9]+', '_', header_text[:50].lower()).strip('_'),
+                    'name': header_text,
+                    'selectionRule': 'all',
+                    'credits': header_credits,
+                    'courses': [],
+                    'subgroups': [],
+                }
+                last_required_course = None
+                continue
+
+            # Ensure we always have a current group
+            if current_group is None:
+                current_group = {
+                    'id': re.sub(r'[^a-z0-9]+', '_', table_name[:50].lower()).strip('_'),
+                    'name': table_name,
+                    'selectionRule': 'all',
+                    'credits': None,
+                    'courses': [],
+                    'subgroups': [],
+                }
+
+            # Skip header rows (th)
+            if row.find('th'):
+                continue
+
+            # ── OR / orclass row (BUG 1 FIX) ──────────────────────────────
+            if 'orclass' in row_classes:
+                codecol = row.find('td', class_='codecol')
+                if not codecol:
+                    continue
+                links = codecol.find_all('a', class_='bubblelink')
+                if not links:
+                    continue
+                or_course_code = links[0].get_text(strip=True)
+                hours_cell = row.find('td', class_='hourscol')
+                or_credits = parse_credits_from_cell(hours_cell) or '3'
+                or_course = {'code': or_course_code, 'credits': or_credits}
+
+                # Merge with previous course into a proper OR subgroup
+                if last_required_course:
+                    # Remove the last required course from its list
+                    if in_selection and selection_courses and selection_courses[-1] == last_required_course:
+                        selection_courses.pop()
+                    elif current_group['courses'] and current_group['courses'][-1] == last_required_course:
+                        current_group['courses'].pop()
+                    elif parent_selection and current_sub_courses and current_sub_courses[-1] == last_required_course:
+                        current_sub_courses.pop()
+                    else:
+                        last_required_course = None  # can't find it, just append normally
+
+                if last_required_course:
+                    or_subgroup = {
+                        'name': 'Select one of the following:',
+                        'selectionRule': 'exactly_one',
+                        'courses': [last_required_course, or_course],
+                    }
+                    # Put it in the right place
+                    if in_selection:
+                        selection_courses.append(or_subgroup)  # nested — rare
+                    elif parent_selection and current_sub_name:
+                        current_sub_courses.append(or_subgroup)
+                    else:
+                        current_group.setdefault('subgroups', []).append(or_subgroup)
+                    last_required_course = None
+                else:
+                    # Fallback: just add as a regular course
+                    _add_course(or_course, current_group, in_selection, selection_courses,
+                                parent_selection, current_sub_courses)
+                    last_required_course = or_course
+                continue
+
+            # ── Selection description row (no codecol) ─────────────────────
+            codecol_check = row.find('td', class_='codecol')
+            row_desc_text = get_row_description_text(row)   # BUG 2 FIX: no hourscol leak
+
+            if not codecol_check and is_selection_description(row_desc_text):
+                # Multi-part: one from each area
+                if re.search(r'one from each|each of the following|from each', row_desc_text, re.I):
+                    flush_selection()
+                    if parent_selection:
+                        flush_sub()
+                    rule, _ = parse_selection_rule(row_desc_text)
+                    rc = extract_required_credits_from_selection(row_desc_text)
+                    parent_selection = {
+                        'name': row_desc_text,
+                        'selectionRule': rule,
+                        'courses': [],
+                        'subgroups': [],
+                    }
+                    if rc:
+                        parent_selection['required_credits'] = rc
+                    current_group.setdefault('subgroups', []).append(parent_selection)
+                    current_sub_name = None
+                    current_sub_courses = []
+                else:
+                    # Standard selection list
+                    flush_selection()
+                    selection_text = row_desc_text
+                    selection_rule, _ = parse_selection_rule(row_desc_text)
+                    selection_req_credits = extract_required_credits_from_selection(row_desc_text)
+                    in_selection = True
+                continue
+
+            # ── Subsection bold header within a parent selection ───────────
+            if parent_selection is not None and not codecol_check:
+                bold = row.find(['strong', 'b'])
+                if bold:
+                    flush_sub()
+                    current_sub_name = bold.get_text(strip=True)
+                    continue
+
+            # ── Course row ─────────────────────────────────────────────────
+            codecol = row.find('td', class_='codecol')
+            if not codecol:
+                continue
+            link = codecol.find('a', class_='bubblelink')
+            if not link:
+                continue
+            code = link.get_text(strip=True)
+            if code in {'UNIV 101', 'UCWR 110'}:
+                continue
+            hours_cell = row.find('td', class_='hourscol')
+            credits = parse_credits_from_cell(hours_cell) or '3'
+
+            course_obj = {'code': code, 'credits': credits}
+
+            if parent_selection is not None:
+                if current_sub_name:
+                    current_sub_courses.append(course_obj)
+                else:
+                    parent_selection.setdefault('courses', []).append(course_obj)
+                last_required_course = course_obj
+            elif in_selection:
+                selection_courses.append(course_obj)
+                last_required_course = course_obj
+            else:
+                current_group.setdefault('courses', []).append(course_obj)
+                last_required_course = course_obj
+
+        # ── End of table: flush open structures ────────────────────────────
+        if parent_selection:
+            flush_sub()
+            parent_selection = None
+        flush_selection()
+
+        if current_group and (current_group.get('courses') or current_group.get('subgroups')):
+            if current_group.get('credits') is None:
+                current_group['credits'] = compute_group_credits(current_group) or None
+            groups.append(current_group)
+
+    return groups
+
+
+def _add_course(course_obj, current_group, in_selection, selection_courses,
+                parent_selection, current_sub_courses):
+    """Helper to add a course to the right bucket."""
+    if parent_selection is not None and current_sub_courses is not None:
+        current_sub_courses.append(course_obj)
+    elif in_selection:
+        selection_courses.append(course_obj)
+    else:
+        current_group.setdefault('courses', []).append(course_obj)
+
+
+def extract_total_credits_from_page(soup):
     patterns = [
-        r'(\d+(?:-\d+)?)\s*(?:credit|hours?|credits?)',
-        r'^(\d+(?:-\d+)?)$',
-        r'\(\s*(\d+(?:-\d+)?)\s*(?:credit|hours?|credits?)?\s*\)'
+        r'Total\s*(?:Credit\s*Hours?|Credits?)?\s*[:]\s*(\d+(?:-\d+)?)',
+        r'(\d+(?:-\d+)?)\s*credit hours?\s*(?:are required for the major|total)',
+        r'a total of\s+.*?\(?(\d+(?:-\d+)?)\s*(?:credit|hour)',
+        r'requires\s+(\d+(?:-\d+)?)\s*(?:credit|hour)',
     ]
-    
-    for pattern in patterns:
-        match = re.search(pattern, text, re.IGNORECASE)
-        if match:
-            return match.group(1)
-    
+    for cont in soup.find_all(['div', 'p', 'span', 'strong']):
+        txt = cont.get_text(strip=True)
+        if not re.search(r'Total|credit', txt, re.I):
+            continue
+        for pat in patterns:
+            m = re.search(pat, txt, re.I)
+            if m:
+                return m.group(1)
     return None
 
 
-def parse_credits_from_cell(credits_cell):
-    """
-    Parse credits from a credits column cell.
-    Returns credits as string (e.g., "3", "3-4") or None.
-    """
-    if not credits_cell:
-        return None
-    
-    credits_text = credits_cell.get_text(strip=True)
-    return extract_credits_from_text(credits_text)
+# ── page fetcher / parser ──────────────────────────────────────────────────────
 
+SESSION = requests.Session()
+SESSION.headers.update({
+    'User-Agent': (
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+        'AppleWebKit/537.36 (KHTML, like Gecko) '
+        'Chrome/124.0.0.0 Safari/537.36'
+    ),
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.9',
+})
+
+STOP_HEADINGS = re.compile(
+    r'suggested|sequence|transfer|study abroad|graduation|additional|important|details',
+    re.IGNORECASE,
+)
+
+
+def parse_curriculum_page(url):
+    try:
+        time.sleep(0.5)
+        resp = SESSION.get(url, timeout=15)
+        resp.raise_for_status()
+        soup = BeautifulSoup(resp.content, 'html.parser')
+
+        container = soup.find('div', id='curriculumtextcontainer')
+        if not container:
+            container = soup.find('div', class_='page_content tab_content')
+        if not container:
+            return {'requirements': [], 'total_credits': None}
+
+        # Clip container at non-curriculum headings
+        curriculum_start = None
+        for elem in container.children:
+            if isinstance(elem, Tag) and elem.name in ('h2', 'h3', 'h4'):
+                text = elem.get_text(strip=True).lower()
+                if any(kw in text for kw in [
+                    'curriculum', 'major requirements', 'program requirements', 'requirements'
+                ]):
+                    curriculum_start = elem
+                    break
+        if curriculum_start is None:
+            curriculum_start = next(
+                (c for c in container.children if isinstance(c, Tag)), None
+            )
+
+        relevant = []
+        elem = curriculum_start
+        while elem:
+            if isinstance(elem, Tag) and elem.name in ('h2', 'h3', 'h4'):
+                if STOP_HEADINGS.search(elem.get_text(strip=True)):
+                    break
+            relevant.append(elem)
+            elem = elem.next_sibling
+
+        temp = BeautifulSoup('', 'html.parser').new_tag('div')
+        for e in relevant:
+            temp.append(e)
+
+        declared_total = (
+            extract_total_credits_from_page(container)
+            or extract_total_credits_from_page(soup)
+        )
+
+        groups = parse_curriculum_tables(temp)
+
+        computed_total = None
+        if not declared_total:
+            t = sum(compute_group_credits(g) for g in groups)
+            if t > 0:
+                computed_total = str(t)
+
+        final_total = declared_total or computed_total
+
+        for g in groups:
+            if g.get('credits') is None:
+                g['credits'] = compute_group_credits(g) or None
+
+        return {'requirements': groups, 'total_credits': final_total}
+
+    except Exception as e:
+        print(f'    Error parsing {url}: {str(e)[:100]}')
+        return {'requirements': [], 'total_credits': None}
+
+
+# ── school / program discovery ─────────────────────────────────────────────────
 
 def scrape_school_programs(school_url, school_name):
-    """
-    Scrape all bachelor's programs from a school's page
-    
-    Returns:
-        dict: Dictionary of programs found
-    """
     programs = {}
-    
     try:
-        print(f"\nScraping {school_name}...")
-        print(f"  URL: {school_url}")
-        
-        response = requests.get(school_url, timeout=10)
-        response.raise_for_status()
-        
-        soup = BeautifulSoup(response.content, 'html.parser')
-        links = soup.find_all('a', href=True)
-        
-        program_links = set()
-        
-        for link in links:
+        print(f'\nScraping {school_name}...')
+        resp = SESSION.get(school_url, timeout=15)
+        resp.raise_for_status()
+        soup = BeautifulSoup(resp.content, 'html.parser')
+
+        for link in soup.find_all('a', href=True):
             link_text = link.get_text(strip=True)
             href = link['href']
-            
-            # Pattern 1: Standard format with degree type in parentheses
-            match = re.search(r'^(.+?)\s*\((B[A-Z]{1,4})\)$', link_text)
-            
-            # Pattern 2: Education programs that might not have degree type in link text
-            # Look for links to education program pages
-            is_education_program = (
-                school_name == "School of Education" and 
-                href and 
-                '/education/' in href and
-                any(keyword in link_text.lower() for keyword in 
-                    ['education', 'bilingual', 'early childhood', 'elementary', 
-                     'secondary', 'special education'])
-            )
-            
-            if match and href:
-                major_name = match.group(1).strip()
-                degree_type = match.group(2).strip()
-                
-                # Build absolute URL
-                if href.startswith('/'):
-                    program_url = f"https://catalog.luc.edu{href}"
-                elif href.startswith('http'):
-                    program_url = href
-                else:
-                    base_path = urlparse(school_url).path
-                    if base_path.endswith('/'):
-                        program_url = urljoin(school_url, href)
-                    else:
-                        program_url = urljoin(school_url + '/', href)
-                
-                key = f"{major_name} ({degree_type})"
-                department_name = extract_department(program_url)
-                
+
+            m = re.search(r'^(.+?)\s*\((B[A-Z]{1,4})\)$', link_text)
+            if m and href:
+                major_name = m.group(1).strip()
+                degree_type = m.group(2).strip()
+                program_url = urljoin(school_url, href)
+                key = f'{major_name} ({degree_type})'
                 if key not in programs:
                     programs[key] = {
-                        "major_name": major_name,
-                        "degree_type": degree_type,
-                        "school_college": school_name,
-                        "department": department_name,
-                        "program_url": program_url,
-                        "requirements": [],
-                        "total_credits": 0
+                        'major_name': major_name,
+                        'degree_type': degree_type,
+                        'school_college': school_name,
+                        'program_url': program_url,
+                        'requirements': [],
+                        'total_credits': None,
                     }
-                    print(f"  Found: {key}")
-            
-            # Special handling for School of Education programs
-            elif is_education_program and href:
-                # Try to extract program name from the link text or URL
-                major_name = link_text.strip()
-                if not major_name or len(major_name) < 3:
-                    # Extract from URL
-                    url_path = href.split('/')
-                    for part in url_path:
-                        if 'education' in part.lower() and part.lower() != 'education':
-                            major_name = part.replace('-', ' ').title()
-                            break
-                
-                degree_type = "BSEd" if "bilingual" in major_name.lower() or "education" in major_name.lower() else "BS"
-                
-                if href.startswith('/'):
-                    program_url = f"https://catalog.luc.edu{href}"
-                else:
-                    program_url = href
-                
-                key = f"{major_name} ({degree_type})"
-                department_name = "Education"
-                
-                if key not in programs:
-                    programs[key] = {
-                        "major_name": major_name,
-                        "degree_type": degree_type,
-                        "school_college": school_name,
-                        "department": department_name,
-                        "program_url": program_url,
-                        "requirements": [],
-                        "total_credits": 0
-                    }
-                    print(f"  Found (education): {key}")
-        
-        print(f"  Total programs found: {len(programs)}")
-        
+                    print(f'  Found: {key}')
+
+            elif school_name == 'School of Education' and href and '/education/' in href:
+                if any(kw in link_text.lower() for kw in [
+                    'education', 'bilingual', 'early childhood',
+                    'elementary', 'secondary', 'special education',
+                ]):
+                    major_name = link_text.strip()
+                    degree_type = 'BSEd'
+                    program_url = urljoin(school_url, href)
+                    key = f'{major_name} ({degree_type})'
+                    if key not in programs:
+                        programs[key] = {
+                            'major_name': major_name,
+                            'degree_type': degree_type,
+                            'school_college': school_name,
+                            'program_url': program_url,
+                            'requirements': [],
+                            'total_credits': None,
+                        }
+                        print(f'  Found (education): {key}')
+
+        print(f'  Total programs: {len(programs)}')
     except Exception as e:
-        print(f"  Error scraping {school_name}: {str(e)}")
-    
+        print(f'  Error scraping {school_name}: {e}')
     return programs
 
 
-def parse_standard_curriculum_table(soup, curriculum_section):
-    """
-    Parse the standard curriculum table and return structured requirements
-    
-    Returns:
-        list: Structured requirement groups
-    """
-    requirements = []
-    course_table = curriculum_section.find('table', class_='sc_courselist')
-    
-    if not course_table:
-        return requirements
-    
-    rows = course_table.find_all('tr')
-    
-    current_group = None
-    current_subgroup = None
-    option_courses = []
-    collecting_options = False
-    current_selection_rule = None
-    group_total_credits = 0
-    
-    for row in rows:
-        # Skip header rows
-        if row.find('th'):
-            continue
-        
-        # Check for section header
-        if 'areaheader' in row.get('class', []):
-            # Save previous group if it exists
-            if current_group and (current_group.get("courses") or current_group.get("subgroups")):
-                current_group["credits"] = group_total_credits if group_total_credits > 0 else None
-                requirements.append(current_group)
-            
-            # Start new group
-            header_text = row.get_text(strip=True)
-            
-            # Extract credits from header if present
-            credits_match = re.search(r'(\d+(?:-\d+)?)\s*(?:credits?|hours?)?$', header_text)
-            group_credits = credits_match.group(1) if credits_match else None
-            
-            current_group = {
-                "id": re.sub(r'[^a-z0-9]+', '_', header_text[:50].lower()),
-                "name": header_text,
-                "selectionRule": "all",
-                "credits": group_credits,
-                "courses": [],
-                "subgroups": []
-            }
-            group_total_credits = 0
-            current_subgroup = None
-            collecting_options = False
-            option_courses = []
-            continue
-        
-        # Check for selective requirement text
-        cell_text = row.get_text(strip=True)
-        if 'select' in cell_text.lower() or 'choose' in cell_text.lower():
-            # Save any pending options
-            if collecting_options and option_courses and current_group:
-                if current_subgroup:
-                    current_subgroup["courses"] = option_courses
-                    if current_subgroup not in current_group["subgroups"]:
-                        current_group["subgroups"].append(current_subgroup)
-                else:
-                    current_group["courses"].append({
-                        "type": "selective",
-                        "selectionRule": current_selection_rule or "exactly_one",
-                        "options": option_courses
-                    })
-                option_courses = []
-            
-            # Parse selection rule
-            if 'at least one' in cell_text.lower() or 'choose at least one' in cell_text.lower():
-                current_selection_rule = "at_least_one"
-            elif 'no more than one' in cell_text.lower() or 'at most one' in cell_text.lower():
-                current_selection_rule = "at_most_one"
-            elif 'choose two' in cell_text.lower():
-                current_selection_rule = "choose_two"
-            else:
-                current_selection_rule = "exactly_one"
-            
-            # Check if this starts a subgroup
-            if 'of the following' in cell_text.lower():
-                current_subgroup = {
-                    "name": cell_text,
-                    "selectionRule": current_selection_rule,
-                    "courses": []
-                }
-                collecting_options = True
-            continue
-        
-        # Look for course codes
-        codecol = row.find('td', class_='codecol')
-        if codecol and current_group:
-            # Check for OR relationships
-            if 'orclass' in row.get('class', []):
-                continue
-            
-            # Find credits column
-            credits_cell = row.find('td', class_='hourscol')
-            credits = parse_credits_from_cell(credits_cell)
-            
-            # Get course code
-            course_link = codecol.find('a', class_='bubblelink')
-            if not course_link:
-                continue
-            
-            course_code = course_link.get_text(strip=True)
-            
-            # Skip university core courses
-            if course_code in {'UNIV 101', 'UCWR 110'}:
-                continue
-            
-            # Check if indented (part of a selection group)
-            if codecol.find('div', class_='blockindent') or codecol.find('p', class_='indent'):
-                if collecting_options:
-                    option_courses.append({"code": course_code, "credits": credits or "3"})
-                continue
-            
-            # If we were collecting options, save them
-            if collecting_options and option_courses:
-                if current_subgroup:
-                    current_subgroup["courses"] = option_courses
-                    if current_subgroup not in current_group["subgroups"]:
-                        current_group["subgroups"].append(current_subgroup)
-                else:
-                    current_group["courses"].append({
-                        "type": "selective",
-                        "selectionRule": current_selection_rule or "exactly_one",
-                        "options": option_courses
-                    })
-                option_courses = []
-                collecting_options = False
-                current_subgroup = None
-            
-            # Regular required course
-            current_group["courses"].append({
-                "code": course_code,
-                "credits": credits or "3"
-            })
-            
-            # Add to total credits if numeric
-            if credits and '-' not in credits:
-                try:
-                    group_total_credits += int(credits)
-                except ValueError:
-                    pass
-    
-    # Save the last group
-    if current_group and (current_group.get("courses") or current_group.get("subgroups")):
-        current_group["credits"] = group_total_credits if group_total_credits > 0 else None
-        requirements.append(current_group)
-    
-    return requirements
-
-
-def parse_education_curriculum(soup, curriculum_section):
-    """
-    Special handling for School of Education curriculum which has a different structure.
-    Handles multiple tables, section headers, and module-based sequences.
-    """
-    requirements = []
-    
-    # Find all course listing tables
-    tables = curriculum_section.find_all('table', class_='sc_courselist')
-    
-    # Also look for sections with TLSC modules that might be in divs
-    phase_sections = curriculum_section.find_all(['h2', 'h3', 'h4'], string=re.compile(r'Phase|Sequence|Concentration|Specialization', re.IGNORECASE))
-    
-    if phase_sections:
-        # Handle phase-based structure (like TLSC modules)
-        for phase in phase_sections:
-            phase_name = phase.get_text(strip=True)
-            phase_group = {
-                "id": re.sub(r'[^a-z0-9]+', '_', phase_name[:50].lower()),
-                "name": phase_name,
-                "selectionRule": "all",
-                "credits": None,
-                "courses": [],
-                "subgroups": []
-            }
-            
-            # Find tables after this header until the next header
-            phase_total = 0
-            next_elem = phase.find_next_sibling()
-            
-            while next_elem and next_elem.name not in ['h2', 'h3', 'h4']:
-                if next_elem.name == 'table' and 'sc_courselist' in next_elem.get('class', []):
-                    rows = next_elem.find_all('tr')
-                    for row in rows:
-                        codecol = row.find('td', class_='codecol')
-                        if codecol:
-                            course_link = codecol.find('a', class_='bubblelink')
-                            if course_link:
-                                course_code = course_link.get_text(strip=True)
-                                if course_code in {'UNIV 101', 'UCWR 110'}:
-                                    continue
-                                
-                                credits_cell = row.find('td', class_='hourscol')
-                                credits = parse_credits_from_cell(credits_cell)
-                                
-                                phase_group["courses"].append({
-                                    "code": course_code,
-                                    "credits": credits or "3"
-                                })
-                                
-                                if credits and '-' not in credits:
-                                    try:
-                                        phase_total += int(credits)
-                                    except ValueError:
-                                        pass
-                next_elem = next_elem.find_next_sibling()
-            
-            if phase_group["courses"]:
-                phase_group["credits"] = phase_total if phase_total > 0 else None
-                requirements.append(phase_group)
-    
-    # Also handle standard course tables
-    for table in tables:
-        # Look for section headers before the table
-        prev_sibling = table.find_previous_sibling()
-        section_name = "Education Courses"
-        
-        # Check for heading tags
-        if prev_sibling and prev_sibling.name in ['h2', 'h3', 'h4']:
-            section_name = prev_sibling.get_text(strip=True)
-        # Check for bold text or strong tags
-        elif prev_sibling and prev_sibling.name == 'p':
-            strong = prev_sibling.find('strong')
-            if strong:
-                section_name = strong.get_text(strip=True)
-        
-        current_group = {
-            "id": re.sub(r'[^a-z0-9]+', '_', section_name[:50].lower()),
-            "name": section_name,
-            "selectionRule": "all",
-            "credits": None,
-            "courses": [],
-            "subgroups": []
-        }
-        
-        rows = table.find_all('tr')
-        group_total = 0
-        
-        for row in rows:
-            if row.find('th'):
-                continue
-            
-            codecol = row.find('td', class_='codecol')
-            if codecol:
-                course_link = codecol.find('a', class_='bubblelink')
-                if course_link:
-                    course_code = course_link.get_text(strip=True)
-                    
-                    # Skip if already in core
-                    if course_code in {'UNIV 101', 'UCWR 110'}:
-                        continue
-                    
-                    # Get credits
-                    credits_cell = row.find('td', class_='hourscol')
-                    credits = parse_credits_from_cell(credits_cell)
-                    
-                    current_group["courses"].append({
-                        "code": course_code,
-                        "credits": credits or "3"
-                    })
-                    
-                    if credits and '-' not in credits:
-                        try:
-                            group_total += int(credits)
-                        except ValueError:
-                            pass
-        
-        if current_group["courses"]:
-            current_group["credits"] = group_total if group_total > 0 else None
-            # Avoid duplicate groups
-            if not any(req.get("name") == section_name for req in requirements):
-                requirements.append(current_group)
-    
-    return requirements
-
-
-def extract_courses_from_curriculum(curriculum_url):
-    """
-    Extract structured requirements from a program's curriculum page
-    
-    Returns:
-        list: Structured requirements with selection rules
-    """
-    try:
-        time.sleep(0.5)
-        
-        response = requests.get(curriculum_url, timeout=10)
-        response.raise_for_status()
-        
-        soup = BeautifulSoup(response.content, 'html.parser')
-        
-        # Find the curriculum section
-        curriculum_section = soup.find('div', id='curriculumtextcontainer')
-        if not curriculum_section:
-            curriculum_section = soup.find('div', class_='page_content tab_content')
-        
-        if not curriculum_section:
-            return []
-        
-        # Special handling for Education programs
-        if 'education' in curriculum_url.lower():
-            return parse_education_curriculum(soup, curriculum_section)
-        
-        return parse_standard_curriculum_table(soup, curriculum_section)
-        
-    except requests.Timeout:
-        print(f"    Timeout - skipping this program")
-    except requests.RequestException as e:
-        print(f"    Network error: {str(e)[:50]}")
-    except Exception as e:
-        print(f"    Error extracting courses: {str(e)[:50]}")
-    
-    return []
-
-
 def scrape_all_schools():
-    """Scrape programs from all schools/colleges"""
-    all_programs = {}
-    
     schools = [
-        {"name": "College of Arts and Sciences", "url": "https://catalog.luc.edu/undergraduate/arts-sciences/#academicstext"},
-        {"name": "Quinlan School of Business", "url": "https://catalog.luc.edu/undergraduate/business/#academicstext"},
-        {"name": "School of Communication", "url": "https://catalog.luc.edu/undergraduate/communication/#academicstext"},
-        {"name": "School of Education", "url": "https://catalog.luc.edu/undergraduate/education/#academicstext"},
-        {"name": "School of Environmental Sustainability", "url": "https://catalog.luc.edu/undergraduate/environmental-sustainability/#academicstext"},
-        {"name": "Parkinson School of Health Sciences and Public Health", "url": "https://catalog.luc.edu/undergraduate/health-sciences-public-health/#academicstext"},
-        {"name": "Marcella Niehoff School of Nursing", "url": "https://catalog.luc.edu/undergraduate/nursing/#academicstext"},
-        {"name": "School of Social Work", "url": "https://catalog.luc.edu/undergraduate/social-work/#academicstext"},
-        {"name": "School of Continuing and Professional Studies", "url": "https://catalog.luc.edu/undergraduate/continuing-professional-studies/#academicstext"}
+        {'name': 'College of Arts and Sciences',
+         'url': 'https://catalog.luc.edu/undergraduate/arts-sciences/#academicstext'},
+        {'name': 'Quinlan School of Business',
+         'url': 'https://catalog.luc.edu/undergraduate/business/#academicstext'},
+        {'name': 'School of Communication',
+         'url': 'https://catalog.luc.edu/undergraduate/communication/#academicstext'},
+        {'name': 'School of Education',
+         'url': 'https://catalog.luc.edu/undergraduate/education/#academicstext'},
+        {'name': 'School of Environmental Sustainability',
+         'url': 'https://catalog.luc.edu/undergraduate/environmental-sustainability/#academicstext'},
+        {'name': 'Parkinson School of Health Sciences and Public Health',
+         'url': 'https://catalog.luc.edu/undergraduate/health-sciences-public-health/#academicstext'},
+        {'name': 'Marcella Niehoff School of Nursing',
+         'url': 'https://catalog.luc.edu/undergraduate/nursing/#academicstext'},
+        {'name': 'School of Social Work',
+         'url': 'https://catalog.luc.edu/undergraduate/social-work/#academicstext'},
+        {'name': 'School of Continuing and Professional Studies',
+         'url': 'https://catalog.luc.edu/undergraduate/continuing-professional-studies/#academicstext'},
     ]
-    
+    all_programs = {}
     for school in schools:
-        school_programs = scrape_school_programs(school['url'], school['name'])
-        all_programs.update(school_programs)
+        progs = scrape_school_programs(school['url'], school['name'])
+        all_programs.update(progs)
         time.sleep(1)
-    
     return all_programs
 
 
-def populate_requirements(programs):
-    """Populate structured requirements for each program"""
+def populate_all_requirements(programs):
     total = len(programs)
-    
-    print(f"\nPopulating requirements for {total} programs...")
-    
-    for idx, (key, program) in enumerate(programs.items(), 1):
-        print(f"\n[{idx}/{total}] Processing: {key}")
-        
-        program_url = program.get('program_url', '')
-        
-        if program_url:
-            curriculum_url = f"{program_url}#curriculumtext"
-            print(f"  Fetching from: {curriculum_url}")
-            
-            requirements = extract_courses_from_curriculum(curriculum_url)
-            
-            program['requirements'] = requirements
-            
-            # Calculate total credits from all requirement groups
-            total_credits = 0
-            for req in requirements:
-                credits = req.get('credits')
-                if credits:
-                    try:
-                        # Handle ranges like "3-4" by taking the max
-                        if '-' in str(credits):
-                            total_credits += int(str(credits).split('-')[1])
-                        else:
-                            total_credits += int(credits)
-                    except (ValueError, TypeError):
-                        pass
-            
-            program['total_credits'] = total_credits if total_credits > 0 else None
-            
-            if requirements:
-                print(f"  Found {len(requirements)} requirement groups, total credits: {total_credits}")
-            else:
-                print(f"  - No requirements found")
+    print(f'\nPopulating requirements for {total} programs...')
+    for idx, (key, prog) in enumerate(programs.items(), 1):
+        url = prog.get('program_url')
+        if not url:
+            continue
+        curriculum_url = f'{url}#curriculumtext'
+        print(f'[{idx}/{total}] {key}')
+        result = parse_curriculum_page(curriculum_url)
+        prog['requirements'] = result['requirements']
+        prog['total_credits'] = result['total_credits']
+        if result['requirements']:
+            print(f'  {len(result["requirements"])} groups, {result["total_credits"]} credits')
         else:
-            print(f"  - No program URL available")
-    
+            print('  No requirements found.')
     return programs
 
 
 def main():
-    """Main function to scrape all programs and save to JSON"""
-    output_file = "filtered_data/majors_structured.json"
-    
-    print("=" * 80)
-    print("SCRAPING BACHELOR'S DEGREE PROGRAMS FROM LOYOLA CATALOG")
-    print("(Structured format with selection rules)")
-    print("=" * 80)
-    
-    print("\nStep 1: Scraping all schools for bachelor's programs...")
+    import os
+    output_file = 'majors_structured_fixed.json'
+
+    print('=' * 70)
+    print('SCRAPING LOYOLA CHICAGO BACHELOR PROGRAMS (FIXED)')
+    print('=' * 70)
+
+    print('\nStep 1: Discovering programs...')
     all_programs = scrape_all_schools()
-    
-    print(f"\n{'=' * 80}")
-    print(f"Total programs found: {len(all_programs)}")
-    print(f"{'=' * 80}")
-    
-    print("\nStep 2: Extracting structured requirements for each program...")
-    all_programs = populate_requirements(all_programs)
-    
-    print(f"\n{'=' * 80}")
-    print("Step 3: Saving results to JSON...")
-    
-    # Sort programs alphabetically
+    print(f'\nTotal programs found: {len(all_programs)}')
+
+    print('\nStep 2: Extracting requirements...')
+    all_programs = populate_all_requirements(all_programs)
+
     sorted_programs = dict(sorted(all_programs.items()))
-    
-    # Create final output with university core
     output_data = {
-        "university_core": get_university_core_requirements(),
-        "programs": sorted_programs
+        'university_core': get_university_core_requirements(),
+        'programs': sorted_programs,
     }
-    
+
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(output_data, f, indent=2, ensure_ascii=False)
-    
-    print(f"  Saved to: {output_file}")
-    
-    # Summary statistics
-    programs_with_reqs = sum(1 for p in sorted_programs.values() if p['requirements'])
-    programs_with_credits = sum(1 for p in sorted_programs.values() if p.get('total_credits'))
-    
-    print(f"\n{'=' * 80}")
-    print("SUMMARY")
-    print(f"{'=' * 80}")
-    print(f"Total programs: {len(sorted_programs)}")
-    print(f"Programs with requirements: {programs_with_reqs}")
-    print(f"Programs with credit totals: {programs_with_credits}")
-    print(f"Programs without requirements: {len(sorted_programs) - programs_with_reqs}")
-    
-    # Summary by school
-    school_counts = {}
-    for program in sorted_programs.values():
-        school = program.get('school_college', 'Unknown')
-        school_counts[school] = school_counts.get(school, 0) + 1
-    
-    print(f"\nPrograms by school:")
-    for school in sorted(school_counts.keys()):
-        print(f"  {school}: {school_counts[school]} programs")
-    
-    # Sample output for verification
-    if sorted_programs:
-        sample_key = list(sorted_programs.keys())[0]
-        print(f"\nSample program: {sample_key}")
-        print(f"  Total credits: {sorted_programs[sample_key].get('total_credits')}")
-        print(f"  Requirement groups: {len(sorted_programs[sample_key].get('requirements', []))}")
-    
-    print(f"\n{'=' * 80}")
-    print("COMPLETE!")
-    print(f"{'=' * 80}\n")
+
+    print(f'\nSaved to {output_file}')
+    with_reqs = sum(1 for p in sorted_programs.values() if p['requirements'])
+    with_credits = sum(1 for p in sorted_programs.values() if p.get('total_credits'))
+    print(f'Programs with requirements : {with_reqs}')
+    print(f'Programs with credit totals: {with_credits}')
+    print('Done.')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

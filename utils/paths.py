@@ -19,7 +19,7 @@ TEST_OUTPUT_DIR = PROJECT_ROOT / 'test_output'
 
 # Specific data files
 MERGED_ENROLLMENT = FILTERED_DATA_DIR / 'merged_student_enrollment.tsv'
-MAJORS_JSON = FILTERED_DATA_DIR / 'bachelors_majors_web.json'
+MAJORS_JSON = FILTERED_DATA_DIR / 'majors_structured.json'
 COURSES_JSON = FILTERED_DATA_DIR / 'courses.json'
 SEMESTER_STATS = DATA_ANALYSIS_DIR / 'semester_statistics.csv'
 

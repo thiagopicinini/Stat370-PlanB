@@ -64,9 +64,34 @@ class MajorRecommender:
         return data_by_semester
         
     def _load_json(self, filepath: str) -> dict:
-        """Load JSON file"""
+        """Load JSON file and normalize structure to have 'programs' and 'university_core' keys"""
         with open(filepath, 'r') as f:
-            return json.load(f)
+            data = json.load(f)
+        
+        # If data already has 'programs' key (old test format), return as-is
+        if 'programs' in data:
+            return data
+        
+        # Otherwise, assume all top-level keys except special ones are majors
+        # Wrap them in a 'programs' dict
+        if 'university_core' not in data:
+            # If no university_core, create a default one
+            return {
+                'university_core': {
+                    'category': 'University Core Curriculum',
+                    'description': 'Required foundation courses.',
+                    'areas': [],
+                    'total_credit_hours': 'Approximately 34-37 credit hours'
+                },
+                'programs': data
+            }
+        else:
+            # Has university_core, so wrap the rest as programs
+            programs = {k: v for k, v in data.items() if k != 'university_core'}
+            return {
+                'university_core': data['university_core'],
+                'programs': programs
+            }
     
     def _load_student_data(self, enrollment_files: List[str]) -> pd.DataFrame:
         """Load and merge all student enrollment data"""
@@ -263,106 +288,179 @@ class MajorRecommender:
         
         return all_courses
     
+    def _parse_structured_requirements(self, requirements: List[Dict]) -> List[Dict]:
+        """
+        Parse structured requirements exactly, respecting nested selection rules.
+        Returns a list of requirement slots, each with:
+            - 'options': list of course codes that can satisfy this slot
+            - 'group_id': unique ID of the logical group (to prevent double‑counting the same course)
+        """
+        slots = []
+        group_counter = 0
+
+        def _collect_leaf_courses(group: Dict) -> List[str]:
+            """Recursively collect all course codes from a group (ignoring selection rules)."""
+            codes = []
+            for course in group.get('courses', []):
+                code = course.get('code', '').strip().replace('\xa0', ' ') if isinstance(course, dict) else str(course).strip().replace('\xa0', ' ')
+                if code:
+                    codes.append(code)
+            for sub in group.get('subgroups', []):
+                codes.extend(_collect_leaf_courses(sub))
+            return codes
+
+        def _process_group(group: Dict, parent_group_id: str = None) -> List[Dict]:
+            nonlocal group_counter
+            rule = group.get('selectionRule', 'all')
+            direct_courses = group.get('courses', [])
+            subgroups = group.get('subgroups', [])
+            group_slots = []
+
+            # Convert direct courses to list of code strings
+            direct_codes = []
+            for c in direct_courses:
+                code = c.get('code', '').strip().replace('\xa0', ' ') if isinstance(c, dict) else str(c).strip().replace('\xa0', ' ')
+                if code:
+                    direct_codes.append(code)
+
+            # ----- Rule: "all" -----
+            if rule == 'all':
+                # Each direct course becomes its own slot (only that course)
+                for code in direct_codes:
+                    group_slots.append({
+                        'options': [code],
+                        'group_id': f"g{group_counter}"
+                    })
+                    group_counter += 1
+                # Process each subgroup recursively and add all their slots
+                for sub in subgroups:
+                    group_slots.extend(_process_group(sub))
+                return group_slots
+
+            # ----- Rule: "exactly_one" (or "at_least_one" / "at_most_one") -----
+            if rule in ('exactly_one', 'at_least_one', 'at_most_one'):
+                # Collect all possible course options from this group and its subgroups
+                all_options = direct_codes.copy()
+                for sub in subgroups:
+                    all_options.extend(_collect_leaf_courses(sub))
+                # Remove duplicates while preserving order
+                all_options = list(dict.fromkeys(all_options))
+                group_slots.append({
+                    'options': all_options,
+                    'group_id': f"g{group_counter}"
+                })
+                group_counter += 1
+                return group_slots
+
+            # ----- Rule: "choose_N" -----
+            if rule.startswith('choose_'):
+                try:
+                    num_choices = int(rule.split('_')[1])
+                except (IndexError, ValueError):
+                    num_choices = 1   # fallback for malformed rule
+
+                # Case 1: No subgroups – simple elective list
+                if not subgroups:
+                    if not direct_codes:
+                        return []   # nothing to choose from
+                    # Create num_choices slots, all with the same list of options
+                    for i in range(num_choices):
+                        group_slots.append({
+                            'options': direct_codes,
+                            'group_id': f"g{group_counter}"
+                        })
+                    group_counter += 1
+                    return group_slots
+
+                # Case 2: Has subgroups – interpret as "choose exactly one from each of N subgroups"
+                # This matches History BA (choose_four with four sub‑areas)
+                if len(subgroups) == num_choices:
+                    # Each subgroup is treated as a separate required component
+                    for sub in subgroups:
+                        # Recursively process the subgroup – it will produce its own slot(s)
+                        sub_slots = _process_group(sub)
+                        group_slots.extend(sub_slots)
+                    return group_slots
+                else:
+                    # Fallback: treat as union of all courses from all subgroups + direct courses
+                    all_options = direct_codes.copy()
+                    for sub in subgroups:
+                        all_options.extend(_collect_leaf_courses(sub))
+                    all_options = list(dict.fromkeys(all_options))
+                    for i in range(num_choices):
+                        group_slots.append({
+                            'options': all_options,
+                            'group_id': f"g{group_counter}"
+                        })
+                    group_counter += 1
+                    return group_slots
+
+            # Unknown rule – treat as "all" as a safe default
+            return _process_group({**group, 'selectionRule': 'all'})
+
+        # Process each top‑level requirement group
+        for idx, req_group in enumerate(requirements):
+            slots.extend(_process_group(req_group))
+
+        return slots
     def calculate_major_match(self, student_courses: List[Dict], major_name: str) -> Dict:
-        """
-        Calculate how many credits a student has earned toward a specific major.
-        Works with the new scrape_v2 structured requirements format with selection rules.
-        
-        Handles OR requirements correctly: if a major requires "STAT 203 or STAT 335",
-        only ONE of those courses counts toward the requirement (not both).
-        """
         if major_name not in self.majors_data.get('programs', {}):
             return {'matched_courses': [], 'total_credits': 0, 'course_count': 0, 'total_required': 0}
-        
+
         major_info = self.majors_data['programs'][major_name]
-        
-        # Parse requirements into a list of requirement items (each can be a single course or OR group)
-        requirement_items = []  # List of either single courses or OR groups
-        
+
+        # Parse requirements into exact slots
         if 'requirements' in major_info:
-            # New structured format from scrape_v2 - extract using existing method
-            all_required_courses = self._extract_all_courses_from_requirements(major_info.get('requirements', []))
-            # For new format, just treat all courses as individual requirements
-            requirement_items = list(all_required_courses)
+            slots = self._parse_structured_requirements(major_info.get('requirements', []))
         else:
-            # Fallback to old format with special handling for OR requirements
-            required_courses_list = major_info.get('required_courses', [])
-            
-            for req_course in required_courses_list:
-                if isinstance(req_course, str):
-                    # Check for "or" pattern like "STAT 203 or STAT 335"
-                    cleaned = req_course.replace('\xa0', ' ')
-                    if ' or ' in cleaned:
-                        # This is an OR group - store as a list of options
-                        or_options = []
-                        for code in cleaned.split(' or '):
-                            code_clean = code.strip()
-                            if not code_clean.startswith('['):
-                                or_options.append(code_clean)
-                        if or_options:
-                            requirement_items.append(or_options)
-                    else:
-                        # Single course requirement
-                        code_clean = cleaned.strip()
-                        if not code_clean.startswith('['):
-                            requirement_items.append(code_clean)
-                elif isinstance(req_course, dict) and 'options' in req_course:
-                    # Handle dictionary format with 'options' key as an OR group
-                    or_options = [code.replace('\xa0', ' ').strip() for code in req_course['options']]
-                    if or_options:
-                        requirement_items.append(or_options)
-        
-        # Create set of all possible required courses (for reference)
-        all_required_courses = set()
-        for item in requirement_items:
-            if isinstance(item, list):
-                all_required_courses.update(item)
-            else:
-                all_required_courses.add(item)
-        
-        # Get student's courses
-        student_course_dict = {c['course'].strip().replace('\xa0', ' '): c for c in student_courses}
-        
-        # Match student courses to requirements
+            # Fallback to old format (unchanged)
+            slots = self._parse_old_format_requirements(major_info)   # you can keep your existing fallback
+
+        # Map student courses to usable data
+        student_course_map = {}
+        for c in student_courses:
+            code = c['course'].strip().replace('\xa0', ' ')
+            credits = c.get('credits', 0)
+            student_course_map[code] = credits
+
+        # Group slots by group_id
+        from collections import defaultdict
+        slots_by_group = defaultdict(list)
+        for slot in slots:
+            slots_by_group[slot['group_id']].append(slot)
+
         matched_courses = []
         total_credits = 0
-        satisfied_requirements = set()  # Track which requirement indices are satisfied
-        
-        for req_idx, requirement in enumerate(requirement_items):
-            if isinstance(requirement, list):
-                # OR group - find the FIRST student course that satisfies any option
-                for course_option in requirement:
-                    if course_option in student_course_dict:
-                        student_course = student_course_dict[course_option]
-                        matched_courses.append({
-                            'course': course_option,
-                            'credits': student_course.get('credits', 0)
-                        })
-                        try:
-                            total_credits += int(student_course.get('credits', 0))
-                        except (ValueError, TypeError):
-                            total_credits += 0
-                        satisfied_requirements.add(req_idx)
-                        break  # Only count ONE course from the OR group
-            else:
-                # Single course requirement
-                if requirement in student_course_dict:
-                    student_course = student_course_dict[requirement]
-                    matched_courses.append({
-                        'course': requirement,
-                        'credits': student_course.get('credits', 0)
-                    })
-                    try:
-                        total_credits += int(student_course.get('credits', 0))
-                    except (ValueError, TypeError):
-                        total_credits += 0
-                    satisfied_requirements.add(req_idx)
-        
+        total_slots = len(slots)
+
+        # For each group, assign courses to slots without reusing a course inside the same group
+        used_courses_per_group = defaultdict(set)
+
+        for group_id, group_slots in slots_by_group.items():
+            # Available courses = all student courses minus those already used in this group
+            available = {code: credits for code, credits in student_course_map.items()
+                        if code not in used_courses_per_group[group_id]}
+
+            for slot in group_slots:
+                # Find the first available course that matches any option in this slot
+                matched = None
+                for option in slot['options']:
+                    if option in available:
+                        matched = option
+                        break
+                if matched:
+                    matched_courses.append({'course': matched, 'credits': available[matched]})
+                    total_credits += available[matched]
+                    # Mark this course as used for this group
+                    used_courses_per_group[group_id].add(matched)
+                    # Remove from available for subsequent slots in same group
+                    del available[matched]
+
         return {
             'matched_courses': matched_courses,
             'total_credits': total_credits,
             'course_count': len(matched_courses),
-            'total_required': len(requirement_items)
+            'total_required': total_slots
         }
     
     def can_complete_in_four_years(self, student_courses: List[Dict],
